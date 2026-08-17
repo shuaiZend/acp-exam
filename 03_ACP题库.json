@@ -1,5 +1,4 @@
-// ACP 题库数据 - 自动生成（含课程原题）
-const QUESTION_BANK = {
+{
   "metadata": {
     "title": "阿里云大模型 ACP 认证考试题库",
     "description": "基于阿里云大模型 ACP 认证教程和考试大纲 V3 生成的练习题库（含课程原题）",
@@ -2084,4 +2083,4 @@ const QUESTION_BANK = {
       "explanation": "反思机制有两种模式：自我反馈（Self Review）适合静态文本比对；外部反馈（External Feedback）将生成结果放到真实环境执行，用执行结果反馈给模型。图表验证需要客观事实——代码是否能正常运行、图表是否正确渲染，这属于外部反馈场景。AgentScope 内置 execute_python_code 工具可以执行绘图代码返回图片，Agent 通过视觉输入发现问题。自我反馈存在自证正确偏差；人工审核成本高不可持续；关键词检查无法验证图表实际渲染效果。"
     }
   ]
-};
+}

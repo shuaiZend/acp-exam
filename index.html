@@ -350,7 +350,6 @@
   }
   .badge-type-single { background: rgba(122,162,247,0.15); color: var(--accent); }
   .badge-type-multiple { background: rgba(224,175,104,0.15); color: var(--yellow); }
-  .badge-type-true_false { background: rgba(158,206,106,0.15); color: var(--green); }
   .badge-module { background: rgba(86,95,137,0.2); color: var(--text-dim); }
   .badge-score { background: rgba(255,158,100,0.15); color: var(--orange); }
 
@@ -746,7 +745,7 @@ function startExam() {
 
   // 分类: 课程原题优先, 非课程题补充
   const isCourse = q => (q.source || '').startsWith('课程');
-  const isSingle = q => q.type === 'single' || q.type === 'true_false';
+  const isSingle = q => q.type === 'single';
   const isMultiple = q => q.type === 'multiple';
 
   // 单选池: 课程原题在前(保持原序), 非课程题在后(保持原序)
@@ -771,8 +770,8 @@ function startExam() {
   optionShuffles = {};
   examQuestions.forEach((q, i) => {
     userAnswers[i] = q.type === 'multiple' ? [] : null;
-    // 为每道题生成选项随机顺序 (true_false 题不shuffle)
-    if (q.type !== 'true_false' && q.options) {
+    // 为每道题生成选项随机顺序
+    if (q.options) {
       optionShuffles[i] = shuffle(Object.keys(q.options).sort());
     }
   });
@@ -844,31 +843,17 @@ function renderQuestion() {
   }
 
   // 题型标签
-  const typeLabel = q.type === 'single' ? '单选题' : q.type === 'multiple' ? '多选题' : '判断题';
+  const typeLabel = q.type === 'single' ? '单选题' : '多选题';
   const typeClass = 'badge-type-' + q.type;
   const score = q.type === 'multiple' ? MULTIPLE_SCORE : SINGLE_SCORE;
 
-  // 选项 HTML
+  // 选项 HTML (选项顺序随机)
   let optionsHTML = '';
-  if (q.type === 'true_false') {
-    // 判断题: 正确/错误 (不随机)
-    const opts = [
-      { key: true, label: '正确' },
-      { key: false, label: '错误' }
-    ];
-    optionsHTML = '<div class="option-list">' + opts.map(opt => {
-      const selected = userAnswers[currentIdx] === opt.key;
-      return `<div class="option-item ${selected ? 'selected' : ''}" onclick="selectTrueFalse(${opt.key})">
-        <div class="option-marker">${opt.key ? 'T' : 'F'}</div>
-        <div class="option-text">${opt.label}</div>
-      </div>`;
-    }).join('') + '</div>';
-  } else {
-    // 单选/多选题: 选项顺序随机
+  {
     const shuffledKeys = optionShuffles[currentIdx] || Object.keys(q.options).sort();
     const isMultiple = q.type === 'multiple';
     optionsHTML = '<div class="option-list">' + shuffledKeys.map((origKey, displayIdx) => {
-      const displayLetter = letter(displayIdx); // 显示用字母 A/B/C/D (按随机后顺序)
+      const displayLetter = letter(displayIdx);
       const selected = isMultiple
         ? (userAnswers[currentIdx] && userAnswers[currentIdx].includes(origKey))
         : userAnswers[currentIdx] === origKey;
@@ -904,11 +889,6 @@ function selectOption(key, isMultiple) {
   } else {
     userAnswers[currentIdx] = key;
   }
-  renderQuestion();
-}
-
-function selectTrueFalse(val) {
-  userAnswers[currentIdx] = val;
   renderQuestion();
 }
 
@@ -1021,15 +1001,12 @@ function buildWrongReviewHTML(wrongQuestions) {
   return '<h2>错题回顾（' + wrongQuestions.length + ' 题）</h2>' +
     wrongQuestions.map(w => {
       const q = w.question;
-      const typeLabel = q.type === 'single' ? '单选题' : q.type === 'multiple' ? '多选题' : '判断题';
+      const typeLabel = q.type === 'single' ? '单选题' : '多选题';
       const typeClass = 'badge-type-' + q.type;
 
       // 用户答案格式化
       let userAnsText, correctAnsText;
-      if (q.type === 'true_false') {
-        userAnsText = w.userAnswer === null || w.userAnswer === undefined ? '未作答' : (w.userAnswer ? '正确' : '错误');
-        correctAnsText = w.correctAnswer ? '正确' : '错误';
-      } else if (q.type === 'multiple') {
+      if (q.type === 'multiple') {
         userAnsText = (!w.userAnswer || w.userAnswer.length === 0) ? '未作答' : w.userAnswer.sort().join('、');
         correctAnsText = w.correctAnswer.sort().join('、');
       } else {
@@ -1157,7 +1134,7 @@ function startPractice() {
   practiceQuestions.forEach((q, i) => {
     practiceUserAnswers[i] = q.type === 'multiple' ? [] : null;
     practiceDone[i] = false;
-    if (q.type !== 'true_false' && q.options) {
+    if (q.options) {
       practiceShuffles[i] = shuffle(Object.keys(q.options).sort());
     }
   });
@@ -1209,7 +1186,7 @@ function renderPracticeQuestion() {
 
   const answered = practiceDone[idx];
   const isMultiple = q.type === 'multiple';
-  const typeLabel = q.type === 'single' ? '单选题' : isMultiple ? '多选题' : '判断题';
+  const typeLabel = q.type === 'single' ? '单选题' : '多选题';
   const typeClass = 'badge-type-' + q.type;
   const score = isMultiple ? MULTIPLE_SCORE : SINGLE_SCORE;
 
@@ -1217,25 +1194,7 @@ function renderPracticeQuestion() {
   let optionsHTML = '';
   let letterMap = {};
 
-  if (q.type === 'true_false') {
-    const opts = [{ key: true, label: '正确' }, { key: false, label: '错误' }];
-    optionsHTML = '<div class="option-list">' + opts.map(opt => {
-      const selected = practiceUserAnswers[idx] === opt.key;
-      const isCorrectOpt = q.answer === opt.key;
-      let cls = 'option-item';
-      if (selected) cls += ' selected';
-      if (answered) {
-        if (isCorrectOpt) cls += ' correct';
-        else if (selected) cls += ' wrong';
-      }
-      const clickAttr = answered ? '' : `onclick="selectPracticeTrueFalse(${opt.key})"`;
-      const cursorStyle = answered ? ' style="cursor:not-allowed;"' : '';
-      return `<div class="${cls}" ${clickAttr}${cursorStyle}>
-        <div class="option-marker">${opt.key ? 'T' : 'F'}</div>
-        <div class="option-text">${opt.label}</div>
-      </div>`;
-    }).join('') + '</div>';
-  } else {
+  {
     const shuffledKeys = practiceShuffles[idx] || Object.keys(q.options).sort();
     shuffledKeys.forEach((k, di) => { letterMap[k] = letter(di); });
     const correctKeys = isMultiple ? [...q.answer].sort() : [q.answer];
@@ -1277,10 +1236,7 @@ function renderPracticeQuestion() {
   if (answered) {
     const isCorrect = checkPracticeAnswer(idx);
     let userAnsText, correctAnsText;
-    if (q.type === 'true_false') {
-      userAnsText = practiceUserAnswers[idx] ? '正确' : '错误';
-      correctAnsText = q.answer ? '正确' : '错误';
-    } else {
+    {
       const correctKeys = isMultiple ? [...q.answer].sort() : [q.answer];
       const userKeys = isMultiple
         ? [...(practiceUserAnswers[idx] || [])]
@@ -1339,14 +1295,6 @@ function selectPracticeOption(key, isMultiple) {
     practiceDone[idx] = true;
     renderPracticeQuestion();
   }
-}
-
-function selectPracticeTrueFalse(val) {
-  const idx = practiceCurrentIdx;
-  if (practiceDone[idx]) return;
-  practiceUserAnswers[idx] = val;
-  practiceDone[idx] = true;
-  renderPracticeQuestion();
 }
 
 // 多选题手动提交
@@ -1445,7 +1393,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('practiceTotal').textContent = total;
 
   const courseCount = (QUESTION_BANK.statistics.course_questions || 0);
-  const singles = QUESTION_BANK.questions.filter(q => q.type === 'single' || q.type === 'true_false').length;
+  const singles = QUESTION_BANK.questions.filter(q => q.type === 'single').length;
   const multiples = QUESTION_BANK.questions.filter(q => q.type === 'multiple').length;
   document.getElementById('infoSingle').textContent = `题库 ${singles} 题（含课程原题），考试取 50 题 x 1 分`;
   document.getElementById('infoMultiple').textContent = `题库 ${multiples} 题（含课程原题），考试取 ${Math.min(25, multiples)} 题 x 2 分`;
