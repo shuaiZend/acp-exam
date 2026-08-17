@@ -227,8 +227,82 @@
   .btn-danger:hover { opacity: 0.85; }
   .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
+  /* ===== Practice Mode (刷题模式) ===== */
+  .practice-entry {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .practice-entry h2 { color: var(--green); font-size: 1.1rem; margin-bottom: 0.25rem; }
+  .practice-entry .sub-note { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 1rem; }
+
+  .practice-setup {
+    display: none;
+    margin-top: 1.25rem;
+    text-align: left;
+    background: var(--bg);
+    border: 1px solid var(--green);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+  .practice-setup h3 { color: var(--green); font-size: 0.95rem; margin-bottom: 0.75rem; }
+  .input-row { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+  #practiceCount {
+    width: 130px;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text-bright);
+    font-size: 1rem;
+    font-family: inherit;
+  }
+  #practiceCount:focus { outline: none; border-color: var(--accent); }
+  .error-text { color: var(--red); font-size: 0.85rem; margin-top: 0.6rem; }
+  .setup-hint { color: var(--text-dim); font-size: 0.8rem; margin-top: 0.5rem; }
+
+  /* 作答反馈高亮 */
+  .option-item.correct {
+    border-color: var(--green);
+    background: rgba(158,206,106,0.1);
+  }
+  .option-item.correct .option-marker {
+    border-color: var(--green);
+    background: var(--green);
+    color: var(--bg);
+  }
+  .option-item.correct .option-text { color: var(--green); }
+  .option-item.wrong {
+    border-color: var(--red);
+    background: rgba(247,118,142,0.1);
+  }
+  .option-item.wrong .option-marker {
+    border-color: var(--red);
+    background: var(--red);
+    color: var(--bg);
+  }
+  .option-item.wrong .option-text { color: var(--red); text-decoration: line-through; }
+
+  /* 答案与解析面板 */
+  .feedback-panel {
+    margin-top: 1.25rem;
+    padding: 1rem 1.25rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .feedback-correct { background: rgba(158,206,106,0.08); border: 1px solid var(--green); }
+  .feedback-wrong { background: rgba(247,118,142,0.08); border: 1px solid var(--red); }
+  .feedback-verdict { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+  .feedback-correct .feedback-verdict { color: var(--green); }
+  .feedback-wrong .feedback-verdict { color: var(--red); }
+  .feedback-answer { color: var(--text-bright); margin-bottom: 0.4rem; }
+  .feedback-explanation { color: var(--text-dim); }
+  .feedback-explanation strong { color: var(--yellow); }
+
   /* ===== Exam Screen ===== */
   #examScreen { display: none; max-width: 760px; margin: 0 auto; padding: 1.5rem; }
+  #practiceScreen { display: none; max-width: 760px; margin: 0 auto; padding: 1.5rem; }
   .exam-header {
     display: flex;
     justify-content: space-between;
@@ -561,6 +635,25 @@
       </div>
     </div>
     <button class="btn btn-primary" onclick="startExam()">开始模拟考试</button>
+
+    <!-- 刷题模式入口 -->
+    <div class="practice-entry">
+      <h2>刷题模式</h2>
+      <p class="sub-note">自由练习：作答后立即查看正确答案与详细解析</p>
+      <button class="btn btn-secondary" onclick="openPracticeSetup()">进入刷题模式</button>
+
+      <!-- 数量设置面板 -->
+      <div class="practice-setup" id="practiceSetup">
+        <h3>设置刷题数量</h3>
+        <div class="input-row">
+          <input type="number" id="practiceCount" min="10" placeholder="10 - 题库总数" />
+          <button class="btn btn-primary" onclick="startPractice()">开始刷题</button>
+          <button class="btn btn-secondary" onclick="closePracticeSetup()">取消</button>
+        </div>
+        <div class="error-text" id="practiceError" style="display:none;"></div>
+        <div class="setup-hint">题库共 <span id="practiceTotal">--</span> 题，请输入 10 到题库总数之间的整数</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -582,18 +675,34 @@
   </div>
 </div>
 
+<!-- ===== Practice Screen (刷题模式) ===== -->
+<div id="practiceScreen">
+  <div class="exam-header">
+    <div class="progress-text">刷题模式 | 第 <span id="pCurIdx">1</span> / <span id="pTotalIdx">10</span> 题</div>
+    <button class="btn btn-secondary" style="padding:0.4rem 0.9rem; font-size:0.85rem;" onclick="finishPractice()">结束练习</button>
+  </div>
+  <div class="progress-bar"><div class="progress-bar-fill" id="pProgressFill" style="width:0%"></div></div>
+
+  <div class="navigator" id="pNavigator"></div>
+
+  <div class="question-card" id="pQuestionCard"></div>
+
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" id="pPrevBtn" onclick="practicePrev()">上一题</button>
+    <button class="btn btn-primary" id="pNextBtn" onclick="practiceNext()">下一题</button>
+  </div>
+</div>
+
 <!-- ===== Results Screen ===== -->
 <div id="resultsScreen">
   <div class="score-card">
-    <div class="score-label">考试得分</div>
+    <div class="score-label" id="scoreLabel">考试得分</div>
     <div class="score-value" id="scoreValue">--</div>
     <div class="score-detail" id="scoreDetail"></div>
     <div class="score-stats" id="scoreStats"></div>
   </div>
   <div class="wrong-section" id="wrongSection"></div>
-  <div class="actions-bar">
-    <button class="btn btn-primary" onclick="location.reload()">再考一次</button>
-  </div>
+  <div class="actions-bar" id="actionsBar"></div>
 </div>
 
 <script src="exam_data.js"></script>
@@ -870,6 +979,7 @@ function submitExam() {
   const scoreEl = document.getElementById('scoreValue');
   scoreEl.textContent = scaledScore;
   scoreEl.className = 'score-value ' + (passed ? 'pass' : 'fail');
+  document.getElementById('scoreLabel').textContent = '考试得分';
 
   const h = String(Math.floor(elapsed / 3600)).padStart(2, '0');
   const m = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0');
@@ -897,48 +1007,54 @@ function submitExam() {
     </div>
   `;
 
-  // 渲染错题列表
-  const wrongSection = document.getElementById('wrongSection');
-  if (wrongQuestions.length === 0) {
-    wrongSection.innerHTML = '<div class="no-wrong">全部答对，太强了！</div>';
-  } else {
-    wrongSection.innerHTML = '<h2>错题回顾（' + wrongQuestions.length + ' 题）</h2>' +
-      wrongQuestions.map(w => {
-        const q = w.question;
-        const typeLabel = q.type === 'single' ? '单选题' : q.type === 'multiple' ? '多选题' : '判断题';
-        const typeClass = 'badge-type-' + q.type;
+  // 渲染错题列表（通用函数，模拟考试与刷题模式共用）
+  document.getElementById('wrongSection').innerHTML = buildWrongReviewHTML(wrongQuestions);
 
-        // 用户答案格式化
-        let userAnsText, correctAnsText;
-        if (q.type === 'true_false') {
-          userAnsText = w.userAnswer === null || w.userAnswer === undefined ? '未作答' : (w.userAnswer ? '正确' : '错误');
-          correctAnsText = w.correctAnswer ? '正确' : '错误';
-        } else if (q.type === 'multiple') {
-          userAnsText = (!w.userAnswer || w.userAnswer.length === 0) ? '未作答' : w.userAnswer.sort().join('、');
-          correctAnsText = w.correctAnswer.sort().join('、');
-        } else {
-          userAnsText = w.userAnswer || '未作答';
-          correctAnsText = w.correctAnswer;
-        }
+  // 结果页操作按钮（模拟考试：再考一次）
+  document.getElementById('actionsBar').innerHTML =
+    '<button class="btn btn-primary" onclick="location.reload()">再考一次</button>';
+}
 
-        // 选项详情
-        let optionsDetail = '';
-        if (q.options) {
-          const keys = Object.keys(q.options).sort();
-          optionsDetail = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-dim);">' +
-            keys.map(k => {
-              const isCorrect = q.type === 'multiple' ? q.answer.includes(k) : q.answer === k;
-              const isUserSelected = q.type === 'multiple'
-                ? (w.userAnswer && w.userAnswer.includes(k))
-                : w.userAnswer === k;
-              let style = '';
-              if (isCorrect) style = 'color:var(--green);font-weight:600;';
-              else if (isUserSelected && !isCorrect) style = 'color:var(--red);text-decoration:line-through;';
-              return `<div style="${style}">${k}. ${q.options[k]}</div>`;
-            }).join('') + '</div>';
-        }
+// ===== 通用错题回顾渲染（模拟考试与刷题模式共用） =====
+function buildWrongReviewHTML(wrongQuestions) {
+  if (wrongQuestions.length === 0) return '<div class="no-wrong">全部答对，太强了！</div>';
+  return '<h2>错题回顾（' + wrongQuestions.length + ' 题）</h2>' +
+    wrongQuestions.map(w => {
+      const q = w.question;
+      const typeLabel = q.type === 'single' ? '单选题' : q.type === 'multiple' ? '多选题' : '判断题';
+      const typeClass = 'badge-type-' + q.type;
 
-        return `<div class="wrong-card">
+      // 用户答案格式化
+      let userAnsText, correctAnsText;
+      if (q.type === 'true_false') {
+        userAnsText = w.userAnswer === null || w.userAnswer === undefined ? '未作答' : (w.userAnswer ? '正确' : '错误');
+        correctAnsText = w.correctAnswer ? '正确' : '错误';
+      } else if (q.type === 'multiple') {
+        userAnsText = (!w.userAnswer || w.userAnswer.length === 0) ? '未作答' : w.userAnswer.sort().join('、');
+        correctAnsText = w.correctAnswer.sort().join('、');
+      } else {
+        userAnsText = w.userAnswer || '未作答';
+        correctAnsText = w.correctAnswer;
+      }
+
+      // 选项详情
+      let optionsDetail = '';
+      if (q.options) {
+        const keys = Object.keys(q.options).sort();
+        optionsDetail = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-dim);">' +
+          keys.map(k => {
+            const isCorrect = q.type === 'multiple' ? q.answer.includes(k) : q.answer === k;
+            const isUserSelected = q.type === 'multiple'
+              ? (w.userAnswer && w.userAnswer.includes(k))
+              : w.userAnswer === k;
+            let style = '';
+            if (isCorrect) style = 'color:var(--green);font-weight:600;';
+            else if (isUserSelected && !isCorrect) style = 'color:var(--red);text-decoration:line-through;';
+            return `<div style="${style}">${k}. ${q.options[k]}</div>`;
+          }).join('') + '</div>';
+      }
+
+      return `<div class="wrong-card">
           <div class="wrong-meta">
             <span class="badge ${typeClass}">${typeLabel}</span>
             <span class="badge badge-module">${q.module}</span>
@@ -958,14 +1074,375 @@ function submitExam() {
           </div>
           <div class="wrong-explanation"><strong>解析：</strong>${q.explanation}</div>
         </div>`;
-      }).join('');
+    }).join('');
+}
+
+// ===== Practice Mode (刷题模式) =====
+let practiceQuestions = [];
+let practiceUserAnswers = {};
+let practiceShuffles = {};   // 每题选项的随机顺序映射
+let practiceDone = {};       // 每题是否已作答
+let practiceCurrentIdx = 0;
+
+// 从数组中随机抽取 n 个不重复元素 (Fisher-Yates 部分抽取)
+function randomSample(arr, n) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > a.length - 1 - n; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
   }
+  return a.slice(a.length - n);
+}
+
+// ===== 数量设置面板 =====
+function openPracticeSetup() {
+  const setup = document.getElementById('practiceSetup');
+  setup.style.display = 'block';
+  document.getElementById('practiceCount').value = '';
+  hidePracticeError();
+  setTimeout(() => document.getElementById('practiceCount').focus(), 50);
+}
+
+function closePracticeSetup() {
+  document.getElementById('practiceSetup').style.display = 'none';
+}
+
+function showPracticeError(msg) {
+  const el = document.getElementById('practiceError');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+function hidePracticeError() {
+  const el = document.getElementById('practiceError');
+  el.style.display = 'none';
+}
+
+// 回车键快速开始
+document.getElementById('practiceCount').addEventListener('keydown', e => {
+  if (e.key === 'Enter') startPractice();
+});
+
+// ===== 校验数量并随机抽题 =====
+function startPractice() {
+  const input = document.getElementById('practiceCount');
+  const total = QUESTION_BANK.questions.length;
+  const val = input.value.trim();
+
+  // 校验: 必须为 10 到题库总数之间的整数
+  if (val === '' || !/^\d+$/.test(val)) {
+    showPracticeError('请输入整数题目数量');
+    input.focus();
+    return;
+  }
+  const x = parseInt(val, 10);
+  if (x < 10) {
+    showPracticeError('题目数量不能小于 10 题');
+    input.focus();
+    return;
+  }
+  if (x > total) {
+    showPracticeError('题目数量不能超过题库总数 ' + total + ' 题');
+    input.focus();
+    return;
+  }
+
+  // 随机抽取 x 道不重复题目
+  practiceQuestions = randomSample(QUESTION_BANK.questions, x);
+  practiceUserAnswers = {};
+  practiceShuffles = {};
+  practiceDone = {};
+  practiceCurrentIdx = 0;
+
+  practiceQuestions.forEach((q, i) => {
+    practiceUserAnswers[i] = q.type === 'multiple' ? [] : null;
+    practiceDone[i] = false;
+    if (q.type !== 'true_false' && q.options) {
+      practiceShuffles[i] = shuffle(Object.keys(q.options).sort());
+    }
+  });
+
+  // 切换到刷题界面
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('practiceScreen').style.display = 'block';
+  document.getElementById('pTotalIdx').textContent = x;
+
+  renderPracticeNavigator();
+  renderPracticeQuestion();
+}
+
+// ===== 导航器 =====
+function renderPracticeNavigator() {
+  const nav = document.getElementById('pNavigator');
+  nav.innerHTML = '';
+  practiceQuestions.forEach((q, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot';
+    if (i === practiceCurrentIdx) dot.classList.add('current');
+    if (practiceDone[i]) dot.classList.add('answered');
+    dot.textContent = i + 1;
+    dot.onclick = () => { practiceCurrentIdx = i; renderPracticeNavigator(); renderPracticeQuestion(); };
+    nav.appendChild(dot);
+  });
+}
+
+// ===== 渲染题目（作答后立即显示答案与解析） =====
+function renderPracticeQuestion() {
+  const q = practiceQuestions[practiceCurrentIdx];
+  const card = document.getElementById('pQuestionCard');
+  const idx = practiceCurrentIdx;
+
+  // 进度
+  document.getElementById('pCurIdx').textContent = idx + 1;
+  document.getElementById('pProgressFill').style.width = ((idx + 1) / practiceQuestions.length * 100) + '%';
+  document.getElementById('pPrevBtn').disabled = idx === 0;
+
+  // 按钮状态
+  const nextBtn = document.getElementById('pNextBtn');
+  if (idx === practiceQuestions.length - 1) {
+    nextBtn.textContent = '结束练习';
+    nextBtn.className = 'btn btn-danger';
+  } else {
+    nextBtn.textContent = '下一题';
+    nextBtn.className = 'btn btn-primary';
+  }
+
+  const answered = practiceDone[idx];
+  const isMultiple = q.type === 'multiple';
+  const typeLabel = q.type === 'single' ? '单选题' : isMultiple ? '多选题' : '判断题';
+  const typeClass = 'badge-type-' + q.type;
+  const score = isMultiple ? MULTIPLE_SCORE : SINGLE_SCORE;
+
+  // 选项区域（已作答则锁定并高亮反馈）
+  let optionsHTML = '';
+  let letterMap = {};
+
+  if (q.type === 'true_false') {
+    const opts = [{ key: true, label: '正确' }, { key: false, label: '错误' }];
+    optionsHTML = '<div class="option-list">' + opts.map(opt => {
+      const selected = practiceUserAnswers[idx] === opt.key;
+      const isCorrectOpt = q.answer === opt.key;
+      let cls = 'option-item';
+      if (selected) cls += ' selected';
+      if (answered) {
+        if (isCorrectOpt) cls += ' correct';
+        else if (selected) cls += ' wrong';
+      }
+      const clickAttr = answered ? '' : `onclick="selectPracticeTrueFalse(${opt.key})"`;
+      const cursorStyle = answered ? ' style="cursor:not-allowed;"' : '';
+      return `<div class="${cls}" ${clickAttr}${cursorStyle}>
+        <div class="option-marker">${opt.key ? 'T' : 'F'}</div>
+        <div class="option-text">${opt.label}</div>
+      </div>`;
+    }).join('') + '</div>';
+  } else {
+    const shuffledKeys = practiceShuffles[idx] || Object.keys(q.options).sort();
+    shuffledKeys.forEach((k, di) => { letterMap[k] = letter(di); });
+    const correctKeys = isMultiple ? [...q.answer].sort() : [q.answer];
+
+    optionsHTML = '<div class="option-list">' + shuffledKeys.map((origKey, di) => {
+      const displayLetter = letter(di);
+      const selected = isMultiple
+        ? (practiceUserAnswers[idx] && practiceUserAnswers[idx].includes(origKey))
+        : practiceUserAnswers[idx] === origKey;
+      const isCorrectOpt = correctKeys.includes(origKey);
+      let cls = 'option-item';
+      if (selected) cls += ' selected';
+      if (answered) {
+        if (isCorrectOpt) cls += ' correct';
+        else if (selected) cls += ' wrong';
+      }
+      const markerClass = isMultiple ? 'option-marker checkbox' : 'option-marker';
+      const clickAttr = answered ? '' : `onclick="selectPracticeOption('${origKey}', ${isMultiple})"`;
+      const cursorStyle = answered ? ' style="cursor:not-allowed;"' : '';
+      return `<div class="${cls}" ${clickAttr}${cursorStyle}>
+        <div class="${markerClass}">${displayLetter}</div>
+        <div class="option-text">${q.options[origKey]}</div>
+      </div>`;
+    }).join('') + '</div>';
+
+    // 多选题未作答时显示提交按钮
+    if (isMultiple && !answered) {
+      const selectedCount = (practiceUserAnswers[idx] || []).length;
+      optionsHTML += `
+        <div style="margin-top:1rem;">
+          <button class="btn btn-primary" ${selectedCount === 0 ? 'disabled' : ''} onclick="submitPracticeMultiple()">提交答案</button>
+          <span style="color:var(--text-dim);font-size:0.85rem;margin-left:0.75rem;">请选完所有正确选项后再提交</span>
+        </div>`;
+    }
+  }
+
+  // 反馈面板（已作答才显示）
+  let feedbackHTML = '';
+  if (answered) {
+    const isCorrect = checkPracticeAnswer(idx);
+    let userAnsText, correctAnsText;
+    if (q.type === 'true_false') {
+      userAnsText = practiceUserAnswers[idx] ? '正确' : '错误';
+      correctAnsText = q.answer ? '正确' : '错误';
+    } else {
+      const correctKeys = isMultiple ? [...q.answer].sort() : [q.answer];
+      const userKeys = isMultiple
+        ? [...(practiceUserAnswers[idx] || [])]
+        : (practiceUserAnswers[idx] === null || practiceUserAnswers[idx] === undefined ? [] : [practiceUserAnswers[idx]]);
+      userAnsText = userKeys.map(k => letterMap[k]).join('、') || '未作答';
+      correctAnsText = correctKeys.map(k => letterMap[k]).join('、');
+    }
+    feedbackHTML = `
+      <div class="feedback-panel ${isCorrect ? 'feedback-correct' : 'feedback-wrong'}">
+        <div class="feedback-verdict">${isCorrect ? '回答正确' : '回答错误'}</div>
+        <div class="feedback-answer">正确答案：${correctAnsText}　|　你的答案：${userAnsText}</div>
+        <div class="feedback-explanation"><strong>解析：</strong>${q.explanation}</div>
+      </div>`;
+  }
+
+  card.innerHTML = `
+    <div class="question-meta">
+      <span class="badge ${typeClass}">${typeLabel}</span>
+      <span class="badge badge-module">${q.module}</span>
+      <span class="badge badge-score">${score} 分</span>
+      ${(q.source || '').startsWith('课程') ? '<span class="badge" style="background:rgba(255,158,100,0.15);color:var(--orange);">课程原题</span>' : ''}
+      ${answered ? '<span class="badge" style="background:rgba(158,206,106,0.15);color:var(--green);">已作答</span>' : ''}
+    </div>
+    <div class="question-text">${q.question}</div>
+    ${optionsHTML}
+    ${feedbackHTML}
+  `;
+
+  renderPracticeNavigator();
+}
+
+function checkPracticeAnswer(idx) {
+  const q = practiceQuestions[idx];
+  const userAns = practiceUserAnswers[idx];
+  const correctAns = q.answer;
+  if (q.type === 'multiple') {
+    return JSON.stringify([...(userAns || [])].sort()) === JSON.stringify([...correctAns].sort());
+  }
+  return userAns === correctAns;
+}
+
+// ===== 作答 =====
+function selectPracticeOption(key, isMultiple) {
+  const idx = practiceCurrentIdx;
+  if (practiceDone[idx]) return;
+  if (isMultiple) {
+    if (!practiceUserAnswers[idx]) practiceUserAnswers[idx] = [];
+    const i = practiceUserAnswers[idx].indexOf(key);
+    if (i >= 0) practiceUserAnswers[idx].splice(i, 1);
+    else practiceUserAnswers[idx].push(key);
+    // 多选题：选择多个选项后需手动提交，不立即锁定
+    renderPracticeQuestion();
+  } else {
+    // 单选题：选择后立即锁定并显示解析
+    practiceUserAnswers[idx] = key;
+    practiceDone[idx] = true;
+    renderPracticeQuestion();
+  }
+}
+
+function selectPracticeTrueFalse(val) {
+  const idx = practiceCurrentIdx;
+  if (practiceDone[idx]) return;
+  practiceUserAnswers[idx] = val;
+  practiceDone[idx] = true;
+  renderPracticeQuestion();
+}
+
+// 多选题手动提交
+function submitPracticeMultiple() {
+  const idx = practiceCurrentIdx;
+  const ans = practiceUserAnswers[idx] || [];
+  if (ans.length === 0) return;
+  practiceDone[idx] = true;
+  renderPracticeQuestion();
+}
+
+// ===== 导航 =====
+function practicePrev() {
+  if (practiceCurrentIdx > 0) { practiceCurrentIdx--; renderPracticeQuestion(); }
+}
+
+function practiceNext() {
+  if (practiceCurrentIdx < practiceQuestions.length - 1) {
+    practiceCurrentIdx++;
+    renderPracticeQuestion();
+  } else {
+    finishPractice();
+  }
+}
+
+// ===== 结束统计与错题回顾 =====
+function finishPractice() {
+  let correctCount = 0, wrongCount = 0, unansweredCount = 0;
+  const wrongQuestions = [];
+
+  practiceQuestions.forEach((q, i) => {
+    const score = q.type === 'multiple' ? MULTIPLE_SCORE : SINGLE_SCORE;
+
+    if (!practiceDone[i]) {
+      unansweredCount++;
+      wrongQuestions.push({ question: q, userAnswer: null, correctAnswer: q.answer, score });
+      return;
+    }
+    if (checkPracticeAnswer(i)) {
+      correctCount++;
+    } else {
+      wrongCount++;
+      wrongQuestions.push({ question: q, userAnswer: practiceUserAnswers[i], correctAnswer: q.answer, score });
+    }
+  });
+
+  // 显示结果（刷题模式不记分，只统计答对/答错数量）
+  document.getElementById('practiceScreen').style.display = 'none';
+  document.getElementById('resultsScreen').style.display = 'block';
+
+  const scoreEl = document.getElementById('scoreValue');
+  scoreEl.textContent = correctCount;
+  scoreEl.className = 'score-value pass';
+  document.getElementById('scoreLabel').textContent = '答对题数';
+
+  document.getElementById('scoreDetail').innerHTML =
+    `答对 ${correctCount} / ${practiceQuestions.length} 题`;
+
+  document.getElementById('scoreStats').innerHTML = `
+    <div class="stat-item">
+      <div class="stat-num" style="color:var(--green)">${correctCount}</div>
+      <div class="stat-label">答对</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" style="color:var(--red)">${wrongCount}</div>
+      <div class="stat-label">答错</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" style="color:var(--yellow)">${unansweredCount}</div>
+      <div class="stat-label">未作答</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" style="color:var(--accent)">${practiceQuestions.length}</div>
+      <div class="stat-label">总题数</div>
+    </div>
+  `;
+
+  document.getElementById('wrongSection').innerHTML = buildWrongReviewHTML(wrongQuestions);
+
+  document.getElementById('actionsBar').innerHTML = `
+    <button class="btn btn-secondary" onclick="backToHome()">返回首页</button>
+    <button class="btn btn-primary" onclick="backToHome(); openPracticeSetup();">再练一组</button>
+  `;
+}
+
+function backToHome() {
+  document.getElementById('resultsScreen').style.display = 'none';
+  document.getElementById('startScreen').style.display = 'flex';
+  closePracticeSetup();
 }
 
 // ===== Init =====
 document.addEventListener('DOMContentLoaded', () => {
   const total = QUESTION_BANK.metadata.total_questions;
   document.getElementById('infoTotal').textContent = total + ' 题';
+  document.getElementById('practiceTotal').textContent = total;
 
   const courseCount = (QUESTION_BANK.statistics.course_questions || 0);
   const singles = QUESTION_BANK.questions.filter(q => q.type === 'single' || q.type === 'true_false').length;
