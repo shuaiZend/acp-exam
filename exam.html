@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ACP 认证模拟考试系统</title>
+<style>
+  :root {
+    --bg: #1a1b26;
+    --surface: #24283b;
+    --surface-hover: #2f334d;
+    --border: #3b4261;
+    --text: #c0caf5;
+    --text-dim: #565f89;
+    --text-bright: #ffffff;
+    --accent: #7aa2f7;
+    --accent-hover: #89b4fa;
+    --green: #9ece6a;
+    --red: #f7768e;
+    --yellow: #e0af68;
+    --orange: #ff9e64;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ===== Start Screen ===== */
+  #startScreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+  }
+  #startScreen .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+  }
+  #startScreen h1 {
+    color: var(--text-bright);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+  #startScreen .subtitle {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+  }
+  .exam-info {
+    text-align: left;
+    background: var(--bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .exam-info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .exam-info-row:last-child { border-bottom: none; }
+  .exam-info-row .label { color: var(--text-dim); }
+  .exam-info-row .value { color: var(--text-bright); font-weight: 600; }
+
+  /* ===== Value & Guide Sections ===== */
+  .value-section {
+    background: linear-gradient(135deg, rgba(122,162,247,0.08), rgba(158,206,106,0.05));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+  .value-section h3 {
+    color: var(--accent);
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .value-section ul {
+    list-style: none;
+    padding: 0;
+  }
+  .value-section li {
+    color: var(--text);
+    font-size: 0.85rem;
+    padding: 0.25rem 0;
+    padding-left: 1.1rem;
+    position: relative;
+    line-height: 1.5;
+  }
+  .value-section li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6rem;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .guide-section {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .guide-section h3 {
+    color: var(--yellow);
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+  .guide-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .guide-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .guide-step-num {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--bg);
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .guide-step.done .guide-step-num { background: var(--green); }
+  .guide-step .step-highlight { color: var(--accent); font-weight: 600; }
+  .guide-step .step-note { color: var(--text-dim); font-size: 0.8rem; }
+  .guide-link {
+    display: inline-block;
+    margin-top: 0.6rem;
+    padding: 0.4rem 0.8rem;
+    background: rgba(122,162,247,0.15);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    color: var(--accent);
+    font-size: 0.82rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .guide-link:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .guide-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0.75rem 0;
+  }
+  .free-tag {
+    display: inline-block;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    background: rgba(158,206,106,0.15);
+    color: var(--green);
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+  .paid-tag {
+    display: inline-block;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    background: rgba(247,118,142,0.15);
+    color: var(--red);
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+
+  /* ===== Buttons ===== */
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: inherit;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-secondary {
+    background: var(--surface-hover);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { background: var(--border); }
+  .btn-danger {
+    background: var(--red);
+    color: var(--bg);
+  }
+  .btn-danger:hover { opacity: 0.85; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ===== Exam Screen ===== */
+  #examScreen { display: none; max-width: 760px; margin: 0 auto; padding: 1.5rem; }
+  .exam-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .exam-header .progress-text {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+  }
+  .exam-header .progress-text span { color: var(--accent); font-weight: 600; }
+  .progress-bar {
+    height: 4px;
+    background: var(--surface);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  .question-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .question-meta {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+  .badge {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .badge-type-single { background: rgba(122,162,247,0.15); color: var(--accent); }
+  .badge-type-multiple { background: rgba(224,175,104,0.15); color: var(--yellow); }
+  .badge-type-true_false { background: rgba(158,206,106,0.15); color: var(--green); }
+  .badge-module { background: rgba(86,95,137,0.2); color: var(--text-dim); }
+  .badge-score { background: rgba(255,158,100,0.15); color: var(--orange); }
+
+  .question-text {
+    color: var(--text-bright);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .option-list { display: flex; flex-direction: column; gap: 0.6rem; }
+  .option-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.12s ease;
+    user-select: none;
+  }
+  .option-item:hover { border-color: var(--accent); background: var(--surface-hover); }
+  .option-item.selected {
+    border-color: var(--accent);
+    background: rgba(122,162,247,0.1);
+  }
+  .option-marker {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-dim);
+    transition: all 0.12s ease;
+  }
+  .option-item.selected .option-marker {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .option-item.selected .option-marker.checkbox {
+    border-radius: 6px;
+  }
+  .option-marker.checkbox { border-radius: 6px; }
+  .option-text { color: var(--text); font-size: 0.95rem; line-height: 1.5; }
+
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  /* ===== Question Navigator ===== */
+  .navigator {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .nav-dot {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg);
+    color: var(--text-dim);
+    font-size: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.12s ease;
+  }
+  .nav-dot:hover { border-color: var(--accent); color: var(--accent); }
+  .nav-dot.answered { background: rgba(122,162,247,0.2); color: var(--accent); border-color: var(--accent); }
+  .nav-dot.current { border-color: var(--accent); border-width: 2px; color: var(--text-bright); }
+
+  /* ===== Results Screen ===== */
+  #resultsScreen { display: none; max-width: 760px; margin: 0 auto; padding: 1.5rem; }
+  .score-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .score-label { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 0.5rem; }
+  .score-value {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+  .score-value.pass { color: var(--green); }
+  .score-value.fail { color: var(--red); }
+  .score-detail {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  .score-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .stat-item { text-align: center; }
+  .stat-item .stat-num { font-size: 1.5rem; font-weight: 700; color: var(--text-bright); }
+  .stat-item .stat-label { font-size: 0.8rem; color: var(--text-dim); }
+
+  .wrong-section h2 {
+    color: var(--text-bright);
+    font-size: 1.2rem;
+    margin: 1.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .wrong-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--red);
+    border-radius: 10px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .wrong-card .wrong-meta {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .wrong-card .wrong-question {
+    color: var(--text-bright);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+  .wrong-answer-row {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+    align-items: flex-start;
+  }
+  .wrong-answer-row .label { color: var(--text-dim); flex-shrink: 0; width: 70px; }
+  .wrong-answer-row .correct { color: var(--green); }
+  .wrong-answer-row .user-wrong { color: var(--red); }
+  .wrong-explanation {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed var(--border);
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .no-wrong {
+    text-align: center;
+    padding: 3rem;
+    color: var(--green);
+    font-size: 1.2rem;
+  }
+
+  .actions-bar {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 600px) {
+    #startScreen .card { padding: 1.5rem; }
+    .question-card { padding: 1.25rem; }
+    .score-value { font-size: 2.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Start Screen ===== -->
+<div id="startScreen">
+  <div class="card">
+    <h1>ACP 认证模拟考试</h1>
+    <p class="subtitle">阿里云大模型高级工程师 ACP 认证 (Alibaba Cloud Professional - LLM)</p>
+
+    <!-- ACP 认证价值 -->
+    <div class="value-section">
+      <h3>ACP 认证价值</h3>
+      <ul>
+        <li>掌握大模型提示词、RAG 检索增强、微调、多 Agent 等核心技术能力</li>
+        <li>具备使用阿里云百炼平台独立构建大模型应用的开发、测评、部署能力</li>
+        <li>能够针对复杂业务场景设计并实施大模型驱动的解决方案</li>
+        <li>胜任大模型解决方案高级工程师 / 大模型应用开发高级工程师岗位</li>
+      </ul>
+    </div>
+
+    <!-- 学习引导 -->
+    <div class="guide-section">
+      <h3>备考路线</h3>
+      <div class="guide-steps">
+        <div class="guide-step">
+          <div class="guide-step-num">1</div>
+          <div>
+            <span class="step-highlight">阿里云在线学习</span>
+            <span class="free-tag">免费</span><br>
+            <span class="step-note">完成官方课程学习，掌握大模型开发全流程知识</span>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">2</div>
+          <div>
+            <span class="step-highlight">本系统自我测试</span><br>
+            <span class="step-note">通过模拟考试检验学习成果，查漏补缺</span>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">3</div>
+          <div>
+            <span class="step-highlight">获取考试码</span><br>
+            <span class="step-note">联系管理员领取 ACP 认证考试码</span>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="guide-step-num">4</div>
+          <div>
+            <span class="step-highlight">参加官方认证考试</span>
+            <span class="paid-tag">收费</span><br>
+            <span class="step-note">在阿里云官网完成正式考试，获取认证证书</span>
+          </div>
+        </div>
+      </div>
+      <div class="guide-divider"></div>
+      <a class="guide-link" href="https://edu.aliyun.com/certification/acp26" target="_blank">前往阿里云学习平台 &#8599;</a>
+    </div>
+
+    <!-- 考试信息 -->
+    <div class="exam-info">
+      <div class="exam-info-row">
+        <span class="label">考试时长</span>
+        <span class="value">120 分钟</span>
+      </div>
+      <div class="exam-info-row">
+        <span class="label">满分</span>
+        <span class="value">100 分</span>
+      </div>
+      <div class="exam-info-row">
+        <span class="label">及格分数</span>
+        <span class="value">80 分</span>
+      </div>
+      <div class="exam-info-row">
+        <span class="label">单选题</span>
+        <span class="value" id="infoSingle">50 题 x 1 分 = 50 分</span>
+      </div>
+      <div class="exam-info-row">
+        <span class="label">多选题</span>
+        <span class="value" id="infoMultiple">25 题 x 2 分 = 50 分</span>
+      </div>
+      <div class="exam-info-row">
+        <span class="label">题库总量</span>
+        <span class="value" id="infoTotal">100 题</span>
+      </div>
+      <div class="exam-info-row">
+        <span class="label">课程原题</span>
+        <span class="value" style="color:var(--orange);">必考</span>
+      </div>
+      <div class="exam-info-row">
+        <span class="label">出题规则</span>
+        <span class="value" style="font-size:0.8rem;">课程原题优先 → 补充题；选项随机排序</span>
+      </div>
+    </div>
+    <button class="btn btn-primary" onclick="startExam()">开始模拟考试</button>
+  </div>
+</div>
+
+<!-- ===== Exam Screen ===== -->
+<div id="examScreen">
+  <div class="exam-header">
+    <div class="progress-text">第 <span id="curIdx">1</span> / <span id="totalIdx">72</span> 题</div>
+    <div class="progress-text" id="timerDisplay">00:00:00</div>
+  </div>
+  <div class="progress-bar"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+
+  <div class="navigator" id="navigator"></div>
+
+  <div class="question-card" id="questionCard"></div>
+
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" id="prevBtn" onclick="prevQuestion()">上一题</button>
+    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()">下一题</button>
+  </div>
+</div>
+
+<!-- ===== Results Screen ===== -->
+<div id="resultsScreen">
+  <div class="score-card">
+    <div class="score-label">考试得分</div>
+    <div class="score-value" id="scoreValue">--</div>
+    <div class="score-detail" id="scoreDetail"></div>
+    <div class="score-stats" id="scoreStats"></div>
+  </div>
+  <div class="wrong-section" id="wrongSection"></div>
+  <div class="actions-bar">
+    <button class="btn btn-primary" onclick="location.reload()">再考一次</button>
+  </div>
+</div>
+
+<script src="exam_data.js"></script>
+<script>
+// ===== State =====
+let examQuestions = [];
+let userAnswers = {};
+let optionShuffles = {}; // 每题选项的随机顺序映射: { questionIdx: ['C','A','D','B'] }
+let currentIdx = 0;
+let timerInterval = null;
+let startTime = null;
+
+const SINGLE_COUNT = 50;   // ACP 标准: 50 道单选题
+const SINGLE_SCORE = 1;    // 每题 1 分
+const MULTIPLE_COUNT = 25; // ACP 标准: 25 道多选题
+const MULTIPLE_SCORE = 2;  // 每题 2 分
+const PASSING_SCORE = 80;
+
+// ===== Utility =====
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// 生成顺序字母 (A, B, C, D, E...)
+function letter(idx) { return String.fromCharCode(65 + idx); }
+
+function formatAnswer(ans) {
+  if (Array.isArray(ans)) return ans.sort().join('、');
+  if (typeof ans === 'boolean') return ans ? '正确' : '错误';
+  return ans;
+}
+
+// ===== Start Exam =====
+function startExam() {
+  const allQuestions = QUESTION_BANK.questions;
+
+  // 分类: 课程原题优先, 非课程题补充
+  const isCourse = q => (q.source || '').startsWith('课程');
+  const isSingle = q => q.type === 'single' || q.type === 'true_false';
+  const isMultiple = q => q.type === 'multiple';
+
+  // 单选池: 课程原题在前(保持原序), 非课程题在后(保持原序)
+  const courseSingles = allQuestions.filter(q => isCourse(q) && isSingle(q));
+  const nonCourseSingles = allQuestions.filter(q => !isCourse(q) && isSingle(q));
+  const singlePool = [...courseSingles, ...nonCourseSingles];
+
+  // 多选池: 课程原题在前, 非课程题在后
+  const courseMultiples = allQuestions.filter(q => isCourse(q) && isMultiple(q));
+  const nonCourseMultiples = allQuestions.filter(q => !isCourse(q) && isMultiple(q));
+  const multiplePool = [...courseMultiples, ...nonCourseMultiples];
+
+  // 按ACP标准抽取 (不随机, 按顺序取)
+  const singles = singlePool.slice(0, Math.min(SINGLE_COUNT, singlePool.length));
+  const multiples = multiplePool.slice(0, Math.min(MULTIPLE_COUNT, multiplePool.length));
+
+  // 合并: 先单选后多选 (不随机排序)
+  examQuestions = [...singles, ...multiples];
+
+  // 初始化答案和选项随机顺序
+  userAnswers = {};
+  optionShuffles = {};
+  examQuestions.forEach((q, i) => {
+    userAnswers[i] = q.type === 'multiple' ? [] : null;
+    // 为每道题生成选项随机顺序 (true_false 题不shuffle)
+    if (q.type !== 'true_false' && q.options) {
+      optionShuffles[i] = shuffle(Object.keys(q.options).sort());
+    }
+  });
+
+  currentIdx = 0;
+
+  // 更新UI
+  document.getElementById('startScreen').style.display = 'none';
+  document.getElementById('examScreen').style.display = 'block';
+  document.getElementById('totalIdx').textContent = examQuestions.length;
+
+  // 启动计时器
+  startTime = Date.now();
+  timerInterval = setInterval(updateTimer, 1000);
+
+  renderNavigator();
+  renderQuestion();
+}
+
+function updateTimer() {
+  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+  const h = String(Math.floor(elapsed / 3600)).padStart(2, '0');
+  const m = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0');
+  const s = String(elapsed % 60).padStart(2, '0');
+  document.getElementById('timerDisplay').textContent = `${h}:${m}:${s}`;
+}
+
+// ===== Navigator =====
+function renderNavigator() {
+  const nav = document.getElementById('navigator');
+  nav.innerHTML = '';
+  examQuestions.forEach((q, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot';
+    if (i === currentIdx) dot.classList.add('current');
+    if (isAnswered(i)) dot.classList.add('answered');
+    dot.textContent = i + 1;
+    dot.onclick = () => { currentIdx = i; renderNavigator(); renderQuestion(); };
+    nav.appendChild(dot);
+  });
+}
+
+function isAnswered(idx) {
+  const ans = userAnswers[idx];
+  const q = examQuestions[idx];
+  if (q.type === 'multiple') return ans && ans.length > 0;
+  return ans !== null && ans !== undefined;
+}
+
+// ===== Render Question =====
+function renderQuestion() {
+  const q = examQuestions[currentIdx];
+  const card = document.getElementById('questionCard');
+
+  // 更新进度
+  document.getElementById('curIdx').textContent = currentIdx + 1;
+  const progress = ((currentIdx + 1) / examQuestions.length) * 100;
+  document.getElementById('progressFill').style.width = progress + '%';
+
+  // 按钮状态
+  document.getElementById('prevBtn').disabled = currentIdx === 0;
+  const nextBtn = document.getElementById('nextBtn');
+  if (currentIdx === examQuestions.length - 1) {
+    nextBtn.textContent = '提交交卷';
+    nextBtn.className = 'btn btn-danger';
+  } else {
+    nextBtn.textContent = '下一题';
+    nextBtn.className = 'btn btn-primary';
+  }
+
+  // 题型标签
+  const typeLabel = q.type === 'single' ? '单选题' : q.type === 'multiple' ? '多选题' : '判断题';
+  const typeClass = 'badge-type-' + q.type;
+  const score = q.type === 'multiple' ? MULTIPLE_SCORE : SINGLE_SCORE;
+
+  // 选项 HTML
+  let optionsHTML = '';
+  if (q.type === 'true_false') {
+    // 判断题: 正确/错误 (不随机)
+    const opts = [
+      { key: true, label: '正确' },
+      { key: false, label: '错误' }
+    ];
+    optionsHTML = '<div class="option-list">' + opts.map(opt => {
+      const selected = userAnswers[currentIdx] === opt.key;
+      return `<div class="option-item ${selected ? 'selected' : ''}" onclick="selectTrueFalse(${opt.key})">
+        <div class="option-marker">${opt.key ? 'T' : 'F'}</div>
+        <div class="option-text">${opt.label}</div>
+      </div>`;
+    }).join('') + '</div>';
+  } else {
+    // 单选/多选题: 选项顺序随机
+    const shuffledKeys = optionShuffles[currentIdx] || Object.keys(q.options).sort();
+    const isMultiple = q.type === 'multiple';
+    optionsHTML = '<div class="option-list">' + shuffledKeys.map((origKey, displayIdx) => {
+      const displayLetter = letter(displayIdx); // 显示用字母 A/B/C/D (按随机后顺序)
+      const selected = isMultiple
+        ? (userAnswers[currentIdx] && userAnswers[currentIdx].includes(origKey))
+        : userAnswers[currentIdx] === origKey;
+      const markerClass = isMultiple ? 'option-marker checkbox' : 'option-marker';
+      return `<div class="option-item ${selected ? 'selected' : ''}" onclick="selectOption('${origKey}', ${isMultiple})">
+        <div class="${markerClass}">${displayLetter}</div>
+        <div class="option-text">${q.options[origKey]}</div>
+      </div>`;
+    }).join('') + '</div>';
+  }
+
+  card.innerHTML = `
+    <div class="question-meta">
+      <span class="badge ${typeClass}">${typeLabel}</span>
+      <span class="badge badge-module">${q.module}</span>
+      <span class="badge badge-score">${score} 分</span>
+      ${(q.source || '').startsWith('课程') ? '<span class="badge" style="background:rgba(255,158,100,0.15);color:var(--orange);">课程原题</span>' : ''}
+    </div>
+    <div class="question-text">${q.question}</div>
+    ${optionsHTML}
+  `;
+
+  renderNavigator();
+}
+
+// ===== Answer Selection =====
+function selectOption(key, isMultiple) {
+  if (isMultiple) {
+    if (!userAnswers[currentIdx]) userAnswers[currentIdx] = [];
+    const idx = userAnswers[currentIdx].indexOf(key);
+    if (idx >= 0) userAnswers[currentIdx].splice(idx, 1);
+    else userAnswers[currentIdx].push(key);
+  } else {
+    userAnswers[currentIdx] = key;
+  }
+  renderQuestion();
+}
+
+function selectTrueFalse(val) {
+  userAnswers[currentIdx] = val;
+  renderQuestion();
+}
+
+// ===== Navigation =====
+function prevQuestion() {
+  if (currentIdx > 0) { currentIdx--; renderQuestion(); }
+}
+
+function nextQuestion() {
+  if (currentIdx < examQuestions.length - 1) {
+    currentIdx++;
+    renderQuestion();
+  } else {
+    submitExam();
+  }
+}
+
+// ===== Submit & Results =====
+function submitExam() {
+  // 检查未答题数
+  const unanswered = examQuestions.filter((q, i) => !isAnswered(i)).length;
+  if (unanswered > 0) {
+    if (!confirm(`还有 ${unanswered} 道题未作答，确定提交吗？`)) return;
+  }
+
+  clearInterval(timerInterval);
+  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+
+  // 计算分数
+  let totalScore = 0;
+  let maxScore = 0;
+  let correctCount = 0;
+  const wrongQuestions = [];
+
+  examQuestions.forEach((q, i) => {
+    const score = q.type === 'multiple' ? MULTIPLE_SCORE : SINGLE_SCORE;
+    maxScore += score;
+
+    const userAns = userAnswers[i];
+    const correctAns = q.answer;
+    let isCorrect = false;
+
+    if (q.type === 'multiple') {
+      // 多选题: 需完全匹配
+      const sortedUser = [...(userAns || [])].sort();
+      const sortedCorrect = [...correctAns].sort();
+      isCorrect = JSON.stringify(sortedUser) === JSON.stringify(sortedCorrect);
+    } else {
+      isCorrect = userAns === correctAns;
+    }
+
+    if (isCorrect) {
+      totalScore += score;
+      correctCount++;
+    } else {
+      wrongQuestions.push({ question: q, userAnswer: userAns, correctAnswer: correctAns, score });
+    }
+  });
+
+  // 按比例折算为100分制
+  const scaledScore = Math.round((totalScore / maxScore) * 100);
+  const passed = scaledScore >= PASSING_SCORE;
+
+  // 显示结果
+  document.getElementById('examScreen').style.display = 'none';
+  document.getElementById('resultsScreen').style.display = 'block';
+
+  const scoreEl = document.getElementById('scoreValue');
+  scoreEl.textContent = scaledScore;
+  scoreEl.className = 'score-value ' + (passed ? 'pass' : 'fail');
+
+  const h = String(Math.floor(elapsed / 3600)).padStart(2, '0');
+  const m = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0');
+  const s = String(elapsed % 60).padStart(2, '0');
+
+  document.getElementById('scoreDetail').innerHTML =
+    `${passed ? '恭喜通过！' : '未通过'} | 及格线 ${PASSING_SCORE} 分 | 用时 ${h}:${m}:${s}`;
+
+  document.getElementById('scoreStats').innerHTML = `
+    <div class="stat-item">
+      <div class="stat-num" style="color:var(--green)">${correctCount}</div>
+      <div class="stat-label">答对</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" style="color:var(--red)">${wrongQuestions.length}</div>
+      <div class="stat-label">答错</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">${examQuestions.length}</div>
+      <div class="stat-label">总题数</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" style="color:var(--accent)">${totalScore}/${maxScore}</div>
+      <div class="stat-label">原始分</div>
+    </div>
+  `;
+
+  // 渲染错题列表
+  const wrongSection = document.getElementById('wrongSection');
+  if (wrongQuestions.length === 0) {
+    wrongSection.innerHTML = '<div class="no-wrong">全部答对，太强了！</div>';
+  } else {
+    wrongSection.innerHTML = '<h2>错题回顾（' + wrongQuestions.length + ' 题）</h2>' +
+      wrongQuestions.map(w => {
+        const q = w.question;
+        const typeLabel = q.type === 'single' ? '单选题' : q.type === 'multiple' ? '多选题' : '判断题';
+        const typeClass = 'badge-type-' + q.type;
+
+        // 用户答案格式化
+        let userAnsText, correctAnsText;
+        if (q.type === 'true_false') {
+          userAnsText = w.userAnswer === null || w.userAnswer === undefined ? '未作答' : (w.userAnswer ? '正确' : '错误');
+          correctAnsText = w.correctAnswer ? '正确' : '错误';
+        } else if (q.type === 'multiple') {
+          userAnsText = (!w.userAnswer || w.userAnswer.length === 0) ? '未作答' : w.userAnswer.sort().join('、');
+          correctAnsText = w.correctAnswer.sort().join('、');
+        } else {
+          userAnsText = w.userAnswer || '未作答';
+          correctAnsText = w.correctAnswer;
+        }
+
+        // 选项详情
+        let optionsDetail = '';
+        if (q.options) {
+          const keys = Object.keys(q.options).sort();
+          optionsDetail = '<div style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-dim);">' +
+            keys.map(k => {
+              const isCorrect = q.type === 'multiple' ? q.answer.includes(k) : q.answer === k;
+              const isUserSelected = q.type === 'multiple'
+                ? (w.userAnswer && w.userAnswer.includes(k))
+                : w.userAnswer === k;
+              let style = '';
+              if (isCorrect) style = 'color:var(--green);font-weight:600;';
+              else if (isUserSelected && !isCorrect) style = 'color:var(--red);text-decoration:line-through;';
+              return `<div style="${style}">${k}. ${q.options[k]}</div>`;
+            }).join('') + '</div>';
+        }
+
+        return `<div class="wrong-card">
+          <div class="wrong-meta">
+            <span class="badge ${typeClass}">${typeLabel}</span>
+            <span class="badge badge-module">${q.module}</span>
+            <span class="badge badge-score">${w.score} 分</span>
+          </div>
+          <div class="wrong-question">${q.question}</div>
+          ${optionsDetail}
+          <div style="margin-top:0.75rem;">
+            <div class="wrong-answer-row">
+              <span class="label">正确答案</span>
+              <span class="correct">${correctAnsText}</span>
+            </div>
+            <div class="wrong-answer-row">
+              <span class="label">你的答案</span>
+              <span class="user-wrong">${userAnsText}</span>
+            </div>
+          </div>
+          <div class="wrong-explanation"><strong>解析：</strong>${q.explanation}</div>
+        </div>`;
+      }).join('');
+  }
+}
+
+// ===== Init =====
+document.addEventListener('DOMContentLoaded', () => {
+  const total = QUESTION_BANK.metadata.total_questions;
+  document.getElementById('infoTotal').textContent = total + ' 题';
+
+  const courseCount = (QUESTION_BANK.statistics.course_questions || 0);
+  const singles = QUESTION_BANK.questions.filter(q => q.type === 'single' || q.type === 'true_false').length;
+  const multiples = QUESTION_BANK.questions.filter(q => q.type === 'multiple').length;
+  document.getElementById('infoSingle').textContent = `题库 ${singles} 题（含课程原题），考试取 50 题 x 1 分`;
+  document.getElementById('infoMultiple').textContent = `题库 ${multiples} 题（含课程原题），考试取 ${Math.min(25, multiples)} 题 x 2 分`;
+});
+</script>
+</body>
+</html>
