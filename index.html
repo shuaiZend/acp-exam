@@ -774,6 +774,7 @@ function weightedSample(pool, count) {
 // ===== Start Exam =====
 function startExam() {
   const allQuestions = QUESTION_BANK.questions;
+  const PROB_THRESHOLD = 30; // 必考概率低于30%的题目不进入模拟考试
 
   // 分类: 必考题(课程原题)和普通题
   const isCourse = q => (q.source || '').startsWith('课程');
@@ -787,19 +788,31 @@ function startExam() {
   // 剩余名额: 加权抽取
   const remainingCount = Math.max(0, EXAM_QUESTION_COUNT - courseQuestions.length);
   
-  // 按单选/多选比例分配剩余名额 (大致保持2:1的比例)
-  const nonCourseSingles = nonCourseQuestions.filter(q => q.type === 'single');
-  const nonCourseMultiples = nonCourseQuestions.filter(q => q.type === 'multiple');
+  // 非必考题: 优先使用概率>=30%的题目, 不够时再用低概率题凑数
+  const nonCourseSinglesHigh = nonCourseQuestions.filter(q => q.type === 'single' && (q.probability || 0) >= PROB_THRESHOLD);
+  const nonCourseSinglesLow = nonCourseQuestions.filter(q => q.type === 'single' && (q.probability || 0) < PROB_THRESHOLD);
+  const nonCourseMultiplesHigh = nonCourseQuestions.filter(q => q.type === 'multiple' && (q.probability || 0) >= PROB_THRESHOLD);
+  const nonCourseMultiplesLow = nonCourseQuestions.filter(q => q.type === 'multiple' && (q.probability || 0) < PROB_THRESHOLD);
   
-  // 按题库中单选/多选比例分配
-  const totalNonCourse = nonCourseSingles.length + nonCourseMultiples.length;
-  const singleRatio = totalNonCourse > 0 ? nonCourseSingles.length / totalNonCourse : 0.5;
+  // 按题库中高概率单选/多选比例分配名额
+  const totalHigh = nonCourseSinglesHigh.length + nonCourseMultiplesHigh.length;
+  const singleRatio = totalHigh > 0 ? nonCourseSinglesHigh.length / totalHigh : 0.5;
   const remainSingles = Math.round(remainingCount * singleRatio);
   const remainMultiples = remainingCount - remainSingles;
   
-  // 加权抽样
-  const sampledSingles = weightedSample(nonCourseSingles, Math.min(remainSingles, nonCourseSingles.length));
-  const sampledMultiples = weightedSample(nonCourseMultiples, Math.min(remainMultiples, nonCourseMultiples.length));
+  // 先从高概率池中加权抽取
+  let sampledSingles = weightedSample(nonCourseSinglesHigh, Math.min(remainSingles, nonCourseSinglesHigh.length));
+  let sampledMultiples = weightedSample(nonCourseMultiplesHigh, Math.min(remainMultiples, nonCourseMultiplesHigh.length));
+  
+  // 如果高概率题不够, 从低概率池中凑数
+  const singleShortfall = remainSingles - sampledSingles.length;
+  const multipleShortfall = remainMultiples - sampledMultiples.length;
+  if (singleShortfall > 0) {
+    sampledSingles = sampledSingles.concat(weightedSample(nonCourseSinglesLow, Math.min(singleShortfall, nonCourseSinglesLow.length)));
+  }
+  if (multipleShortfall > 0) {
+    sampledMultiples = sampledMultiples.concat(weightedSample(nonCourseMultiplesLow, Math.min(multipleShortfall, nonCourseMultiplesLow.length)));
+  }
   
   // 合并: 必考单选 -> 抽样单选 -> 必考多选 -> 抽样多选 (不随机排序)
   examQuestions = [...courseSingles, ...sampledSingles, ...courseMultiples, ...sampledMultiples];
