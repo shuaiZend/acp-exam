@@ -601,12 +601,8 @@
     <!-- 考试信息 -->
     <div class="exam-info">
       <div class="exam-info-row">
-        <span class="label">考试时长</span>
-        <span class="value">120 分钟</span>
-      </div>
-      <div class="exam-info-row">
-        <span class="label">满分</span>
-        <span class="value">100 分</span>
+        <span class="label">题目数量</span>
+        <span class="value">100 道</span>
       </div>
       <div class="exam-info-row">
         <span class="label">及格分数</span>
@@ -614,19 +610,19 @@
       </div>
       <div class="exam-info-row">
         <span class="label">单选题</span>
-        <span class="value" id="infoSingle">50 题 x 1 分 = 50 分</span>
+        <span class="value" id="infoSingle">按概率加权抽取，每题 1 分</span>
       </div>
       <div class="exam-info-row">
         <span class="label">多选题</span>
-        <span class="value" id="infoMultiple">25 题 x 2 分 = 50 分</span>
+        <span class="value" id="infoMultiple">按概率加权抽取，每题 2 分</span>
       </div>
       <div class="exam-info-row">
         <span class="label">题库总量</span>
-        <span class="value" id="infoTotal">100 题</span>
+        <span class="value" id="infoTotal">--</span>
       </div>
       <div class="exam-info-row">
-        <span class="label">课程原题</span>
-        <span class="value" style="color:var(--orange);">必考</span>
+        <span class="label">抽题规则</span>
+        <span class="value" style="font-size:0.8rem;">必考题全纳入 + 加权随机抽取；选项随机</span>
       </div>
       <div class="exam-info-row">
         <span class="label">出题规则</span>
@@ -714,10 +710,9 @@ let currentIdx = 0;
 let timerInterval = null;
 let startTime = null;
 
-const SINGLE_COUNT = 50;   // ACP 标准: 50 道单选题
-const SINGLE_SCORE = 1;    // 每题 1 分
-const MULTIPLE_COUNT = 25; // ACP 标准: 25 道多选题
-const MULTIPLE_SCORE = 2;  // 每题 2 分
+const EXAM_QUESTION_COUNT = 100; // 每次考试题目数量
+const SINGLE_SCORE = 1;    // 单选题每题 1 分
+const MULTIPLE_SCORE = 2;  // 多选题每题 2 分
 const PASSING_SCORE = 80;
 
 // ===== Utility =====
@@ -739,31 +734,75 @@ function formatAnswer(ans) {
   return ans;
 }
 
+// 判断是否为代码题
+function isCodeQuestion(q) {
+  const text = (q.question || '') + ' ' + Object.values(q.options || {}).join(' ');
+  const codeKeywords = ['python', 'def ', 'import ', '代码', 'class ', 'self.', 'return ', 'query_engine',
+    'model.train', 'loss=', 'optimizer', 'swift sft', 'vllm serve', 'function ', '__init__',
+    'print(', 'api_key', 'checkpoint', 'lora_rank', 'json schema'];
+  return codeKeywords.some(kw => text.toLowerCase().includes(kw.toLowerCase()));
+}
+
+// 加权随机抽样: 根据probability字段加权抽取count道题
+function weightedSample(pool, count) {
+  const result = [];
+  const available = [...pool];
+  
+  for (let i = 0; i < count && available.length > 0; i++) {
+    // 计算权重: probability * 代码题降权
+    const weights = available.map(q => {
+      let w = q.probability || 50; // 默认概率50
+      if (isCodeQuestion(q)) w *= 0.5; // 代码题权重减半
+      return Math.max(1, w); // 确保非零
+    });
+    
+    // 加权随机选择
+    const totalWeight = weights.reduce((a, b) => a + b, 0);
+    let r = Math.random() * totalWeight;
+    let selectedIdx = 0;
+    for (let j = 0; j < weights.length; j++) {
+      r -= weights[j];
+      if (r <= 0) { selectedIdx = j; break; }
+    }
+    
+    result.push(available[selectedIdx]);
+    available.splice(selectedIdx, 1); // 不重复抽取
+  }
+  return result;
+}
+
 // ===== Start Exam =====
 function startExam() {
   const allQuestions = QUESTION_BANK.questions;
 
-  // 分类: 课程原题优先, 非课程题补充
+  // 分类: 必考题(课程原题)和普通题
   const isCourse = q => (q.source || '').startsWith('课程');
-  const isSingle = q => q.type === 'single';
-  const isMultiple = q => q.type === 'multiple';
+  const courseQuestions = allQuestions.filter(q => isCourse(q));
+  const nonCourseQuestions = allQuestions.filter(q => !isCourse(q));
 
-  // 单选池: 课程原题在前(保持原序), 非课程题在后(保持原序)
-  const courseSingles = allQuestions.filter(q => isCourse(q) && isSingle(q));
-  const nonCourseSingles = allQuestions.filter(q => !isCourse(q) && isSingle(q));
-  const singlePool = [...courseSingles, ...nonCourseSingles];
-
-  // 多选池: 课程原题在前, 非课程题在后
-  const courseMultiples = allQuestions.filter(q => isCourse(q) && isMultiple(q));
-  const nonCourseMultiples = allQuestions.filter(q => !isCourse(q) && isMultiple(q));
-  const multiplePool = [...courseMultiples, ...nonCourseMultiples];
-
-  // 按ACP标准抽取 (不随机, 按顺序取)
-  const singles = singlePool.slice(0, Math.min(SINGLE_COUNT, singlePool.length));
-  const multiples = multiplePool.slice(0, Math.min(MULTIPLE_COUNT, multiplePool.length));
-
-  // 合并: 先单选后多选 (不随机排序)
-  examQuestions = [...singles, ...multiples];
+  // 必考题全部纳入(保持原序: 先单选后多选)
+  const courseSingles = courseQuestions.filter(q => q.type === 'single');
+  const courseMultiples = courseQuestions.filter(q => q.type === 'multiple');
+  
+  // 剩余名额: 加权抽取
+  const remainingCount = Math.max(0, EXAM_QUESTION_COUNT - courseQuestions.length);
+  
+  // 按单选/多选比例分配剩余名额 (大致保持2:1的比例)
+  const nonCourseSingles = nonCourseQuestions.filter(q => q.type === 'single');
+  const nonCourseMultiples = nonCourseQuestions.filter(q => q.type === 'multiple');
+  
+  // 按题库中单选/多选比例分配
+  const totalNonCourse = nonCourseSingles.length + nonCourseMultiples.length;
+  const singleRatio = totalNonCourse > 0 ? nonCourseSingles.length / totalNonCourse : 0.5;
+  const remainSingles = Math.round(remainingCount * singleRatio);
+  const remainMultiples = remainingCount - remainSingles;
+  
+  // 加权抽样
+  const sampledSingles = weightedSample(nonCourseSingles, Math.min(remainSingles, nonCourseSingles.length));
+  const sampledMultiples = weightedSample(nonCourseMultiples, Math.min(remainMultiples, nonCourseMultiples.length));
+  
+  // 合并: 必考单选 -> 抽样单选 -> 必考多选 -> 抽样多选 (不随机排序)
+  examQuestions = [...courseSingles, ...sampledSingles, ...courseMultiples, ...sampledMultiples];
 
   // 初始化答案和选项随机顺序
   userAnswers = {};
@@ -871,6 +910,7 @@ function renderQuestion() {
       <span class="badge badge-module">${q.module}</span>
       <span class="badge badge-score">${score} 分</span>
       ${(q.source || '').startsWith('课程') ? '<span class="badge" style="background:rgba(255,158,100,0.15);color:var(--orange);">课程原题</span>' : ''}
+      ${q.probability ? '<span class="badge" style="background:rgba(86,95,137,0.2);color:var(--text-dim);">必考概率 ' + q.probability + '%</span>' : ''}
     </div>
     <div class="question-text">${q.question}</div>
     ${optionsHTML}
@@ -1395,8 +1435,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const courseCount = (QUESTION_BANK.statistics.course_questions || 0);
   const singles = QUESTION_BANK.questions.filter(q => q.type === 'single').length;
   const multiples = QUESTION_BANK.questions.filter(q => q.type === 'multiple').length;
-  document.getElementById('infoSingle').textContent = `题库 ${singles} 题（含课程原题），考试取 50 题 x 1 分`;
-  document.getElementById('infoMultiple').textContent = `题库 ${multiples} 题（含课程原题），考试取 ${Math.min(25, multiples)} 题 x 2 分`;
+  document.getElementById('infoSingle').textContent = '题库 ' + singles + ' 题，加权抽取，每题 1 分';
+  document.getElementById('infoMultiple').textContent = '题库 ' + multiples + ' 题，加权抽取，每题 2 分';
 });
 </script>
 </body>

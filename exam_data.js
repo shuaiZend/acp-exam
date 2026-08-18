@@ -84,7 +84,8 @@ const QUESTION_BANK = {
         "D": "https://chat.qwen.ai/v1"
       },
       "answer": "B",
-      "explanation": "阿里云 DashScope 提供与 OpenAI SDK 兼容的 API 接口，其 base_url 为 https://dashscope.aliyuncs.com/compatible-mode/v1，可以使用标准的 OpenAI SDK 进行调用。"
+      "explanation": "阿里云 DashScope 提供与 OpenAI SDK 兼容的 API 接口，其 base_url 为 https://dashscope.aliyuncs.com/compatible-mode/v1，可以使用标准的 OpenAI SDK 进行调用。",
+      "probability": 7
     },
     {
       "id": "Q002",
@@ -98,7 +99,8 @@ const QUESTION_BANK = {
         "D": "temperature 默认值为 1.0"
       },
       "answer": "C",
-      "explanation": "temperature 调节 softmax 概率分布的尖锐程度，取值范围 [0, 2)，默认 0.7（Qwen-Max）。值越低概率越集中于高概率 Token，输出越确定（适合代码生成）；值越高概率分布越平坦，输出越多样（适合创意文案）。"
+      "explanation": "temperature 调节 softmax 概率分布的尖锐程度，取值范围 [0, 2)，默认 0.7（Qwen-Max）。值越低概率越集中于高概率 Token，输出越确定（适合代码生成）；值越高概率分布越平坦，输出越多样（适合创意文案）。",
+      "probability": 13
     },
     {
       "id": "Q003",
@@ -112,7 +114,8 @@ const QUESTION_BANK = {
         "D": "控制模型的温度参数"
       },
       "answer": "B",
-      "explanation": "top_p（Nucleus Sampling）按概率降序排序，选取累计概率达到阈值的 Token 子集进行采样。取值范围 (0, 1]，默认 0.8。值越小候选范围越窄输出越稳定，值越大候选范围越广内容越多样。"
+      "explanation": "top_p（Nucleus Sampling）按概率降序排序，选取累计概率达到阈值的 Token 子集进行采样。取值范围 (0, 1]，默认 0.8。值越小候选范围越窄输出越稳定，值越大候选范围越广内容越多样。",
+      "probability": 13
     },
     {
       "id": "Q004",
@@ -126,7 +129,8 @@ const QUESTION_BANK = {
         "D": "developer"
       },
       "answer": "C",
-      "explanation": "在 messages 参数结构中，system 角色用于设置大模型的角色和任务，user 角色是用户问题，assistant 角色是模型回复。system 消息影响模型的输出风格和行为规范。"
+      "explanation": "在 messages 参数结构中，system 角色用于设置大模型的角色和任务，user 角色是用户问题，assistant 角色是模型回复。system 消息影响模型的输出风格和行为规范。",
+      "probability": 7
     },
     {
       "id": "Q005",
@@ -140,7 +144,8 @@ const QUESTION_BANK = {
         "D": "realtime=True"
       },
       "answer": "A",
-      "explanation": "设置 stream=True 可以启用流式输出，通过迭代 chunk.choices[0].delta.content 逐 token 输出，实现类似打字机效果，减少用户感知延迟。"
+      "explanation": "设置 stream=True 可以启用流式输出，通过迭代 chunk.choices[0].delta.content 逐 token 输出，实现类似打字机效果，减少用户感知延迟。",
+      "probability": 13
     },
     {
       "id": "Q006",
@@ -158,7 +163,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "大模型文本生成工作流程五阶段为：文本分词→Token 向量化→大模型推理→解码与自回归→输出文本。大模型推理使用的是 Decoder Block（因果自注意力+前馈网络），而非编码器结构。"
+      "explanation": "大模型文本生成工作流程五阶段为：文本分词→Token 向量化→大模型推理→解码与自回归→输出文本。大模型推理使用的是 Decoder Block（因果自注意力+前馈网络），而非编码器结构。",
+      "probability": 7
     },
     {
       "id": "Q007",
@@ -176,7 +182,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "重要建议是不要同时调整 temperature 和 top_p，可能导致输出不可预测。seed 参数传入相同值尽量返回相同结果但不保证完全一致。top_k 只保留概率最高的 k 个 Token。分布式系统等会引入微小随机性。"
+      "explanation": "重要建议是不要同时调整 temperature 和 top_p，可能导致输出不可预测。seed 参数传入相同值尽量返回相同结果但不保证完全一致。top_k 只保留概率最高的 k 个 Token。分布式系统等会引入微小随机性。",
+      "probability": 13
     },
     {
       "id": "Q011",
@@ -190,7 +197,8 @@ const QUESTION_BANK = {
         "D": "Memory（记忆机制）"
       },
       "answer": "C",
-      "explanation": "上下文工程的四大核心技术是：RAG、Prompt、Tool（工具使用）、Memory。微调不属于上下文工程的范畴，它是模型层面的优化。"
+      "explanation": "上下文工程的四大核心技术是：RAG、Prompt、Tool（工具使用）、Memory。微调不属于上下文工程的范畴，它是模型层面的优化。",
+      "probability": 13
     },
     {
       "id": "Q012",
@@ -204,7 +212,8 @@ const QUESTION_BANK = {
         "D": "控制搜索引擎的爬取范围"
       },
       "answer": "B",
-      "explanation": "enable_search 参数让大模型利用互联网搜索结果丰富回复内容，属于大模型自带的知识扩展能力，与 RAG 的向量检索不同。"
+      "explanation": "enable_search 参数让大模型利用互联网搜索结果丰富回复内容，属于大模型自带的知识扩展能力，与 RAG 的向量检索不同。",
+      "probability": 13
     },
     {
       "id": "Q013",
@@ -223,7 +232,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "大模型常用的解码策略包括：贪心解码（每步选概率最高的 Token）、Beam Search（维护多个候选序列）、Top-p（累计概率采样）、Top-k Sampling（只保留概率最高的 k 个 Token）。"
+      "explanation": "大模型常用的解码策略包括：贪心解码（每步选概率最高的 Token）、Beam Search（维护多个候选序列）、Top-p（累计概率采样）、Top-k Sampling（只保留概率最高的 k 个 Token）。",
+      "probability": 13
     },
     {
       "id": "Q015",
@@ -237,7 +247,8 @@ const QUESTION_BANK = {
         "D": "seed 参数的取值范围是 [0, 100]"
       },
       "answer": "B",
-      "explanation": "seed 参数传入相同值尽量返回相同结果，但不保证完全一致。因为分布式系统、模型输出优化等因素会引入微小的随机性。"
+      "explanation": "seed 参数传入相同值尽量返回相同结果，但不保证完全一致。因为分布式系统、模型输出优化等因素会引入微小的随机性。",
+      "probability": 13
     },
     {
       "id": "Q016",
@@ -251,7 +262,8 @@ const QUESTION_BANK = {
         "D": "输出格式（Output Format）"
       },
       "answer": "C",
-      "explanation": "提示词框架六要素为：任务目标、上下文、角色、受众、样例、输出格式。学习率是模型训练参数，不属于提示词框架。"
+      "explanation": "提示词框架六要素为：任务目标、上下文、角色、受众、样例、输出格式。学习率是模型训练参数，不属于提示词框架。",
+      "probability": 30
     },
     {
       "id": "Q017",
@@ -265,7 +277,8 @@ const QUESTION_BANK = {
         "D": "角色限定"
       },
       "answer": "B",
-      "explanation": "思维链（COT）让模型一步步思考，输出中间推理步骤，可以提升数学计算等复杂任务的准确率。COT 的扩展还包括思维树（ToT）和思维图（GoT）。"
+      "explanation": "思维链（COT）让模型一步步思考，输出中间推理步骤，可以提升数学计算等复杂任务的准确率。COT 的扩展还包括思维树（ToT）和思维图（GoT）。",
+      "probability": 30
     },
     {
       "id": "Q018",
@@ -279,7 +292,8 @@ const QUESTION_BANK = {
         "D": "通过搜索引擎优化提示词"
       },
       "answer": "B",
-      "explanation": "Meta Prompting 的核心思想是让大模型扮演提示词评审专家，通过多轮迭代流程（设定参考答案→生成回答→差距分析→重写提示词→重复）自动优化提示词质量。"
+      "explanation": "Meta Prompting 的核心思想是让大模型扮演提示词评审专家，通过多轮迭代流程（设定参考答案→生成回答→差距分析→重写提示词→重复）自动优化提示词质量。",
+      "probability": 30
     },
     {
       "id": "Q019",
@@ -293,7 +307,8 @@ const QUESTION_BANK = {
         "D": "可以让推理模型充当提示词教练"
       },
       "answer": "B",
-      "explanation": "推理模型自带深度思考能力，应避免使用思维链提示。推理模型的提示词技巧包括：保持简洁清晰、避免 COT 提示、根据响应调整提示词、让推理模型充当提示词教练。"
+      "explanation": "推理模型自带深度思考能力，应避免使用思维链提示。推理模型的提示词技巧包括：保持简洁清晰、避免 COT 提示、根据响应调整提示词、让推理模型充当提示词教练。",
+      "probability": 30
     },
     {
       "id": "Q020",
@@ -312,7 +327,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "常用的提示词分隔符包括：【】、<< >>、###、===、---、XML 标签等。选择分隔符时应避免与提示词中已有的符号冲突。"
+      "explanation": "常用的提示词分隔符包括：【】、<< >>、###、===、---、XML 标签等。选择分隔符时应避免与提示词中已有的符号冲突。",
+      "probability": 30
     },
     {
       "id": "Q021",
@@ -330,7 +346,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "少样本示例是在提示词中提供少量参考案例，让大模型模仿风格和结构。比仅规定格式更稳定一致，可引导输出特定格式。不是给模型大量训练数据。"
+      "explanation": "少样本示例是在提示词中提供少量参考案例，让大模型模仿风格和结构。比仅规定格式更稳定一致，可引导输出特定格式。不是给模型大量训练数据。",
+      "probability": 30
     },
     {
       "id": "Q025",
@@ -344,7 +361,8 @@ const QUESTION_BANK = {
         "D": "{prompt} 和 {response}"
       },
       "answer": "B",
-      "explanation": "LlamaIndex 的提示词模板使用 {context_str}（检索到的上下文）和 {query_str}（用户问题）两个变量。"
+      "explanation": "LlamaIndex 的提示词模板使用 {context_str}（检索到的上下文）和 {query_str}（用户问题）两个变量。",
+      "probability": 30
     },
     {
       "id": "Q026",
@@ -362,7 +380,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "结构化输出的闭环包括三步：定义结构、构建提示词、校验与重试。不需要手动标注每条输出。"
+      "explanation": "结构化输出的闭环包括三步：定义结构、构建提示词、校验与重试。不需要手动标注每条输出。",
+      "probability": 15
     },
     {
       "id": "Q027",
@@ -376,7 +395,8 @@ const QUESTION_BANK = {
         "D": "1.0"
       },
       "answer": "A",
-      "explanation": "将 temperature 设置为 0.0 可以获得确定性输出，减少随机性，确保对相同输入产生一致的工具调用决策。"
+      "explanation": "将 temperature 设置为 0.0 可以获得确定性输出，减少随机性，确保对相同输入产生一致的工具调用决策。",
+      "probability": 30
     },
     {
       "id": "Q028",
@@ -390,7 +410,8 @@ const QUESTION_BANK = {
         "D": "文本分段 → 文档解析 → 存储索引 → 文本向量化"
       },
       "answer": "B",
-      "explanation": "RAG 建立索引阶段：文档解析→文本分段→文本向量化→存储索引。"
+      "explanation": "RAG 建立索引阶段：文档解析→文本分段→文本向量化→存储索引。",
+      "probability": 19
     },
     {
       "id": "Q029",
@@ -404,7 +425,8 @@ const QUESTION_BANK = {
         "D": "用搜索引擎代替向量检索"
       },
       "answer": "B",
-      "explanation": "HyDE 先让大模型生成假想答案文档，然后用假想文档去检索真实文档，因为答案文档与知识库文档在语义空间上更接近。"
+      "explanation": "HyDE 先让大模型生成假想答案文档，然后用假想文档去检索真实文档，因为答案文档与知识库文档在语义空间上更接近。",
+      "probability": 19
     },
     {
       "id": "Q030",
@@ -418,7 +440,8 @@ const QUESTION_BANK = {
         "D": "1.0 x 事实准确度"
       },
       "answer": "B",
-      "explanation": "Answer Correctness = 0.25 x 语义相似度 + 0.75 x 事实准确度。事实准确度通过 F1 = TP/(TP+0.5x(FP+FN)) 计算。"
+      "explanation": "Answer Correctness = 0.25 x 语义相似度 + 0.75 x 事实准确度。事实准确度通过 F1 = TP/(TP+0.5x(FP+FN)) 计算。",
+      "probability": 19
     },
     {
       "id": "Q031",
@@ -432,7 +455,8 @@ const QUESTION_BANK = {
         "D": "评测阶段"
       },
       "answer": "B",
-      "explanation": "Context Recall 衡量 ground_truth 中多少比例的观点能被 contexts 支持。该指标低说明检索阶段未能召回足够的相关信息。"
+      "explanation": "Context Recall 衡量 ground_truth 中多少比例的观点能被 contexts 支持。该指标低说明检索阶段未能召回足够的相关信息。",
+      "probability": 19
     },
     {
       "id": "Q032",
@@ -446,7 +470,8 @@ const QUESTION_BANK = {
         "D": "文档切片时中间部分容易丢失"
       },
       "answer": "B",
-      "explanation": "Lost in the Middle 指关键信息被埋藏在大量无关信息中被模型忽略。模型存在首因效应和近因效应，但对中间段落信息容易忽略。"
+      "explanation": "Lost in the Middle 指关键信息被埋藏在大量无关信息中被模型忽略。模型存在首因效应和近因效应，但对中间段落信息容易忽略。",
+      "probability": 19
     },
     {
       "id": "Q033",
@@ -460,7 +485,8 @@ const QUESTION_BANK = {
         "D": "先过滤再召回最后重排序"
       },
       "answer": "B",
-      "explanation": "Rerank 先大量召回（如 similarity_top_k=20），再用重排序模型精排，最后筛选最相关的 top_n 条（如 top_n=3）。"
+      "explanation": "Rerank 先大量召回（如 similarity_top_k=20），再用重排序模型精排，最后筛选最相关的 top_n 条（如 top_n=3）。",
+      "probability": 19
     },
     {
       "id": "Q034",
@@ -478,7 +504,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "检索前优化策略包括：问题改写、问题扩写、HyDE、提取标签过滤等。Rerank 属于检索后优化策略。"
+      "explanation": "检索前优化策略包括：问题改写、问题扩写、HyDE、提取标签过滤等。Rerank 属于检索后优化策略。",
+      "probability": 19
     },
     {
       "id": "Q035",
@@ -496,7 +523,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "SentenceSplitter 是默认方法；TokenTextSplitter 按 Token 固定切分；SemanticSplitterNodeParser 根据语义切分。不同方法有各自的参数需求。"
+      "explanation": "SentenceSplitter 是默认方法；TokenTextSplitter 按 Token 固定切分；SemanticSplitterNodeParser 根据语义切分。不同方法有各自的参数需求。",
+      "probability": 19
     },
     {
       "id": "Q036",
@@ -513,7 +541,8 @@ const QUESTION_BANK = {
         "A",
         "B"
       ],
-      "explanation": "召回环节指标：Context Precision 和 Context Recall。Faithfulness 和 Answer Relevancy 属于生成环节。"
+      "explanation": "召回环节指标：Context Precision 和 Context Recall。Faithfulness 和 Answer Relevancy 属于生成环节。",
+      "probability": 19
     },
     {
       "id": "Q040",
@@ -527,7 +556,8 @@ const QUESTION_BANK = {
         "D": "LangChain"
       },
       "answer": "C",
-      "explanation": "DeepEval 引入了单元测试和 TDD 思想，支持 CI/CD 集成。Ragas 让大模型评估 RAG 系统；TruLens 专注可观测性。"
+      "explanation": "DeepEval 引入了单元测试和 TDD 思想，支持 CI/CD 集成。Ragas 让大模型评估 RAG 系统；TruLens 专注可观测性。",
+      "probability": 19
     },
     {
       "id": "Q041",
@@ -541,7 +571,8 @@ const QUESTION_BANK = {
         "D": "MarkdownNodeParser"
       },
       "answer": "B",
-      "explanation": "句子窗口检索使用 SentenceWindowNodeParser，每个切片包含周围句子作为上下文窗口。"
+      "explanation": "句子窗口检索使用 SentenceWindowNodeParser，每个切片包含周围句子作为上下文窗口。",
+      "probability": 19
     },
     {
       "id": "Q042",
@@ -559,7 +590,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "检索已到位但生成质量不够时，优化方向：优化提示词、调整 temperature、更换更强模型、微调。增加 similarity_top_k 是检索阶段优化，在此场景下不需要。"
+      "explanation": "检索已到位但生成质量不够时，优化方向：优化提示词、调整 temperature、更换更强模型、微调。增加 similarity_top_k 是检索阶段优化，在此场景下不需要。",
+      "probability": 19
     },
     {
       "id": "Q044",
@@ -573,7 +605,8 @@ const QUESTION_BANK = {
         "D": "通过量化降低模型精度"
       },
       "answer": "B",
-      "explanation": "LoRA 不修改原始权重，在旁边挂低秩矩阵 A（d x r）和 B（r x d）学习变化量，r 远小于 d。当 d=4096, r=8 时，参数量减少到 0.4%，保留 97% 以上基础能力。"
+      "explanation": "LoRA 不修改原始权重，在旁边挂低秩矩阵 A（d x r）和 B（r x d）学习变化量，r 远小于 d。当 d=4096, r=8 时，参数量减少到 0.4%，保留 97% 以上基础能力。",
+      "probability": 31
     },
     {
       "id": "Q045",
@@ -587,7 +620,8 @@ const QUESTION_BANK = {
         "D": "蒸馏不需要训练过程"
       },
       "answer": "B",
-      "explanation": "蒸馏与微调训练流程几乎相同（都是 SFT），区别在于数据来源：微调用人工标注（成本高），蒸馏用教师模型生成（成本低，可大规模）。"
+      "explanation": "蒸馏与微调训练流程几乎相同（都是 SFT），区别在于数据来源：微调用人工标注（成本高），蒸馏用教师模型生成（成本低，可大规模）。",
+      "probability": 31
     },
     {
       "id": "Q046",
@@ -601,7 +635,8 @@ const QUESTION_BANK = {
         "D": "训练损失趋于平稳，验证损失趋于平稳"
       },
       "answer": "C",
-      "explanation": "训练损失下降但验证损失先降后升，说明模型在背题——训练集上变好但验证集上变差，是过拟合的典型特征。"
+      "explanation": "训练损失下降但验证损失先降后升，说明模型在背题——训练集上变好但验证集上变差，是过拟合的典型特征。",
+      "probability": 31
     },
     {
       "id": "Q047",
@@ -615,7 +650,8 @@ const QUESTION_BANK = {
         "D": "0.1"
       },
       "answer": "B",
-      "explanation": "ms-swift 框架 LoRA 微调默认 learning_rate 为 5e-5。LoRA 微调学习率通常在 1e-5 ~ 5e-4 之间。"
+      "explanation": "ms-swift 框架 LoRA 微调默认 learning_rate 为 5e-5。LoRA 微调学习率通常在 1e-5 ~ 5e-4 之间。",
+      "probability": 31
     },
     {
       "id": "Q048",
@@ -633,7 +669,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "黑盒蒸馏只需教师 API；白盒蒸馏需要教师权重，学习概率分布（软标签）含暗知识；推理压缩学习 CoT 轨迹。三条路径训练流程几乎相同（都是 SFT）。"
+      "explanation": "黑盒蒸馏只需教师 API；白盒蒸馏需要教师权重，学习概率分布（软标签）含暗知识；推理压缩学习 CoT 轨迹。三条路径训练流程几乎相同（都是 SFT）。",
+      "probability": 31
     },
     {
       "id": "Q049",
@@ -651,7 +688,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "lora_rank 默认 8。数据量小时降到 4 避免过拟合，数据量大或复杂任务升到 16。lora_rank 不是越大越好，过大会增加过拟合风险。"
+      "explanation": "lora_rank 默认 8。数据量小时降到 4 避免过拟合，数据量大或复杂任务升到 16。lora_rank 不是越大越好，过大会增加过拟合风险。",
+      "probability": 16
     },
     {
       "id": "Q053",
@@ -665,7 +703,8 @@ const QUESTION_BANK = {
         "D": "swift save --merge_lora true"
       },
       "answer": "B",
-      "explanation": "使用 swift export --merge_lora true 命令合并 LoRA 参数。合并后的模型可以像普通模型一样直接部署。"
+      "explanation": "使用 swift export --merge_lora true 命令合并 LoRA 参数。合并后的模型可以像普通模型一样直接部署。",
+      "probability": 31
     },
     {
       "id": "Q054",
@@ -679,7 +718,8 @@ const QUESTION_BANK = {
         "D": "1.0"
       },
       "answer": "B",
-      "explanation": "教师模型标注时使用 temperature=0.1 降低随机性，确保标注数据的质量和一致性。"
+      "explanation": "教师模型标注时使用 temperature=0.1 降低随机性，确保标注数据的质量和一致性。",
+      "probability": 31
     },
     {
       "id": "Q055",
@@ -697,7 +737,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "质量过滤包括三类检查：JSON 解析检查、必填字段检查、取值范围检查。通过质量过滤确保训练数据的有效性。"
+      "explanation": "质量过滤包括三类检查：JSON 解析检查、必填字段检查、取值范围检查。通过质量过滤确保训练数据的有效性。",
+      "probability": 31
     },
     {
       "id": "Q057",
@@ -711,7 +752,8 @@ const QUESTION_BANK = {
         "D": "action_calls"
       },
       "answer": "B",
-      "explanation": "Function Calling 中模型返回 tool_calls 字段，包含函数名和参数 JSON。开发者解析后执行函数，将结果包装为 role: tool 的 message 再次调用 API。"
+      "explanation": "Function Calling 中模型返回 tool_calls 字段，包含函数名和参数 JSON。开发者解析后执行函数，将结果包装为 role: tool 的 message 再次调用 API。",
+      "probability": 27
     },
     {
       "id": "Q058",
@@ -725,7 +767,8 @@ const QUESTION_BANK = {
         "D": "输入-处理-输出"
       },
       "answer": "B",
-      "explanation": "ReAct（Reasoning + Acting）三个核心步骤：思考（Thought）—推理当前状态；行动（Action）—调用工具；观察（Observation）—获取工具返回结果。循环直到任务完成。"
+      "explanation": "ReAct（Reasoning + Acting）三个核心步骤：思考（Thought）—推理当前状态；行动（Action）—调用工具；观察（Observation）—获取工具返回结果。循环直到任务完成。",
+      "probability": 53
     },
     {
       "id": "Q059",
@@ -739,7 +782,8 @@ const QUESTION_BANK = {
         "D": "所有工具必须通过中央注册表管理"
       },
       "answer": "B",
-      "explanation": "MCP 核心思想是谁提供工具谁定义工具，将工具定义与使用解耦。MCP Server 声明工具，MCP Client 动态发现并拉取工具定义。"
+      "explanation": "MCP 核心思想是谁提供工具谁定义工具，将工具定义与使用解耦。MCP Server 声明工具，MCP Client 动态发现并拉取工具定义。",
+      "probability": 53
     },
     {
       "id": "Q060",
@@ -753,7 +797,8 @@ const QUESTION_BANK = {
         "D": "gRPC 和 REST"
       },
       "answer": "C",
-      "explanation": "MCP 支持两种传输方式：stdio（本地通信，适合开发调试）和 Streamable HTTP（远程通信，适合生产环境多用户共用）。"
+      "explanation": "MCP 支持两种传输方式：stdio（本地通信，适合开发调试）和 Streamable HTTP（远程通信，适合生产环境多用户共用）。",
+      "probability": 53
     },
     {
       "id": "Q061",
@@ -767,7 +812,8 @@ const QUESTION_BANK = {
         "D": "并行执行模式"
       },
       "answer": "C",
-      "explanation": "分层规划模式采用中心化星型结构。Leader Agent 分解子任务、分派给 Member Agents、汇总结果。AgentScope 中通过 handoff 机制实现。"
+      "explanation": "分层规划模式采用中心化星型结构。Leader Agent 分解子任务、分派给 Member Agents、汇总结果。AgentScope 中通过 handoff 机制实现。",
+      "probability": 53
     },
     {
       "id": "Q062",
@@ -785,7 +831,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "工作流五种编排模式：流水线、分支选择、并行执行、混合专家（MoA）、人机协作（HITL）。向量化召回是记忆管理策略。"
+      "explanation": "工作流五种编排模式：流水线、分支选择、并行执行、混合专家（MoA）、人机协作（HITL）。向量化召回是记忆管理策略。",
+      "probability": 53
     },
     {
       "id": "Q063",
@@ -803,7 +850,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "MoA 让多个不同模型并行处理同一任务，包含提议者和聚合器。核心原理是协作性。但计算成本是 N 倍，用资源换质量。"
+      "explanation": "MoA 让多个不同模型并行处理同一任务，包含提议者和聚合器。核心原理是协作性。但计算成本是 N 倍，用资源换质量。",
+      "probability": 53
     },
     {
       "id": "Q067",
@@ -817,7 +865,8 @@ const QUESTION_BANK = {
         "D": "没有增加"
       },
       "answer": "B",
-      "explanation": "多 Agent 系统增加 3-5 倍 Token 消耗，但通过提高产出可用性避免重复尝试的隐性成本，是对高质量结果的有效投资。"
+      "explanation": "多 Agent 系统增加 3-5 倍 Token 消耗，但通过提高产出可用性避免重复尝试的隐性成本，是对高质量结果的有效投资。",
+      "probability": 53
     },
     {
       "id": "Q068",
@@ -831,7 +880,8 @@ const QUESTION_BANK = {
         "D": "Toolkit"
       },
       "answer": "B",
-      "explanation": "AgentScope 使用 MsgHub 实现共创协作模式（黑板模式），任何 Agent 的回复自动被其他参与者听到并作为上下文。"
+      "explanation": "AgentScope 使用 MsgHub 实现共创协作模式（黑板模式），任何 Agent 的回复自动被其他参与者听到并作为上下文。",
+      "probability": 53
     },
     {
       "id": "Q069",
@@ -848,7 +898,8 @@ const QUESTION_BANK = {
         "A",
         "B"
       ],
-      "explanation": "医疗行业案例：药品不良反应报告生成、CT 影像辅助诊断。虚拟偶像属于娱乐行业，AI 一对一老师属于教育行业。"
+      "explanation": "医疗行业案例：药品不良反应报告生成、CT 影像辅助诊断。虚拟偶像属于娱乐行业，AI 一对一老师属于教育行业。",
+      "probability": 53
     },
     {
       "id": "Q071",
@@ -862,7 +913,8 @@ const QUESTION_BANK = {
         "D": "一种提示词优化工具"
       },
       "answer": "B",
-      "explanation": "vLLM 是专为大模型推理设计的开源框架，通过内存优化和缓存策略提升推理速度和支持高并发。兼容 OpenAI API。"
+      "explanation": "vLLM 是专为大模型推理设计的开源框架，通过内存优化和缓存策略提升推理速度和支持高并发。兼容 OpenAI API。",
+      "probability": 34
     },
     {
       "id": "Q072",
@@ -876,7 +928,8 @@ const QUESTION_BANK = {
         "D": "GPU 云服务器 ECS"
       },
       "answer": "B",
-      "explanation": "函数计算 FC 提供 Serverless GPU，按请求量计费，自动扩缩容，免运维，适合轻量级推理和低频访问。但有冷启动延迟。"
+      "explanation": "函数计算 FC 提供 Serverless GPU，按请求量计费，自动扩缩容，免运维，适合轻量级推理和低频访问。但有冷启动延迟。",
+      "probability": 34
     },
     {
       "id": "Q073",
@@ -890,7 +943,8 @@ const QUESTION_BANK = {
         "D": "Text Transfer Throughput Time"
       },
       "answer": "B",
-      "explanation": "TTFT（Time to First Token）是首 token 延迟，是 SLO 的关键指标之一。另一个关键指标是 TPOT（每 token 生成时间）。"
+      "explanation": "TTFT（Time to First Token）是首 token 延迟，是 SLO 的关键指标之一。另一个关键指标是 TPOT（每 token 生成时间）。",
+      "probability": 34
     },
     {
       "id": "Q074",
@@ -904,7 +958,8 @@ const QUESTION_BANK = {
         "D": "预留实例"
       },
       "answer": "C",
-      "explanation": "抢占式实例按市场价实时变化计费，最高可节约 90% 成本，适用于极致成本控制和非关键业务。但可能被回收。"
+      "explanation": "抢占式实例按市场价实时变化计费，最高可节约 90% 成本，适用于极致成本控制和非关键业务。但可能被回收。",
+      "probability": 34
     },
     {
       "id": "Q075",
@@ -918,7 +973,8 @@ const QUESTION_BANK = {
         "D": "用无关信息干扰模型逻辑判断"
       },
       "answer": "B",
-      "explanation": "提示词注入通过角色扮演、指令覆盖、越狱等方式诱导模型绕过安全限制，注入新指令覆盖或劫持模型原有任务。"
+      "explanation": "提示词注入通过角色扮演、指令覆盖、越狱等方式诱导模型绕过安全限制，注入新指令覆盖或劫持模型原有任务。",
+      "probability": 34
     },
     {
       "id": "Q076",
@@ -932,7 +988,8 @@ const QUESTION_BANK = {
         "D": "Authorization"
       },
       "answer": "B",
-      "explanation": "AI 安全护栏在百炼中通过请求头 X-DashScope-DataInspection 集成。输入不合规时返回 error.code: data_inspection_failed。"
+      "explanation": "AI 安全护栏在百炼中通过请求头 X-DashScope-DataInspection 集成。输入不合规时返回 error.code: data_inspection_failed。",
+      "probability": 17
     },
     {
       "id": "Q077",
@@ -950,7 +1007,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "基础设施安全四项基本防护：网络隔离、系统加固、静态数据加密、最小权限原则。模型量化压缩是性能优化手段。"
+      "explanation": "基础设施安全四项基本防护：网络隔离、系统加固、静态数据加密、最小权限原则。模型量化压缩是性能优化手段。",
+      "probability": 34
     },
     {
       "id": "Q078",
@@ -968,7 +1026,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "零信任核心理念是永不信任始终验证，不区分内外网。零信任是下一代安全理念之一。零信任不限于外部访问，内部访问同样需要验证。"
+      "explanation": "零信任核心理念是永不信任始终验证，不区分内外网。零信任是下一代安全理念之一。零信任不限于外部访问，内部访问同样需要验证。",
+      "probability": 34
     },
     {
       "id": "Q083",
@@ -982,7 +1041,8 @@ const QUESTION_BANK = {
         "D": "输入提示词过滤"
       },
       "answer": "B",
-      "explanation": "RAG 安全防护第一道防线是知识库访问控制——根据用户权限过滤 Top-K 文档。第二道防线是知识库双重加密。"
+      "explanation": "RAG 安全防护第一道防线是知识库访问控制——根据用户权限过滤 Top-K 文档。第二道防线是知识库双重加密。",
+      "probability": 34
     },
     {
       "id": "Q084",
@@ -996,7 +1056,8 @@ const QUESTION_BANK = {
         "D": "与 AES-256 完全相同的对称加密"
       },
       "answer": "B",
-      "explanation": "DCPE 通过加噪、缩放、归一化、洗牌等操作，保留向量近似距离关系（支持向量检索），同时破坏精确数值结构（防止逆向还原）。"
+      "explanation": "DCPE 通过加噪、缩放、归一化、洗牌等操作，保留向量近似距离关系（支持向量检索），同时破坏精确数值结构（防止逆向还原）。",
+      "probability": 34
     },
     {
       "id": "Q085",
@@ -1014,7 +1075,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "三层防御：输入过滤、运行监控、输出审查。模型训练阶段无法消除所有安全风险，需要运行时防护。"
+      "explanation": "三层防御：输入过滤、运行监控、输出审查。模型训练阶段无法消除所有安全风险，需要运行时防护。",
+      "probability": 34
     },
     {
       "id": "Q086",
@@ -1032,7 +1094,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "OpenTelemetry 三类数据：Metrics、Traces、Logs。Alerts 是基于这三类数据设置的规则，不属于数据类型。"
+      "explanation": "OpenTelemetry 三类数据：Metrics、Traces、Logs。Alerts 是基于这三类数据设置的规则，不属于数据类型。",
+      "probability": 34
     },
     {
       "id": "Q089",
@@ -1046,7 +1109,8 @@ const QUESTION_BANK = {
         "D": "PAI-DSW 只支持 GPU 实例"
       },
       "answer": "C",
-      "explanation": "PAI-DSW 免费试用按计算时抵扣，3 个月内每月 250 计算时，总计 750 计算时。关闭浏览器不等于停止实例，必须手动停止或删除。同时支持 CPU 和 GPU。"
+      "explanation": "PAI-DSW 免费试用按计算时抵扣，3 个月内每月 250 计算时，总计 750 计算时。关闭浏览器不等于停止实例，必须手动停止或删除。同时支持 CPU 和 GPU。",
+      "probability": 13
     },
     {
       "id": "Q090",
@@ -1060,7 +1124,8 @@ const QUESTION_BANK = {
         "D": "OpenAI.create_vector_index()"
       },
       "answer": "B",
-      "explanation": "使用 VectorStoreIndex.from_documents(documents, embed_model=...) 创建向量索引，包含文档切片和建索引两个步骤。"
+      "explanation": "使用 VectorStoreIndex.from_documents(documents, embed_model=...) 创建向量索引，包含文档切片和建索引两个步骤。",
+      "probability": 9
     },
     {
       "id": "Q091",
@@ -1074,7 +1139,8 @@ const QUESTION_BANK = {
         "D": "全量对话历史"
       },
       "answer": "C",
-      "explanation": "向量化召回将对话转为向量存入向量数据库，通过语义相似度搜索找出最相关历史记录，可摆脱上下文窗口束缚。缺点是系统复杂度最高。"
+      "explanation": "向量化召回将对话转为向量存入向量数据库，通过语义相似度搜索找出最相关历史记录，可摆脱上下文窗口束缚。缺点是系统复杂度最高。",
+      "probability": 53
     },
     {
       "id": "Q092",
@@ -1088,7 +1154,8 @@ const QUESTION_BANK = {
         "D": "--memory-cap"
       },
       "answer": "B",
-      "explanation": "使用 --gpu-memory-utilization 参数控制显存占用率，如 --gpu-memory-utilization 0.7 表示最多使用 70% 的 GPU 显存。"
+      "explanation": "使用 --gpu-memory-utilization 参数控制显存占用率，如 --gpu-memory-utilization 0.7 表示最多使用 70% 的 GPU 显存。",
+      "probability": 34
     },
     {
       "id": "Q093",
@@ -1102,7 +1169,8 @@ const QUESTION_BANK = {
         "D": "教师模型本身不稳定的任务"
       },
       "answer": "C",
-      "explanation": "蒸馏适合输出格式固定、不依赖外部知识、高频调用、成本敏感的场景。不适合需要实时知识更新（用 RAG）、需要多步推理、教师不稳定的场景。"
+      "explanation": "蒸馏适合输出格式固定、不依赖外部知识、高频调用、成本敏感的场景。不适合需要实时知识更新（用 RAG）、需要多步推理、教师不稳定的场景。",
+      "probability": 31
     },
     {
       "id": "Q094",
@@ -1116,7 +1184,8 @@ const QUESTION_BANK = {
         "D": "仅由技术团队内部使用"
       },
       "answer": "B",
-      "explanation": "小规模试点可有效控制风险，避免因技术不成熟或业务场景不合适导致项目失败。这是 RIDE 方法论中验效果阶段的实践。"
+      "explanation": "小规模试点可有效控制风险，避免因技术不成熟或业务场景不合适导致项目失败。这是 RIDE 方法论中验效果阶段的实践。",
+      "probability": 30
     },
     {
       "id": "Q095",
@@ -1130,7 +1199,8 @@ const QUESTION_BANK = {
         "D": "三者优先级相同"
       },
       "answer": "B",
-      "explanation": "指标优先级：业务指标（如用户满意度）> 核心技术指标（如召回率）> 算法指标（如 Ragas 分数）。业务指标最终决定应用是否成功。"
+      "explanation": "指标优先级：业务指标（如用户满意度）> 核心技术指标（如召回率）> 算法指标（如 Ragas 分数）。业务指标最终决定应用是否成功。",
+      "probability": 19
     },
     {
       "id": "Q097",
@@ -1144,7 +1214,8 @@ const QUESTION_BANK = {
         "D": "可用性、可靠性、可维护性"
       },
       "answer": "B",
-      "explanation": "模型可信三要素：公平性（消除偏见）、鲁棒性（对抗攻击时稳定）、可解释性（给出决策报告）。"
+      "explanation": "模型可信三要素：公平性（消除偏见）、鲁棒性（对抗攻击时稳定）、可解释性（给出决策报告）。",
+      "probability": 34
     },
     {
       "id": "Q099",
@@ -1162,7 +1233,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "上下文工程核心理念是动态加载最相关知识到有限上下文窗口。四大核心技术：RAG、Prompt、Tool、Memory。上下文窗口容量有限。"
+      "explanation": "上下文工程核心理念是动态加载最相关知识到有限上下文窗口。四大核心技术：RAG、Prompt、Tool、Memory。上下文窗口容量有限。",
+      "probability": 13
     },
     {
       "id": "Q100",
@@ -1180,7 +1252,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "性能优化包括：模型小型化/压缩、上下文缓存、批处理、Token 优化、并行化。增加 temperature 值是控制输出随机性的参数，不是性能优化手段。"
+      "explanation": "性能优化包括：模型小型化/压缩、上下文缓存、批处理、Token 优化、并行化。增加 temperature 值是控制输出随机性的参数，不是性能优化手段。",
+      "probability": 34
     },
     {
       "id": "CQ001",
@@ -1195,7 +1268,8 @@ const QUESTION_BANK = {
         "D": "切换为参数量更大的模型，因为大模型的输出稳定性更高"
       },
       "answer": "A",
-      "explanation": "temperature 控制 softmax 输出概率分布的尖锐程度。调低 temperature 会让概率集中在少数高概率 Token 上，使输出更加确定和稳定。top_p 调高会扩大采样范围增加随机性；提示词约束无法改变采样机制；模型参数量与输出随机性无直接关系。"
+      "explanation": "temperature 控制 softmax 输出概率分布的尖锐程度。调低 temperature 会让概率集中在少数高概率 Token 上，使输出更加确定和稳定。top_p 调高会扩大采样范围增加随机性；提示词约束无法改变采样机制；模型参数量与输出随机性无直接关系。",
+      "probability": 40
     },
     {
       "id": "CQ002",
@@ -1210,7 +1284,8 @@ const QUESTION_BANK = {
         "D": "大模型的 temperature 设置过高，导致模型在第二轮对话中\"遗忘\"了之前提到的工具名称"
       },
       "answer": "A",
-      "explanation": "大模型 API 是无状态的，每次调用都是独立的。如果第二次调用时只传入了\"怎么申请账号\"，模型无从知道用户指的是哪个工具的账号。流式输出只改变展示方式不影响 messages 处理；两轮简短对话不会填满上下文窗口；temperature 控制随机性不会导致遗忘上下文信息。"
+      "explanation": "大模型 API 是无状态的，每次调用都是独立的。如果第二次调用时只传入了\"怎么申请账号\"，模型无从知道用户指的是哪个工具的账号。流式输出只改变展示方式不影响 messages 处理；两轮简短对话不会填满上下文窗口；temperature 控制随机性不会导致遗忘上下文信息。",
+      "probability": 40
     },
     {
       "id": "CQ003",
@@ -1225,7 +1300,8 @@ const QUESTION_BANK = {
         "D": "temperature=0.1, top_p=0.95 —— 同时调低温度并放宽采样范围以兼顾稳定和多样"
       },
       "answer": "B",
-      "explanation": "结构化信息提取属于明确答案类任务，需要输出高度稳定。temperature 和 top_p 都应调低，使模型集中选择高概率 Token。选项A的高temperature会引入大量随机性；选项C的默认配置随机性仍偏高；选项D同时调整两个参数且方向相反，可能导致输出行为不可预测，且课程建议不要同时调整这两个参数。"
+      "explanation": "结构化信息提取属于明确答案类任务，需要输出高度稳定。temperature 和 top_p 都应调低，使模型集中选择高概率 Token。选项A的高temperature会引入大量随机性；选项C的默认配置随机性仍偏高；选项D同时调整两个参数且方向相反，可能导致输出行为不可预测，且课程建议不要同时调整这两个参数。",
+      "probability": 40
     },
     {
       "id": "CQ004",
@@ -1240,7 +1316,8 @@ const QUESTION_BANK = {
         "D": "将上一轮召回的文本段迁移过来"
       },
       "answer": "B",
-      "explanation": "通过动态重写当前问题，既保留了对话连贯性，又避免了过时文本迁移问题，是平衡效率与精度的最优方案。直接使用原始问题或完整历史记录会导致检索噪声或信息冗余。"
+      "explanation": "通过动态重写当前问题，既保留了对话连贯性，又避免了过时文本迁移问题，是平衡效率与精度的最优方案。直接使用原始问题或完整历史记录会导致检索噪声或信息冗余。",
+      "probability": 57
     },
     {
       "id": "CQ005",
@@ -1255,7 +1332,8 @@ const QUESTION_BANK = {
         "D": "用户问题过长导致分词结果异常，需要在检索前对用户输入做长度截断处理"
       },
       "answer": "B",
-      "explanation": "关键词匹配只能找到包含完全相同词汇的内容，无法理解\"带薪假\"和\"年假\"是同一概念的不同表述。如果改用向量语义检索，Embedding 模型能捕获语义相似性，即使用词不同也能匹配到相关文档。"
+      "explanation": "关键词匹配只能找到包含完全相同词汇的内容，无法理解\"带薪假\"和\"年假\"是同一概念的不同表述。如果改用向量语义检索，Embedding 模型能捕获语义相似性，即使用词不同也能匹配到相关文档。",
+      "probability": 57
     },
     {
       "id": "CQ006",
@@ -1270,7 +1348,8 @@ const QUESTION_BANK = {
         "D": "补充少样本示例(Sample)，提供一份简洁版操作指南作为参考范例"
       },
       "answer": "B",
-      "explanation": "问题的核心是\"内容深度不匹配目标用户\"。受众(Audience)要素直接告诉模型\"为谁而写\"，从而调整内容的深度和用词。角色设定能影响语气风格但不如直接指定受众精准；格式调整不解决内容深度问题；示例能引导风格但本质上是给答案而非让模型理解受众需求。"
+      "explanation": "问题的核心是\"内容深度不匹配目标用户\"。受众(Audience)要素直接告诉模型\"为谁而写\"，从而调整内容的深度和用词。角色设定能影响语气风格但不如直接指定受众精准；格式调整不解决内容深度问题；示例能引导风格但本质上是给答案而非让模型理解受众需求。",
+      "probability": 45
     },
     {
       "id": "CQ007",
@@ -1288,7 +1367,8 @@ const QUESTION_BANK = {
         "A",
         "C"
       ],
-      "explanation": "正确的优化（如Meta Prompting）需要明确的\"问题\"和\"目标\"。选项A（坏样本）和选项C（期望输出）是定义\"问题\"和\"目标\"的关键步骤。选项B（推倒重来）和选项D（凭直觉修改）都是高风险低效率的方法。"
+      "explanation": "正确的优化（如Meta Prompting）需要明确的\"问题\"和\"目标\"。选项A（坏样本）和选项C（期望输出）是定义\"问题\"和\"目标\"的关键步骤。选项B（推倒重来）和选项D（凭直觉修改）都是高风险低效率的方法。",
+      "probability": 45
     },
     {
       "id": "CQ008",
@@ -1309,7 +1389,8 @@ const QUESTION_BANK = {
         "C",
         "E"
       ],
-      "explanation": "推理型大模型（如qwen3-plus）无需显式要求即可通过类似思维链的模式做深度思考，因此选项D是错误的。选项A、B、C、E都是推荐的提示词技巧。"
+      "explanation": "推理型大模型（如qwen3-plus）无需显式要求即可通过类似思维链的模式做深度思考，因此选项D是错误的。选项A、B、C、E都是推荐的提示词技巧。",
+      "probability": 90
     },
     {
       "id": "CQ009",
@@ -1324,7 +1405,8 @@ const QUESTION_BANK = {
         "D": "Answer Relevancy —— 检查最终生成的答案与用户原始问题之间的相关程度"
       },
       "answer": "B",
-      "explanation": "场景中的核心问题是\"正确文档存在但排名靠后\"，这正是 Context Precision 衡量的内容——检索结果中相关切片是否排在前面、信噪比是否足够高。Context Recall 关注的是\"有没有召回\"，但场景中正确切片已经被召回了。"
+      "explanation": "场景中的核心问题是\"正确文档存在但排名靠后\"，这正是 Context Precision 衡量的内容——检索结果中相关切片是否排在前面、信噪比是否足够高。Context Recall 关注的是\"有没有召回\"，但场景中正确切片已经被召回了。",
+      "probability": 57
     },
     {
       "id": "CQ010",
@@ -1339,7 +1421,8 @@ const QUESTION_BANK = {
         "D": "评测数据集设计有问题"
       },
       "answer": "C",
-      "explanation": "Context Recall衡量\"相关文档有没有被全部检索到\"，分数低说明有遗漏。Answer Relevancy衡量\"回答和问题是否相关\"，分数高说明模型基于检索到的内容给出了相关回答。优化方向是改进检索策略，扩大召回范围。"
+      "explanation": "Context Recall衡量\"相关文档有没有被全部检索到\"，分数低说明有遗漏。Answer Relevancy衡量\"回答和问题是否相关\"，分数高说明模型基于检索到的内容给出了相关回答。优化方向是改进检索策略，扩大召回范围。",
+      "probability": 57
     },
     {
       "id": "CQ011",
@@ -1354,7 +1437,8 @@ const QUESTION_BANK = {
         "D": "增大句子窗口的 window_size，让每个切片携带更多的上下文背景信息"
       },
       "answer": "B",
-      "explanation": "Markdown 格式文档天然有标题层级结构，Markdown 切片能按标题层级智能分割，将不同部门的内容拆分为独立切片，从根本上避免多部门信息混在一起。Token切片按固定长度截断可能在段落中间断开；按部门拆分文档手段过重；增大窗口会加剧信息混淆。"
+      "explanation": "Markdown 格式文档天然有标题层级结构，Markdown 切片能按标题层级智能分割，将不同部门的内容拆分为独立切片，从根本上避免多部门信息混在一起。Token切片按固定长度截断可能在段落中间断开；按部门拆分文档手段过重；增大窗口会加剧信息混淆。",
+      "probability": 57
     },
     {
       "id": "CQ012",
@@ -1369,7 +1453,8 @@ const QUESTION_BANK = {
         "D": "在线推理和离线索引的矛盾"
       },
       "answer": "B",
-      "explanation": "小chunk能精准匹配用户问题，但返回的内容太短、缺少上下文；大chunk上下文完整但定位不够精准。句子窗口检索的方案是：用小块做检索定位，返回时自动扩展到周围几句话，兼顾精准和完整。"
+      "explanation": "小chunk能精准匹配用户问题，但返回的内容太短、缺少上下文；大chunk上下文完整但定位不够精准。句子窗口检索的方案是：用小块做检索定位，返回时自动扩展到周围几句话，兼顾精准和完整。",
+      "probability": 57
     },
     {
       "id": "CQ013",
@@ -1384,7 +1469,8 @@ const QUESTION_BANK = {
         "D": "减少工具数量，将功能相近的工具合并为一个多功能工具以降低管理复杂度"
       },
       "answer": "B",
-      "explanation": "MCP让工具作为独立服务暴露自己的能力描述，Agent通过标准协议动态发现可用工具，新增工具无需修改Agent代码，实现了工具与Agent的解耦。A只是把配置从代码中分离，Agent仍需感知所有Schema；C的HTTP网关统一了入口但Agent失去了对工具能力的感知；D违背了扩展需求。"
+      "explanation": "MCP让工具作为独立服务暴露自己的能力描述，Agent通过标准协议动态发现可用工具，新增工具无需修改Agent代码，实现了工具与Agent的解耦。A只是把配置从代码中分离，Agent仍需感知所有Schema；C的HTTP网关统一了入口但Agent失去了对工具能力的感知；D违背了扩展需求。",
+      "probability": 80
     },
     {
       "id": "CQ014",
@@ -1399,7 +1485,8 @@ const QUESTION_BANK = {
         "D": "更换为更稳定的竞品数据API服务商，从数据源层面消除工具失败的可能"
       },
       "answer": "C",
-      "explanation": "Plan & Execute模式让Agent从\"执行者\"变为\"规划者\"，面对工具失败时能自主调整计划（如改用其他信息源或跳过该步骤），从架构层面获得适应性。A只是延迟失败；B方向对但为每种异常预设分支会让工作流复杂度急剧膨胀；D是理想化方案无法保证任何外部服务永远可用。"
+      "explanation": "Plan & Execute模式让Agent从\"执行者\"变为\"规划者\"，面对工具失败时能自主调整计划（如改用其他信息源或跳过该步骤），从架构层面获得适应性。A只是延迟失败；B方向对但为每种异常预设分支会让工作流复杂度急剧膨胀；D是理想化方案无法保证任何外部服务永远可用。",
+      "probability": 100
     },
     {
       "id": "CQ015",
@@ -1414,7 +1501,8 @@ const QUESTION_BANK = {
         "D": "三个Agent各自独立完成完整课程初稿，最后由人工挑选质量最好的一份作为成品"
       },
       "answer": "B",
-      "explanation": "该任务具有明确的上下游依赖关系（大纲→代码→文稿），目标清晰、可拆解，适合分层规划模式。共创模式适合开放性创意问题；单体Agent处理多角色任务容易注意力涣散；D是平行冗余策略而非协作。"
+      "explanation": "该任务具有明确的上下游依赖关系（大纲→代码→文稿），目标清晰、可拆解，适合分层规划模式。共创模式适合开放性创意问题；单体Agent处理多角色任务容易注意力涣散；D是平行冗余策略而非协作。",
+      "probability": 80
     },
     {
       "id": "CQ016",
@@ -1429,7 +1517,8 @@ const QUESTION_BANK = {
         "D": "改用滚动摘要策略，定期将旧对话压缩为摘要以保留核心信息"
       },
       "answer": "C",
-      "explanation": "向量化长期记忆将关键偏好持久化到向量数据库中，每次按当前任务语义检索最相关的记忆，从根本上摆脱上下文窗口的长度限制。A只是延迟问题；B仅适用于已知的固定偏好，不具备通用性；D比截断好但摘要质量取决于压缩模型，长期累积仍可能丢失细节。"
+      "explanation": "向量化长期记忆将关键偏好持久化到向量数据库中，每次按当前任务语义检索最相关的记忆，从根本上摆脱上下文窗口的长度限制。A只是延迟问题；B仅适用于已知的固定偏好，不具备通用性；D比截断好但摘要质量取决于压缩模型，长期累积仍可能丢失细节。",
+      "probability": 100
     },
     {
       "id": "CQ017",
@@ -1444,7 +1533,8 @@ const QUESTION_BANK = {
         "D": "蒸馏需要 GPU，微调不需要 GPU"
       },
       "answer": "B",
-      "explanation": "蒸馏和微调的训练流程（SFT）本身几乎相同，核心区别在于训练数据的来源。蒸馏使用教师模型的输出作为训练数据，微调使用人工标注的数据。两者都需要 GPU 进行训练，都可以用于不同规模的模型。"
+      "explanation": "蒸馏和微调的训练流程（SFT）本身几乎相同，核心区别在于训练数据的来源。蒸馏使用教师模型的输出作为训练数据，微调使用人工标注的数据。两者都需要 GPU 进行训练，都可以用于不同规模的模型。",
+      "probability": 94
     },
     {
       "id": "CQ018",
@@ -1459,7 +1549,8 @@ const QUESTION_BANK = {
         "D": "根据上下文生成创意营销文案"
       },
       "answer": "C",
-      "explanation": "0.6B 模型的能力边界决定了它适合\"高频、固定域、单步判断\"的任务。结构化提取（意图识别、实体抽取、分类）正是这类任务的典型代表，输出格式固定、不需要外部知识、不需要多步推理。长文本生成、多轮对话、创意写作都超出了 0.6B 模型的能力范围。"
+      "explanation": "0.6B 模型的能力边界决定了它适合\"高频、固定域、单步判断\"的任务。结构化提取（意图识别、实体抽取、分类）正是这类任务的典型代表，输出格式固定、不需要外部知识、不需要多步推理。长文本生成、多轮对话、创意写作都超出了 0.6B 模型的能力范围。",
+      "probability": 94
     },
     {
       "id": "CQ019",
@@ -1474,7 +1565,8 @@ const QUESTION_BANK = {
         "D": "商业模型的 API 调用速度太慢"
       },
       "answer": "C",
-      "explanation": "这是一个合规问题，而非技术问题。部分商业模型在服务条款中明确禁止使用其输出来训练竞品模型。使用开源模型（如 Qwen 系列，Apache 2.0 协议）作为教师则不存在此限制。在实施蒸馏项目前，务必确认教师模型的许可条款。"
+      "explanation": "这是一个合规问题，而非技术问题。部分商业模型在服务条款中明确禁止使用其输出来训练竞品模型。使用开源模型（如 Qwen 系列，Apache 2.0 协议）作为教师则不存在此限制。在实施蒸馏项目前，务必确认教师模型的许可条款。",
+      "probability": 94
     },
     {
       "id": "CQ020",
@@ -1489,7 +1581,8 @@ const QUESTION_BANK = {
         "D": "只有大公司才能自托管"
       },
       "answer": "B",
-      "explanation": "没有绝对的好坏之分。云服务零运维、按量付费，适合规模不确定的早期阶段；自托管成本低但需要 GPU 运维能力，适合流量稳定、规模够大的场景。选型的本质是算一笔账：月调用量多少时自托管成本低于云服务？这个盈亏平衡点因场景而异。"
+      "explanation": "没有绝对的好坏之分。云服务零运维、按量付费，适合规模不确定的早期阶段；自托管成本低但需要 GPU 运维能力，适合流量稳定、规模够大的场景。选型的本质是算一笔账：月调用量多少时自托管成本低于云服务？这个盈亏平衡点因场景而异。",
+      "probability": 100
     },
     {
       "id": "CQ021",
@@ -1504,7 +1597,8 @@ const QUESTION_BANK = {
         "D": "使用函数计算 FC 部署模型，利用 Serverless 按需计费降低成本"
       },
       "answer": "B",
-      "explanation": "三个关键约束决定了选型：千问系列模型（百炼原生支持）、无运维人员（排除需要运维能力的GPU服务器和ACK）、快速上线（百炼一键部署最快）。函数计算FC虽也免运维，但更适合低频离线任务且有冷启动延迟问题，对需要实时响应的客服场景不够理想。"
+      "explanation": "三个关键约束决定了选型：千问系列模型（百炼原生支持）、无运维人员（排除需要运维能力的GPU服务器和ACK）、快速上线（百炼一键部署最快）。函数计算FC虽也免运维，但更适合低频离线任务且有冷启动延迟问题，对需要实时响应的客服场景不够理想。",
+      "probability": 100
     },
     {
       "id": "CQ022",
@@ -1519,7 +1613,8 @@ const QUESTION_BANK = {
         "D": "模型窃取攻击，应加强 AI 大模型安全层"
       },
       "answer": "C",
-      "explanation": "利用高计算成本请求耗尽 GPU 资源，是针对 AI 服务的应用层 DDoS 攻击。在应用层做防御，例如使用 DDoS 高防和 WAF 进行流量清洗与访问控制。"
+      "explanation": "利用高计算成本请求耗尽 GPU 资源，是针对 AI 服务的应用层 DDoS 攻击。在应用层做防御，例如使用 DDoS 高防和 WAF 进行流量清洗与访问控制。",
+      "probability": 100
     },
     {
       "id": "CQ023",
@@ -1534,7 +1629,8 @@ const QUESTION_BANK = {
         "D": "使用更大参数的模型替换当前模型，依靠更强的理解能力自动识别恶意内容"
       },
       "answer": "B",
-      "explanation": "这是典型的间接 Prompt 注入攻击——攻击指令不在用户输入中，而是隐藏在 Agent 读取的外部文档里。关键词黑名单挡不住，因为恶意指令可以用无穷种方式表达。正确的防御核心是在架构层面区分\"用户指令\"和\"外部数据内容\"，确保外部内容不会被提升为指令执行。"
+      "explanation": "这是典型的间接 Prompt 注入攻击——攻击指令不在用户输入中，而是隐藏在 Agent 读取的外部文档里。关键词黑名单挡不住，因为恶意指令可以用无穷种方式表达。正确的防御核心是在架构层面区分\"用户指令\"和\"外部数据内容\"，确保外部内容不会被提升为指令执行。",
+      "probability": 100
     },
     {
       "id": "CQ024",
@@ -1554,7 +1650,8 @@ const QUESTION_BANK = {
         "D",
         "E"
       ],
-      "explanation": "单一工具无法应对所有威胁（A错误）。传统WAF主要防御SQL注入、XSS等Web攻击，对理解语义的提示词注入攻击防御能力有限（C错误）。B、D、E分别体现了基础设施、应用层和数据层面的正确防护思路。"
+      "explanation": "单一工具无法应对所有威胁（A错误）。传统WAF主要防御SQL注入、XSS等Web攻击，对理解语义的提示词注入攻击防御能力有限（C错误）。B、D、E分别体现了基础设施、应用层和数据层面的正确防护思路。",
+      "probability": 100
     },
     {
       "id": "Q101",
@@ -1569,7 +1666,8 @@ const QUESTION_BANK = {
       },
       "answer": "D",
       "explanation": "Input Token 数量取决于模型使用的分词器（Tokenizer）及其词表（Vocabulary）。分词发生在模型推理之前，与 softmax、top_p 等生成阶段参数无关（排除 B、C）。解码器层数影响的是推理深度而非分词粒度（排除 A）。如果模型 B 的词表中包含更丰富的中文词汇（如完整的中文字词而非拆成单字），同样一段中文就能用更少的 Token 表示，因此 D 是最合理的分析。",
-      "source": "课程原题"
+      "source": "课程原题",
+      "probability": 40
     },
     {
       "id": "Q102",
@@ -1584,7 +1682,8 @@ const QUESTION_BANK = {
       },
       "answer": "A",
       "explanation": "大模型生成补丁的过程本质上与生成普通文本一样，都是逐 Token 自回归采样生成的，采样策略（temperature、top_p、top_k 等）会影响每个 Token 的选择，从而导致输出差异。选项 B 错误，因为题目明确说明输入完全相同。选项 C 虽然方向正确但过于绝对，temperature=0 只是降低随机性，由于分布式系统等因素仍不能保证完全一致。选项 D 错误，流式输出只影响展示方式，不影响生成内容的顺序和内容。",
-      "source": "课程原题"
+      "source": "课程原题",
+      "probability": 20
     },
     {
       "id": "Q103",
@@ -1599,7 +1698,8 @@ const QUESTION_BANK = {
       },
       "answer": "B",
       "explanation": "反复遗漏同一类要点说明模型缺乏对该类要点的审查意识，最有效的方法是提供少样本示例（Few-shot）——给出一个完整的审查案例（包含终止条款及其完整分析过程），让模型按相同结构和深度进行审查。选项 A 的角色设定能影响语气风格，但不直接解决系统性遗漏。选项 C 的自我反馈存在自证正确偏差。选项 D 的拆分调用能提高单条款关注度，但不解决模型本身缺乏某类审查要点意识的问题。",
-      "source": "课程原题"
+      "source": "课程原题",
+      "probability": 90
     },
     {
       "id": "Q104",
@@ -1614,7 +1714,8 @@ const QUESTION_BANK = {
       },
       "answer": "D",
       "explanation": "课程中明确指出 RAG 安全防护的第一道防线是知识库访问控制——根据用户权限过滤 Top-K 文档，确保员工只能查询到其权限范围内的数据。选项 A 的哈希加密会破坏数据的可检索性，无法用于语义搜索。选项 B 的微调不可靠，模型仍可能被绕过。选项 C 的服务账号只是认证方式改变，不控制数据访问权限。选项 D 限制了知识库的操作权限，确保数据访问受控，是正确的安全措施。",
-      "source": "课程原题"
+      "source": "课程原题",
+      "probability": 100
     },
     {
       "id": "Q105",
@@ -1629,7 +1730,8 @@ const QUESTION_BANK = {
       },
       "answer": "B",
       "explanation": "问题核心是纯向量语义检索对精确的错误码 ORA-12541 这类关键词匹配能力不足——语义相近的文档可能排名靠前，但真正包含该错误码的目标文档反而靠后。最有效的方案是增加关键词检索（如 BM25），与向量召回结果混合排序（Hybrid Retrieval），让包含精确关键词的文档获得更高排名。选项 A 的语义摘要不解决精确匹配问题。选项 C 提高阈值可能误删目标文档。选项 D 的 HyDE 生成假想文档再做向量检索，仍依赖语义相似度，不解决关键词精确匹配问题。",
-      "source": "课程原题"
+      "source": "课程原题",
+      "probability": 57
     },
     {
       "id": "Q106",
@@ -1644,7 +1746,8 @@ const QUESTION_BANK = {
         "D": "为参数表格内容添加人工标注的关键词标签后重建索引"
       },
       "answer": "A",
-      "explanation": "问题根因是表格结构在纯文本入库时被破坏，导致参数行列对应关系丢失。最稳定的方案是从源头修复——用专业解析工具（如 DashScopeParse）将技术手册重新解析为保留表格结构的格式（如 Markdown 表格），再重建索引。选项 B 的关键词扩展不解决结构丢失问题；选项 C 试图用提示词弥补数据缺陷，不可靠；选项 D 的人工标注成本高且不解决结构问题。课程 2.5 中明确提到表格内容增强应通过优化文本解析实现。"
+      "explanation": "问题根因是表格结构在纯文本入库时被破坏，导致参数行列对应关系丢失。最稳定的方案是从源头修复——用专业解析工具（如 DashScopeParse）将技术手册重新解析为保留表格结构的格式（如 Markdown 表格），再重建索引。选项 B 的关键词扩展不解决结构丢失问题；选项 C 试图用提示词弥补数据缺陷，不可靠；选项 D 的人工标注成本高且不解决结构问题。课程 2.5 中明确提到表格内容增强应通过优化文本解析实现。",
+      "probability": 57
     },
     {
       "id": "Q107",
@@ -1659,7 +1762,8 @@ const QUESTION_BANK = {
         "D": "知识库的同步周期，影响新增文档的索引生效时间"
       },
       "answer": "B",
-      "explanation": "知识库内容充足但检索不到有效切片，最应优先排查相似度阈值（similarity_cutoff）。阈值过高会导致即使语义相关的段落也被过滤掉，使大量查询返回空结果。这是最直接的检索端门控配置，且影响面最大。选项 A 的存储分片影响的是容量而非检索质量；选项 C 的切片大小虽影响语义粒度，但通常导致召回不准而非完全检索不到；选项 D 的同步周期只影响新文档，不解释大量已有内容的检索失败。"
+      "explanation": "知识库内容充足但检索不到有效切片，最应优先排查相似度阈值（similarity_cutoff）。阈值过高会导致即使语义相关的段落也被过滤掉，使大量查询返回空结果。这是最直接的检索端门控配置，且影响面最大。选项 A 的存储分片影响的是容量而非检索质量；选项 C 的切片大小虽影响语义粒度，但通常导致召回不准而非完全检索不到；选项 D 的同步周期只影响新文档，不解释大量已有内容的检索失败。",
+      "probability": 57
     },
     {
       "id": "Q108",
@@ -1674,7 +1778,8 @@ const QUESTION_BANK = {
         "D": "扩大召回段落数量，增加相关内容进入模型的概率"
       },
       "answer": "C",
-      "explanation": "相关段落已被检索到但未进入模型上下文，说明问题出在检索后排序环节——相关段落排名靠后被截断。最有效的方案是引入重排序模型（Rerank），对向量召回的大量结果用专门模型重新打分精排，将最相关的段落排到前面。课程 2.5 中讲到的 Rerank 流程是：先大量召回（如 top_k=20），再用重排序模型精排，筛选最相关的 top_n 条。选项 A 的缩小切片粒度不解决排序问题；选项 B 的扩大上下文窗口是治标不治本；选项 D 的扩大召回数量反而可能引入更多噪声，加剧 Lost in the Middle 问题。"
+      "explanation": "相关段落已被检索到但未进入模型上下文，说明问题出在检索后排序环节——相关段落排名靠后被截断。最有效的方案是引入重排序模型（Rerank），对向量召回的大量结果用专门模型重新打分精排，将最相关的段落排到前面。课程 2.5 中讲到的 Rerank 流程是：先大量召回（如 top_k=20），再用重排序模型精排，筛选最相关的 top_n 条。选项 A 的缩小切片粒度不解决排序问题；选项 B 的扩大上下文窗口是治标不治本；选项 D 的扩大召回数量反而可能引入更多噪声，加剧 Lost in the Middle 问题。",
+      "probability": 57
     },
     {
       "id": "Q109",
@@ -1689,7 +1794,8 @@ const QUESTION_BANK = {
         "D": "不再设置术语库，让模型在翻译时联网查询缩写的译法"
       },
       "answer": "C",
-      "explanation": "上千条专业术语无法靠少样本示例（选项 A）或角色设定（选项 B）可靠覆盖，模型内化知识有限且易产生幻觉。最合适的方案是构建专业术语库并使用 RAG 技术——翻译时实时检索术语库获取权威释义，确保术语翻译的准确性和一致性。这正是 RAG 的典型应用场景：将外部权威知识动态注入模型上下文。选项 D 的联网查询不可靠，医学领域需要权威来源而非互联网搜索结果，且存在隐私和延迟问题。"
+      "explanation": "上千条专业术语无法靠少样本示例（选项 A）或角色设定（选项 B）可靠覆盖，模型内化知识有限且易产生幻觉。最合适的方案是构建专业术语库并使用 RAG 技术——翻译时实时检索术语库获取权威释义，确保术语翻译的准确性和一致性。这正是 RAG 的典型应用场景：将外部权威知识动态注入模型上下文。选项 D 的联网查询不可靠，医学领域需要权威来源而非互联网搜索结果，且存在隐私和延迟问题。",
+      "probability": 57
     },
     {
       "id": "Q110",
@@ -1704,7 +1810,8 @@ const QUESTION_BANK = {
         "D": "将所有 PPT 合并成一个文件，再转 Markdown 入库"
       },
       "answer": "C",
-      "explanation": "PPT 中包含表格、流程图等复杂嵌入对象，需要使用专业文档解析工具（如 DashScopeParse）来正确提取这些结构化内容。课程 2.5 中提到 DashScopeParse 是阿里云文档智能服务，可将 PDF/Word/PPT 等格式解析为 Markdown，保留表格等结构信息。选项 A 的截图+OCR 会丢失表格结构信息，且精度低；选项 B 的调大 Top K 是检索阶段优化，不解决文档解析阶段的问题；选项 D 的合并文件不解决复杂内容解析问题，反而增加处理难度。"
+      "explanation": "PPT 中包含表格、流程图等复杂嵌入对象，需要使用专业文档解析工具（如 DashScopeParse）来正确提取这些结构化内容。课程 2.5 中提到 DashScopeParse 是阿里云文档智能服务，可将 PDF/Word/PPT 等格式解析为 Markdown，保留表格等结构信息。选项 A 的截图+OCR 会丢失表格结构信息，且精度低；选项 B 的调大 Top K 是检索阶段优化，不解决文档解析阶段的问题；选项 D 的合并文件不解决复杂内容解析问题，反而增加处理难度。",
+      "probability": 57
     },
     {
       "id": "Q111",
@@ -1719,7 +1826,8 @@ const QUESTION_BANK = {
         "D": "先检查标注质量再微调 0.6B 模型，满足业务指标后上线"
       },
       "answer": "D",
-      "explanation": "正确的微调流程是：先检查训练数据标注质量（课程 4.1 强调质量过滤包括 JSON 解析、必填字段、取值范围检查），再进行微调训练，最后在验证集上评估满足业务指标后才能上线部署。选项 A 的 RAG 方式不适合 0.6B 小模型做分类，推理效率低且能力有限。选项 B 的取最后一个 checkpoint 部署是错误的——最后 checkpoint 可能过拟合，应监控验证损失选择最佳 checkpoint（早停法）。选项 C 的先用全量训练再采样验证是错误顺序——应先拆分训练集和验证集，训练时在验证集上评估，而非训练后再采样。"
+      "explanation": "正确的微调流程是：先检查训练数据标注质量（课程 4.1 强调质量过滤包括 JSON 解析、必填字段、取值范围检查），再进行微调训练，最后在验证集上评估满足业务指标后才能上线部署。选项 A 的 RAG 方式不适合 0.6B 小模型做分类，推理效率低且能力有限。选项 B 的取最后一个 checkpoint 部署是错误的——最后 checkpoint 可能过拟合，应监控验证损失选择最佳 checkpoint（早停法）。选项 C 的先用全量训练再采样验证是错误顺序——应先拆分训练集和验证集，训练时在验证集上评估，而非训练后再采样。",
+      "probability": 47
     },
     {
       "id": "Q112",
@@ -1734,7 +1842,8 @@ const QUESTION_BANK = {
         "D": "数据不足导致欠拟合，应扩充训练数据集后重新训练"
       },
       "answer": "B",
-      "explanation": "训练损失持续下降但验证损失先降后升，是典型的过拟合特征——模型在训练集上持续变好，但在验证集上开始变差，说明模型在背题而非学习通用规律。正确处置是采用早停法（Early Stopping），选取验证损失最低轮次的检查点部署。选项 A 继续训练会加剧过拟合；选项 C 的学习率过高表现为训练损失不降或震荡，与当前现象不符；选项 D 的欠拟合表现为训练损失和验证损失都不下降，也与当前现象不符。"
+      "explanation": "训练损失持续下降但验证损失先降后升，是典型的过拟合特征——模型在训练集上持续变好，但在验证集上开始变差，说明模型在背题而非学习通用规律。正确处置是采用早停法（Early Stopping），选取验证损失最低轮次的检查点部署。选项 A 继续训练会加剧过拟合；选项 C 的学习率过高表现为训练损失不降或震荡，与当前现象不符；选项 D 的欠拟合表现为训练损失和验证损失都不下降，也与当前现象不符。",
+      "probability": 94
     },
     {
       "id": "Q113",
@@ -1749,7 +1858,8 @@ const QUESTION_BANK = {
         "D": "给机器人接入代码解释器，动态生成并运行账户操作脚本"
       },
       "answer": "B",
-      "explanation": "敏感操作（如修改手机号）需要严格的安全控制。将敏感操作封装为 MCP 工具，由应用层校验用户权限和操作合法性后再执行，既实现了工具的标准化管理和动态发现（MCP 的核心优势），又确保了操作安全性。选项 A 让模型直接生成 SQL 操作数据库存在 SQL 注入和越权风险；选项 C 的 MoA 多模型并行生成操作方案引入不可控性，不适合需要确定性的敏感操作；选项 D 的代码解释器动态生成脚本极其危险，无法控制执行内容。课程 4.4 强调 Agent 工具调用需配置指令审计和最小权限。"
+      "explanation": "敏感操作（如修改手机号）需要严格的安全控制。将敏感操作封装为 MCP 工具，由应用层校验用户权限和操作合法性后再执行，既实现了工具的标准化管理和动态发现（MCP 的核心优势），又确保了操作安全性。选项 A 让模型直接生成 SQL 操作数据库存在 SQL 注入和越权风险；选项 C 的 MoA 多模型并行生成操作方案引入不可控性，不适合需要确定性的敏感操作；选项 D 的代码解释器动态生成脚本极其危险，无法控制执行内容。课程 4.4 强调 Agent 工具调用需配置指令审计和最小权限。",
+      "probability": 80
     },
     {
       "id": "Q114",
@@ -1764,7 +1874,8 @@ const QUESTION_BANK = {
         "D": "本地 ASR 转录文字、公有云大模型 API 生成摘要、本地 TTS 播报"
       },
       "answer": "B",
-      "explanation": "安全合规要求数据不得上传公有云，因此全流程的三个环节（ASR 语音识别、文本摘要生成、TTS 语音合成）都必须在本地部署。选项 A 的公有云 ASR 和 TTS 违反合规要求；选项 C 用视觉模型分析会议录像是错误方向，会议录音应使用 ASR 语音识别而非视觉模型；选项 D 的公有云大模型 API 生成摘要同样违反数据不上传公有云的要求。课程 4.2 提到公共云部署、专有云部署和端云协同部署，此场景应采用专有云（本地）部署。"
+      "explanation": "安全合规要求数据不得上传公有云，因此全流程的三个环节（ASR 语音识别、文本摘要生成、TTS 语音合成）都必须在本地部署。选项 A 的公有云 ASR 和 TTS 违反合规要求；选项 C 用视觉模型分析会议录像是错误方向，会议录音应使用 ASR 语音识别而非视觉模型；选项 D 的公有云大模型 API 生成摘要同样违反数据不上传公有云的要求。课程 4.2 提到公共云部署、专有云部署和端云协同部署，此场景应采用专有云（本地）部署。",
+      "probability": 100
     },
     {
       "id": "Q115",
@@ -1779,7 +1890,8 @@ const QUESTION_BANK = {
         "D": "将触发过敏感词的用户加入黑名单以阻止后续恶意咨询"
       },
       "answer": "B",
-      "explanation": "关键词拦截的根本局限在于无法理解上下文语义——合法咨询中可能包含敏感词汇而被误拦。引入语义意图识别，根据上下文判断用户是否真实存在违规意图，能在保持拦截能力的同时大幅降低误拦率。选项 A 的替换专用词表能减少部分误匹配但不解决语义理解问题；选项 C 取消输入端拦截会移除第一道防线，增加安全风险，课程 4.4 强调三层防御中输入过滤是第一层；选项 D 的黑名单机制惩罚合法用户，加剧而非解决误拦问题。"
+      "explanation": "关键词拦截的根本局限在于无法理解上下文语义——合法咨询中可能包含敏感词汇而被误拦。引入语义意图识别，根据上下文判断用户是否真实存在违规意图，能在保持拦截能力的同时大幅降低误拦率。选项 A 的替换专用词表能减少部分误匹配但不解决语义理解问题；选项 C 取消输入端拦截会移除第一道防线，增加安全风险，课程 4.4 强调三层防御中输入过滤是第一层；选项 D 的黑名单机制惩罚合法用户，加剧而非解决误拦问题。",
+      "probability": 100
     },
     {
       "id": "Q116",
@@ -1797,7 +1909,8 @@ const QUESTION_BANK = {
         "A",
         "D"
       ],
-      "explanation": "检索条件放宽后，更多文本段被召回（包括相关和不相关的）。Context Precision 衡量检索结果中相关内容的占比（信噪比），大量无关内容涌入会稀释信号占比，导致 Context Precision 变低（选 A）。Context Recall 衡量标准答案中多少比例的观点能被检索到的上下文支持，召回更多内容意味着覆盖更多标准答案观点的可能性增大，因此 Context Recall 会变高（选 D）。这是经典的精确率-召回率权衡（Precision-Recall Tradeoff）：放宽检索条件提高召回率但降低精确率。选项 B 和 C 的方向与此相反。"
+      "explanation": "检索条件放宽后，更多文本段被召回（包括相关和不相关的）。Context Precision 衡量检索结果中相关内容的占比（信噪比），大量无关内容涌入会稀释信号占比，导致 Context Precision 变低（选 A）。Context Recall 衡量标准答案中多少比例的观点能被检索到的上下文支持，召回更多内容意味着覆盖更多标准答案观点的可能性增大，因此 Context Recall 会变高（选 D）。这是经典的精确率-召回率权衡（Precision-Recall Tradeoff）：放宽检索条件提高召回率但降低精确率。选项 B 和 C 的方向与此相反。",
+      "probability": 57
     },
     {
       "id": "Q117",
@@ -1816,7 +1929,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "选项 A 建立权威术语标准是基础工作；选项 D 用 RAG 技术在翻译时动态检索匹配术语注入上下文，是可扩展的高效方案（课程 2.2 RAG 核心应用场景）；选项 C 的人工审核提供质量兜底。选项 B 错误：将全部术语写入系统提示词不现实——上千条术语会耗尽上下文窗口，且模型无法可靠地从海量提示词中精准定位所需术语，课程 2.1 明确指出上下文窗口容量有限。正确组合是 A（建标准）+ D（自动检索注入）+ C（人工兜底）。"
+      "explanation": "选项 A 建立权威术语标准是基础工作；选项 D 用 RAG 技术在翻译时动态检索匹配术语注入上下文，是可扩展的高效方案（课程 2.2 RAG 核心应用场景）；选项 C 的人工审核提供质量兜底。选项 B 错误：将全部术语写入系统提示词不现实——上千条术语会耗尽上下文窗口，且模型无法可靠地从海量提示词中精准定位所需术语，课程 2.1 明确指出上下文窗口容量有限。正确组合是 A（建标准）+ D（自动检索注入）+ C（人工兜底）。",
+      "probability": 57
     },
     {
       "id": "Q118",
@@ -1834,7 +1948,8 @@ const QUESTION_BANK = {
         "A",
         "B"
       ],
-      "explanation": "微调前应优先评估两项：选项 A 是建立基线——用业务问题测试基础模型，了解当前能力与目标差距，判断微调的必要性和重点方向（课程 4.1 的基线评测步骤）；选项 B 是数据质量检查——对标注数据进行抽检，评估质量和场景覆盖度，课程 4.1 强调质量过滤（JSON 解析、必填字段、取值范围检查）是数据合成的关键环节。选项 C 错误：不应在未评估数据质量的情况下直接启动微调，训练损失曲线只能反映训练状态，无法替代前置的质量评估。选项 D 错误：无标注文档不能直接用于 SFT 微调（需要标注数据），且数据增强不是微调前的优先评估项，应先评估已有数据再考虑扩充。"
+      "explanation": "微调前应优先评估两项：选项 A 是建立基线——用业务问题测试基础模型，了解当前能力与目标差距，判断微调的必要性和重点方向（课程 4.1 的基线评测步骤）；选项 B 是数据质量检查——对标注数据进行抽检，评估质量和场景覆盖度，课程 4.1 强调质量过滤（JSON 解析、必填字段、取值范围检查）是数据合成的关键环节。选项 C 错误：不应在未评估数据质量的情况下直接启动微调，训练损失曲线只能反映训练状态，无法替代前置的质量评估。选项 D 错误：无标注文档不能直接用于 SFT 微调（需要标注数据），且数据增强不是微调前的优先评估项，应先评估已有数据再考虑扩充。",
+      "probability": 94
     },
     {
       "id": "Q119",
@@ -1853,7 +1968,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "选项 A 接入知识库用 RAG 让模型基于检索到的真实文档回答并标注出处，从源头减少幻觉（课程 2.2 RAG 核心价值）；选项 C 的置信度评估+低置信度转人工是输出端安全兜底（课程 4.4 三层防御中的输出审查）；选项 D 直接注入内部政策全文让模型参考权威原文，属于上下文工程实践。选项 B 错误：更大的模型不会自动掌握企业内部政策——这些是模型训练时未见过的新知识，参数量增大不解决领域知识缺失问题，课程 2.1 明确指出大模型的训练数据有截止日期且不含企业私有知识。"
+      "explanation": "选项 A 接入知识库用 RAG 让模型基于检索到的真实文档回答并标注出处，从源头减少幻觉（课程 2.2 RAG 核心价值）；选项 C 的置信度评估+低置信度转人工是输出端安全兜底（课程 4.4 三层防御中的输出审查）；选项 D 直接注入内部政策全文让模型参考权威原文，属于上下文工程实践。选项 B 错误：更大的模型不会自动掌握企业内部政策——这些是模型训练时未见过的新知识，参数量增大不解决领域知识缺失问题，课程 2.1 明确指出大模型的训练数据有截止日期且不含企业私有知识。",
+      "probability": 57
     },
     {
       "id": "Q120",
@@ -1871,7 +1987,8 @@ const QUESTION_BANK = {
         "A",
         "C"
       ],
-      "explanation": "选项 A 正确：课程 3.3 强调多 Agent 系统的核心价值是专业分工，每个 Agent 应有明确职责边界和独立上下文，聚焦各自任务输出更精准。选项 C 正确：课程 3.2 的工作流编排中，人机协作（HITL）模式适用于高价值操作审批和关键产出质量审核，发布帖子等不可逆操作应加入人工确认。选项 B 错误：让每个 Agent 接收上游完整日志会引入大量无关信息，造成注意力稀释和上下文窗口浪费，应只传递必要的结构化结果。选项 D 错误：课程 3.3 明确指出每个子 Agent 应拥有独立上下文窗口，输入更聚焦、输出更精准，共用上下文会导致信息干扰和职责混淆。"
+      "explanation": "选项 A 正确：课程 3.3 强调多 Agent 系统的核心价值是专业分工，每个 Agent 应有明确职责边界和独立上下文，聚焦各自任务输出更精准。选项 C 正确：课程 3.2 的工作流编排中，人机协作（HITL）模式适用于高价值操作审批和关键产出质量审核，发布帖子等不可逆操作应加入人工确认。选项 B 错误：让每个 Agent 接收上游完整日志会引入大量无关信息，造成注意力稀释和上下文窗口浪费，应只传递必要的结构化结果。选项 D 错误：课程 3.3 明确指出每个子 Agent 应拥有独立上下文窗口，输入更聚焦、输出更精准，共用上下文会导致信息干扰和职责混淆。",
+      "probability": 100
     },
     {
       "id": "Q121",
@@ -1885,7 +2002,8 @@ const QUESTION_BANK = {
         "D": "reasoning_content 是用户输入的回显，content 是模型输出"
       },
       "answer": "B",
-      "explanation": "推理模型（如 Qwen3）的特点是输出包含完整推导步骤（思考过程），先输出 reasoning_content（思考过程），再输出 content（回答内容）。推理模型适合数学解题、代码编写、法律分析等需要深度思考的场景。通用模型则不输出 reasoning_content。"
+      "explanation": "推理模型（如 Qwen3）的特点是输出包含完整推导步骤（思考过程），先输出 reasoning_content（思考过程），再输出 content（回答内容）。推理模型适合数学解题、代码编写、法律分析等需要深度思考的场景。通用模型则不输出 reasoning_content。",
+      "probability": 13
     },
     {
       "id": "Q122",
@@ -1899,7 +2017,8 @@ const QUESTION_BANK = {
         "D": "模型已生成完整的回答内容，自然结束生成"
       },
       "answer": "C",
-      "explanation": "自回归生成的停止条件包括三个：遇到 EOS Token（终止符）、达到最大长度限制（max_tokens）、遇到停用词。temperature=0 只是让输出更确定（选择概率最高的 Token），不会导致生成停止。模型生成完整回答后通常输出 EOS Token 自然结束。"
+      "explanation": "自回归生成的停止条件包括三个：遇到 EOS Token（终止符）、达到最大长度限制（max_tokens）、遇到停用词。temperature=0 只是让输出更确定（选择概率最高的 Token），不会导致生成停止。模型生成完整回答后通常输出 EOS Token 自然结束。",
+      "probability": 13
     },
     {
       "id": "Q123",
@@ -1913,7 +2032,8 @@ const QUESTION_BANK = {
         "D": "请将回答限制在 200 字以内"
       },
       "answer": "A",
-      "explanation": "system 消息用于设置大模型的角色和任务，是提示词工程的重要组成部分。选项 A 同时设定了角色（新员工答疑助手）、语气（简洁友好）和受众（非技术岗新人），直接影响输出的风格和内容深度。选项 B 是上下文注入，选项 C 是任务指令，选项 D 是输出格式约束，都不体现角色设定的作用。"
+      "explanation": "system 消息用于设置大模型的角色和任务，是提示词工程的重要组成部分。选项 A 同时设定了角色（新员工答疑助手）、语气（简洁友好）和受众（非技术岗新人），直接影响输出的风格和内容深度。选项 B 是上下文注入，选项 C 是任务指令，选项 D 是输出格式约束，都不体现角色设定的作用。",
+      "probability": 30
     },
     {
       "id": "Q124",
@@ -1927,7 +2047,8 @@ const QUESTION_BANK = {
         "D": "学习率过高导致震荡，应降低学习率重新训练"
       },
       "answer": "B",
-      "explanation": "AI 裁判训练流程类似机器学习分类器训练，需监控训练准确率和评估准确率以检测过拟合。训练集准确率持续上升但评估集先升后降，是典型过拟合——裁判在背训练样本而非学习通用评判标准。正确措施是采纳评估集表现最好的版本，并通过增加样本多样性、减少训练轮次来缓解过拟合。"
+      "explanation": "AI 裁判训练流程类似机器学习分类器训练，需监控训练准确率和评估准确率以检测过拟合。训练集准确率持续上升但评估集先升后降，是典型过拟合——裁判在背训练样本而非学习通用评判标准。正确措施是采纳评估集表现最好的版本，并通过增加样本多样性、减少训练轮次来缓解过拟合。",
+      "probability": 30
     },
     {
       "id": "Q125",
@@ -1941,7 +2062,8 @@ const QUESTION_BANK = {
         "D": "LoRA 不需要训练数据，直接加载即可使用"
       },
       "answer": "B",
-      "explanation": "课程 4.1 明确指出微调至少需要 1000+ 条优质训练数据。200 条数据量太少，容易导致过拟合（模型背题而非学习通用规律）。推荐方案是使用蒸馏——用教师模型（如 qwen-plus）生成更多标注数据，补充到 1000 条以上后再进行 LoRA 微调。同时 lora_rank 参数也应从默认 8 降到 4 以降低过拟合风险。"
+      "explanation": "课程 4.1 明确指出微调至少需要 1000+ 条优质训练数据。200 条数据量太少，容易导致过拟合（模型背题而非学习通用规律）。推荐方案是使用蒸馏——用教师模型（如 qwen-plus）生成更多标注数据，补充到 1000 条以上后再进行 LoRA 微调。同时 lora_rank 参数也应从默认 8 降到 4 以降低过拟合风险。",
+      "probability": 31
     },
     {
       "id": "Q126",
@@ -1955,7 +2077,8 @@ const QUESTION_BANK = {
         "D": "大模型的推理能力不足，无法理解长期上下文"
       },
       "answer": "B",
-      "explanation": "大模型是无状态的（Stateless），每次 API 调用都是独立的，调用结束后不保留任何信息。如果只传入当前轮消息，模型无从知道之前对话中设定的风格要求。解决方案是维护对话历史（conversation_history）传入 messages，或引入记忆机制（短期记忆用对话缓冲区，长期记忆用向量数据库）。"
+      "explanation": "大模型是无状态的（Stateless），每次 API 调用都是独立的，调用结束后不保留任何信息。如果只传入当前轮消息，模型无从知道之前对话中设定的风格要求。解决方案是维护对话历史（conversation_history）传入 messages，或引入记忆机制（短期记忆用对话缓冲区，长期记忆用向量数据库）。",
+      "probability": 53
     },
     {
       "id": "Q127",
@@ -1969,7 +2092,8 @@ const QUESTION_BANK = {
         "D": "滚动摘要模式，定期将旧对话压缩为摘要"
       },
       "answer": "B",
-      "explanation": "AgentScope 长期记忆有两种模式：static_control（静态控制）每次回复前后自动被动保存和检索记忆；agent_control（Agent 控制）让 Agent 获得 record_to_memory 和 retrieve_from_memory 两个工具，自主决定何时记录重要信息到长期记忆、何时从长期记忆检索相关信息。如果希望 Agent 主动判断何时记忆，应选择 agent_control 模式。"
+      "explanation": "AgentScope 长期记忆有两种模式：static_control（静态控制）每次回复前后自动被动保存和检索记忆；agent_control（Agent 控制）让 Agent 获得 record_to_memory 和 retrieve_from_memory 两个工具，自主决定何时记录重要信息到长期记忆、何时从长期记忆检索相关信息。如果希望 Agent 主动判断何时记忆，应选择 agent_control 模式。",
+      "probability": 53
     },
     {
       "id": "Q128",
@@ -1983,7 +2107,8 @@ const QUESTION_BANK = {
         "D": "QwQ 只能处理英文输入"
       },
       "answer": "B",
-      "explanation": "QwQ 是基于 Qwen2.5 系列训练的强推理能力 AI 模型，通过强化学习提升数学、代码及通用任务性能。分为商业版（qwq-plus）和开源版（qwq-32b），支持 131072 tokens 超长上下文和多轮对话。但 QwQ 不支持工具调用和结构化输出，适合需要深度思考与高质量回复的场景（如数学竞赛辅导），不适合需要工具调用的 Agent 场景。"
+      "explanation": "QwQ 是基于 Qwen2.5 系列训练的强推理能力 AI 模型，通过强化学习提升数学、代码及通用任务性能。分为商业版（qwq-plus）和开源版（qwq-32b），支持 131072 tokens 超长上下文和多轮对话。但 QwQ 不支持工具调用和结构化输出，适合需要深度思考与高质量回复的场景（如数学竞赛辅导），不适合需要工具调用的 Agent 场景。",
+      "probability": 53
     },
     {
       "id": "Q129",
@@ -1997,7 +2122,8 @@ const QUESTION_BANK = {
         "D": "使用 RAM 权限控制，限制只有授权账号可以访问模型文件"
       },
       "answer": "B",
-      "explanation": "TEE（Trusted Execution Environment）是 CPU 硬件创建的可信执行环境，形成加密隔离区，专门保护使用中（in-use）的数据安全。KMS 加密保护的是静态数据（存储中），解密后仍暴露在普通内存中；VPC 网络隔离保护的是传输中数据；RAM 权限控制是访问管理。只有 TEE 能在模型推理过程中保护数据不被云服务商或管理员访问。"
+      "explanation": "TEE（Trusted Execution Environment）是 CPU 硬件创建的可信执行环境，形成加密隔离区，专门保护使用中（in-use）的数据安全。KMS 加密保护的是静态数据（存储中），解密后仍暴露在普通内存中；VPC 网络隔离保护的是传输中数据；RAM 权限控制是访问管理。只有 TEE 能在模型推理过程中保护数据不被云服务商或管理员访问。",
+      "probability": 34
     },
     {
       "id": "Q130",
@@ -2011,7 +2137,8 @@ const QUESTION_BANK = {
         "D": "将 top_p 设为 0.1，限制候选 Token 范围"
       },
       "answer": "B",
-      "explanation": "max_tokens 本质是安全阀而非内容控制手段。如果直接设为 50，可能在句子中间截断导致语义不完整。正确做法是优先用提示词引导（请用两到三句话简洁回答），同时设置一个合理的 max_tokens（如 500）作为兜底防止异常长输出。temperature 和 top_p 控制的是输出随机性，不影响回答长度。"
+      "explanation": "max_tokens 本质是安全阀而非内容控制手段。如果直接设为 50，可能在句子中间截断导致语义不完整。正确做法是优先用提示词引导（请用两到三句话简洁回答），同时设置一个合理的 max_tokens（如 500）作为兜底防止异常长输出。temperature 和 top_p 控制的是输出随机性，不影响回答长度。",
+      "probability": 34
     },
     {
       "id": "Q131",
@@ -2025,7 +2152,8 @@ const QUESTION_BANK = {
         "D": "缓存命中部分完全免费，不产生费用"
       },
       "answer": "C",
-      "explanation": "阿里云百炼的上下文缓存（Context Cache）可以缓存公共前缀内容（如系统提示词），千问系列默认支持。缓存命中部分（cache_token）的单价为标准 input_token 单价的 40%。例如系统提示词 3000 Token，日均 5 万次调用，缓存命中可节省 60% 的输入 Token 费用。"
+      "explanation": "阿里云百炼的上下文缓存（Context Cache）可以缓存公共前缀内容（如系统提示词），千问系列默认支持。缓存命中部分（cache_token）的单价为标准 input_token 单价的 40%。例如系统提示词 3000 Token，日均 5 万次调用，缓存命中可节省 60% 的输入 Token 费用。",
+      "probability": 34
     },
     {
       "id": "Q132",
@@ -2039,7 +2167,8 @@ const QUESTION_BANK = {
         "D": "向国家网信办申请网络安全等级保护三级认证"
       },
       "answer": "B",
-      "explanation": "《生成式人工智能服务管理暂行办法》自 2023 年 8 月 15 日起施行，要求提供生成式 AI 服务的企业完成算法备案，未完成备案的服务面临下架风险。此外还需标注 AIGC 标识，遵守《个人信息保护法》等法规。ICP 备案是网站上线的基础要求但非 AI 专属；ISO 27001 和等保三级是安全认证但非算法备案的替代。"
+      "explanation": "《生成式人工智能服务管理暂行办法》自 2023 年 8 月 15 日起施行，要求提供生成式 AI 服务的企业完成算法备案，未完成备案的服务面临下架风险。此外还需标注 AIGC 标识，遵守《个人信息保护法》等法规。ICP 备案是网站上线的基础要求但非 AI 专属；ISO 27001 和等保三级是安全认证但非算法备案的替代。",
+      "probability": 34
     },
     {
       "id": "Q133",
@@ -2053,7 +2182,8 @@ const QUESTION_BANK = {
         "D": "同时运行新旧两套模型，让用户手动选择使用哪个"
       },
       "answer": "B",
-      "explanation": "灰度发布是一种渐进式发布策略，先让小比例用户（如 5%）试用新模型，监控评测指标和用户反馈，达标后再逐步扩大范围直至全面替换。这种方式可以降低模型更新带来的风险——如果新模型出现问题，影响范围仅限于小部分用户，可以快速回滚。直接全量切换风险太大；测试环境验证不等于生产环境表现；同时运行两套模型浪费资源且用户体验差。"
+      "explanation": "灰度发布是一种渐进式发布策略，先让小比例用户（如 5%）试用新模型，监控评测指标和用户反馈，达标后再逐步扩大范围直至全面替换。这种方式可以降低模型更新带来的风险——如果新模型出现问题，影响范围仅限于小部分用户，可以快速回滚。直接全量切换风险太大；测试环境验证不等于生产环境表现；同时运行两套模型浪费资源且用户体验差。",
+      "probability": 34
     },
     {
       "id": "Q134",
@@ -2067,7 +2197,8 @@ const QUESTION_BANK = {
         "D": "先停止当前服务，部署新版本后再启动"
       },
       "answer": "A",
-      "explanation": "蓝绿部署是零停机部署策略，维护两套完全相同的环境（蓝色和绿色）：一套对外提供服务，另一套部署新版本。新版本部署完成后，通过切换流量从旧环境到新环境实现零停机更新。如果新版本有问题，可以立即切回旧环境。选项 B 的重启会导致短暂停机；选项 C 的手动 DNS 修改不够可靠；选项 D 的先停后启有明显停机时间。PAI-EAS 原生支持蓝绿部署。"
+      "explanation": "蓝绿部署是零停机部署策略，维护两套完全相同的环境（蓝色和绿色）：一套对外提供服务，另一套部署新版本。新版本部署完成后，通过切换流量从旧环境到新环境实现零停机更新。如果新版本有问题，可以立即切回旧环境。选项 B 的重启会导致短暂停机；选项 C 的手动 DNS 修改不够可靠；选项 D 的先停后启有明显停机时间。PAI-EAS 原生支持蓝绿部署。",
+      "probability": 34
     },
     {
       "id": "Q135",
@@ -2081,7 +2212,8 @@ const QUESTION_BANK = {
         "D": "关键词检查：检查报告中是否包含图表相关关键词"
       },
       "answer": "B",
-      "explanation": "反思机制有两种模式：自我反馈（Self Review）适合静态文本比对；外部反馈（External Feedback）将生成结果放到真实环境执行，用执行结果反馈给模型。图表验证需要客观事实——代码是否能正常运行、图表是否正确渲染，这属于外部反馈场景。AgentScope 内置 execute_python_code 工具可以执行绘图代码返回图片，Agent 通过视觉输入发现问题。自我反馈存在自证正确偏差；人工审核成本高不可持续；关键词检查无法验证图表实际渲染效果。"
+      "explanation": "反思机制有两种模式：自我反馈（Self Review）适合静态文本比对；外部反馈（External Feedback）将生成结果放到真实环境执行，用执行结果反馈给模型。图表验证需要客观事实——代码是否能正常运行、图表是否正确渲染，这属于外部反馈场景。AgentScope 内置 execute_python_code 工具可以执行绘图代码返回图片，Agent 通过视觉输入发现问题。自我反馈存在自证正确偏差；人工审核成本高不可持续；关键词检查无法验证图表实际渲染效果。",
+      "probability": 27
     },
     {
       "id": "Q136",
@@ -2103,7 +2235,8 @@ const QUESTION_BANK = {
         "E",
         "F"
       ],
-      "explanation": "复杂文档解析器导致解析速度慢，主要影响的是检索效率，而非检索的准确性。"
+      "explanation": "复杂文档解析器导致解析速度慢，主要影响的是检索效率，而非检索的准确性。",
+      "probability": 19
     },
     {
       "id": "Q137",
@@ -2123,7 +2256,8 @@ const QUESTION_BANK = {
         "E",
         "F"
       ],
-      "explanation": "B.CosyVoice主要功能是语音合成，将文本转化为语音，而不是视频剪辑;C.moviepy是 一个用于视频编辑的Python库，但它不能直接将文本转换为视频，需要结合其他操作来实 现;D.Qwen-Max是一个语言模型，主要用于生成文本等自然语言处理任务，而不是专门用于 生成视频字幕，虽然可以生成字幕相关文本，但这不是其主要功能."
+      "explanation": "B.CosyVoice主要功能是语音合成，将文本转化为语音，而不是视频剪辑;C.moviepy是 一个用于视频编辑的Python库，但它不能直接将文本转换为视频，需要结合其他操作来实 现;D.Qwen-Max是一个语言模型，主要用于生成文本等自然语言处理任务，而不是专门用于 生成视频字幕，虽然可以生成字幕相关文本，但这不是其主要功能.",
+      "probability": 53
     },
     {
       "id": "Q138",
@@ -2145,7 +2279,8 @@ const QUESTION_BANK = {
         "E",
         "F"
       ],
-      "explanation": "c严重错误。未备案即上线属于违法行为，将面临处罚"
+      "explanation": "c严重错误。未备案即上线属于违法行为，将面临处罚",
+      "probability": 53
     },
     {
       "id": "Q139",
@@ -2168,7 +2303,8 @@ const QUESTION_BANK = {
         "E",
         "F"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q140",
@@ -2186,7 +2322,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 9
     },
     {
       "id": "Q141",
@@ -2207,7 +2344,8 @@ const QUESTION_BANK = {
         "C",
         "F"
       ],
-      "explanation": "C固定长度切片（如512字符）是机械式方法，会破坏句子、段落或逻辑单元的完整性， 违背语义切片理念。D将完整表格（或逻辑子表）作为一个Chunk，或转换为Markdown等保留 结构的格式"
+      "explanation": "C固定长度切片（如512字符）是机械式方法，会破坏句子、段落或逻辑单元的完整性， 违背语义切片理念。D将完整表格（或逻辑子表）作为一个Chunk，或转换为Markdown等保留 结构的格式",
+      "probability": 9
     },
     {
       "id": "Q142",
@@ -2228,7 +2366,8 @@ const QUESTION_BANK = {
         "E",
         "F"
       ],
-      "explanation": "BPython支持多重继承，因此该选项的说法本身错误，设计基类与Python是否支持多 重继承无关;D基类的设计主要是为了实现代码复用和统一接口，而不是为了隐藏私有属 性,Python中通过命名约定来表示私有属性，与基类的设计并无直接关系"
+      "explanation": "BPython支持多重继承，因此该选项的说法本身错误，设计基类与Python是否支持多 重继承无关;D基类的设计主要是为了实现代码复用和统一接口，而不是为了隐藏私有属 性,Python中通过命名约定来表示私有属性，与基类的设计并无直接关系",
+      "probability": 27
     },
     {
       "id": "Q143",
@@ -2248,7 +2387,8 @@ const QUESTION_BANK = {
         "D",
         "E"
       ],
-      "explanation": "大模型技术还在不断发展和完善中，存在局限性，不能无差错地执行所有文本转换和润 色任务"
+      "explanation": "大模型技术还在不断发展和完善中，存在局限性，不能无差错地执行所有文本转换和润 色任务",
+      "probability": 13
     },
     {
       "id": "Q144",
@@ -2268,7 +2408,8 @@ const QUESTION_BANK = {
         "D",
         "E"
       ],
-      "explanation": "A用户分析、C长度控制、F抽象方案"
+      "explanation": "A用户分析、C长度控制、F抽象方案",
+      "probability": 27
     },
     {
       "id": "Q145",
@@ -2291,7 +2432,8 @@ const QUESTION_BANK = {
         "E",
         "F"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 16
     },
     {
       "id": "Q146",
@@ -2314,7 +2456,8 @@ const QUESTION_BANK = {
         "E",
         "F"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q147",
@@ -2335,7 +2478,8 @@ const QUESTION_BANK = {
         "C",
         "E"
       ],
-      "explanation": "C方案最彻底，B+A组合适用于快速改进，E方案作为补充，D/F不建议"
+      "explanation": "C方案最彻底，B+A组合适用于快速改进，E方案作为补充，D/F不建议",
+      "probability": 19
     },
     {
       "id": "Q148",
@@ -2356,7 +2500,8 @@ const QUESTION_BANK = {
         "D",
         "E"
       ],
-      "explanation": "B/F为损失计算，A/E属正则化，C/D属优化策略"
+      "explanation": "B/F为损失计算，A/E属正则化，C/D属优化策略",
+      "probability": 16
     },
     {
       "id": "Q149",
@@ -2373,7 +2518,8 @@ const QUESTION_BANK = {
         "A",
         "B"
       ],
-      "explanation": "C和D选项存在事实性错误"
+      "explanation": "C和D选项存在事实性错误",
+      "probability": 9
     },
     {
       "id": "Q150",
@@ -2393,7 +2539,8 @@ const QUESTION_BANK = {
         "D",
         "E"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q151",
@@ -2410,7 +2557,8 @@ const QUESTION_BANK = {
         "A",
         "C"
       ],
-      "explanation": "B配置环境变量本身不会减少代码行数，而是通过SDK自动读取环境变量来简化认证流 程，与代码行数无关；D环境变量的读取属于系统级操作，对程序运行速度的影响可忽略不计， 不会显著提升性能"
+      "explanation": "B配置环境变量本身不会减少代码行数，而是通过SDK自动读取环境变量来简化认证流 程，与代码行数无关；D环境变量的读取属于系统级操作，对程序运行速度的影响可忽略不计， 不会显著提升性能",
+      "probability": 7
     },
     {
       "id": "Q152",
@@ -2428,7 +2576,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "D选项违反API调用基本原则，A/B/C是自定义封装的核心价值"
+      "explanation": "D选项违反API调用基本原则，A/B/C是自定义封装的核心价值",
+      "probability": 19
     },
     {
       "id": "Q153",
@@ -2448,7 +2597,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "E排除，其余选项均能实现基本的敏感词检测功能，尽管各有局限性"
+      "explanation": "E排除，其余选项均能实现基本的敏感词检测功能，尽管各有局限性",
+      "probability": 7
     },
     {
       "id": "Q154",
@@ -2468,7 +2618,8 @@ const QUESTION_BANK = {
         "C",
         "E"
       ],
-      "explanation": "样例是指在提示词中提供具体的输入输出示例，用于指导模型生成符合期望的格式或内 容"
+      "explanation": "样例是指在提示词中提供具体的输入输出示例，用于指导模型生成符合期望的格式或内 容",
+      "probability": 30
     },
     {
       "id": "Q155",
@@ -2489,7 +2640,8 @@ const QUESTION_BANK = {
         "E",
         "F"
       ],
-      "explanation": "B/C不属于原生功能，A/D/E/F是标准CRUD操作"
+      "explanation": "B/C不属于原生功能，A/D/E/F是标准CRUD操作",
+      "probability": 13
     },
     {
       "id": "Q156",
@@ -2510,7 +2662,8 @@ const QUESTION_BANK = {
         "D",
         "F"
       ],
-      "explanation": "A/E属于后续处理，B/C/D/F构成完整交互链"
+      "explanation": "A/E属于后续处理，B/C/D/F构成完整交互链",
+      "probability": 7
     },
     {
       "id": "Q157",
@@ -2531,7 +2684,8 @@ const QUESTION_BANK = {
         "D",
         "F"
       ],
-      "explanation": "A作为基础支持库入选，B/D/F是专业多媒体库，C/E无关"
+      "explanation": "A作为基础支持库入选，B/D/F是专业多媒体库，C/E无关",
+      "probability": 27
     },
     {
       "id": "Q158",
@@ -2550,7 +2704,8 @@ const QUESTION_BANK = {
         "D",
         "F"
       ],
-      "explanation": "必须完成算法备案和平台合规流程"
+      "explanation": "必须完成算法备案和平台合规流程",
+      "probability": 31
     },
     {
       "id": "Q159",
@@ -2570,7 +2725,8 @@ const QUESTION_BANK = {
         "D",
         "F"
       ],
-      "explanation": "A/C/E属于其他提示词要素，B/D/F是标准的输出格式指令"
+      "explanation": "A/C/E属于其他提示词要素，B/D/F是标准的输出格式指令",
+      "probability": 30
     },
     {
       "id": "Q160",
@@ -2588,7 +2744,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "C选项属于技术误用，A/B/D构成完整的中文适配方案"
+      "explanation": "C选项属于技术误用，A/B/D构成完整的中文适配方案",
+      "probability": 9
     },
     {
       "id": "Q161",
@@ -2605,7 +2762,8 @@ const QUESTION_BANK = {
         "A",
         "C"
       ],
-      "explanation": "CosyVoice的核心能力是文本转语音（TTS）及流式合成"
+      "explanation": "CosyVoice的核心能力是文本转语音（TTS）及流式合成",
+      "probability": 53
     },
     {
       "id": "Q162",
@@ -2623,7 +2781,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "Embedding模型直接参与ACD三个指标的计算，B属于前置数据处理流程"
+      "explanation": "Embedding模型直接参与ACD三个指标的计算，B属于前置数据处理流程",
+      "probability": 19
     },
     {
       "id": "Q163",
@@ -2641,7 +2800,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "码仅替换特定标点符号，未涉及乱码检测或修复"
+      "explanation": "码仅替换特定标点符号，未涉及乱码检测或修复",
+      "probability": 9
     },
     {
       "id": "Q164",
@@ -2661,7 +2821,8 @@ const QUESTION_BANK = {
         "D",
         "F"
       ],
-      "explanation": "ABE属于增强或辅助操作，非训练循环最小必需步骤"
+      "explanation": "ABE属于增强或辅助操作，非训练循环最小必需步骤",
+      "probability": 31
     },
     {
       "id": "Q165",
@@ -2682,7 +2843,8 @@ const QUESTION_BANK = {
         "E",
         "F"
       ],
-      "explanation": "A.通常属于用户生成内容审核范畴，而非视频本身的合规检测步骤。"
+      "explanation": "A.通常属于用户生成内容审核范畴，而非视频本身的合规检测步骤。",
+      "probability": 53
     },
     {
       "id": "Q166",
@@ -2696,7 +2858,8 @@ const QUESTION_BANK = {
         "D": "确保每个语义单元都有清晰的边界和完整的上下文信息。"
       },
       "answer": "B",
-      "explanation": "独立性：数据单元（如文本段落、表格行、图片标题等）应保持自身明确的语义边界， 不与其他内容混淆。完整性：数据单元应包含足够的上下文信息，确保其含义清晰且不被割裂。"
+      "explanation": "独立性：数据单元（如文本段落、表格行、图片标题等）应保持自身明确的语义边界， 不与其他内容混淆。完整性：数据单元应包含足够的上下文信息，确保其含义清晰且不被割裂。",
+      "probability": 19
     },
     {
       "id": "Q167",
@@ -2710,7 +2873,8 @@ const QUESTION_BANK = {
         "D": "存储向量数据"
       },
       "answer": "C",
-      "explanation": "向量数据库用于管理已生成的向量数据，而非训练生成这些向量的模型"
+      "explanation": "向量数据库用于管理已生成的向量数据，而非训练生成这些向量的模型",
+      "probability": 19
     },
     {
       "id": "Q168",
@@ -2724,7 +2888,8 @@ const QUESTION_BANK = {
         "D": "可以降低对数据库存储空间要求"
       },
       "answer": "A",
-      "explanation": "句子窗口检索的核心优势是通过精准检索（句子级）和上下文扩展（窗口级）平衡检索 精度与生成质量，其他选项均不符合其设计目标。"
+      "explanation": "句子窗口检索的核心优势是通过精准检索（句子级）和上下文扩展（窗口级）平衡检索 精度与生成质量，其他选项均不符合其设计目标。",
+      "probability": 19
     },
     {
       "id": "Q169",
@@ -2738,7 +2903,8 @@ const QUESTION_BANK = {
         "D": "loss.backward()"
       },
       "answer": "B",
-      "explanation": "前向计算（outputs=model(inputs)）→,计算损失（loss=criterion(...)）→ 反向传播（loss.backward()）→,梯度更新（optimizer.step()"
+      "explanation": "前向计算（outputs=model(inputs)）→,计算损失（loss=criterion(...)）→ 反向传播（loss.backward()）→,梯度更新（optimizer.step()",
+      "probability": 16
     },
     {
       "id": "Q170",
@@ -2752,7 +2918,8 @@ const QUESTION_BANK = {
         "D": "控制模型只考虑概率最高的几个词，例如这里设置0.9，则模型只考虑累积概率前90%的词"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q171",
@@ -2766,7 +2933,8 @@ const QUESTION_BANK = {
         "D": "提供特定领域的知识"
       },
       "answer": "C",
-      "explanation": "System角色的本质是间接规范对话，而非直接参与回答。其他选项均为systemprompt 的合理用途。"
+      "explanation": "System角色的本质是间接规范对话，而非直接参与回答。其他选项均为systemprompt 的合理用途。",
+      "probability": 30
     },
     {
       "id": "Q172",
@@ -2780,7 +2948,8 @@ const QUESTION_BANK = {
         "D": "仅使用通义千问API完成所有处理，不使用其他工具。"
       },
       "answer": "B",
-      "explanation": "Multi-Agent的核心是任务分解与专业化协作，而其他选项或依赖单一工具，缺乏分工 机制。"
+      "explanation": "Multi-Agent的核心是任务分解与专业化协作，而其他选项或依赖单一工具，缺乏分工 机制。",
+      "probability": 9
     },
     {
       "id": "Q173",
@@ -2794,7 +2963,8 @@ const QUESTION_BANK = {
         "D": "机器人无法理解用户的问题。"
       },
       "answer": "B",
-      "explanation": "唯一涉及AI输出内容的安全风险（内部代码泄露）"
+      "explanation": "唯一涉及AI输出内容的安全风险（内部代码泄露）",
+      "probability": 17
     },
     {
       "id": "Q174",
@@ -2808,7 +2978,8 @@ const QUESTION_BANK = {
         "D": "加载本地索引，对query进行回复"
       },
       "answer": "B",
-      "explanation": "代码直接对应句子窗口检索的流程，扩展上下文优化生成，其他选项不符合代码功能"
+      "explanation": "代码直接对应句子窗口检索的流程，扩展上下文优化生成，其他选项不符合代码功能",
+      "probability": 7
     },
     {
       "id": "Q175",
@@ -2822,7 +2993,8 @@ const QUESTION_BANK = {
         "D": "从大量日志数据中自动检测异常登录行为"
       },
       "answer": "B",
-      "explanation": "确定统计学显著性需专业工具，大模型更适合语言相关任务。其他选项均可通过LLM实 现（或辅助）。"
+      "explanation": "确定统计学显著性需专业工具，大模型更适合语言相关任务。其他选项均可通过LLM实 现（或辅助）。",
+      "probability": 13
     },
     {
       "id": "Q176",
@@ -2836,7 +3008,8 @@ const QUESTION_BANK = {
         "D": "只需要修改大模型query函数Q_S_Line"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 15
     },
     {
       "id": "Q177",
@@ -2850,7 +3023,8 @@ const QUESTION_BANK = {
         "D": "assistant.id"
       },
       "answer": "A",
-      "explanation": "线程ID是消息创建时的必填参数"
+      "explanation": "线程ID是消息创建时的必填参数",
+      "probability": 12
     },
     {
       "id": "Q178",
@@ -2864,7 +3038,8 @@ const QUESTION_BANK = {
         "D": "代表模型本身，返回生成的回复"
       },
       "answer": "D",
-      "explanation": "assistant角色明确用于标识模型生成的回复"
+      "explanation": "assistant角色明确用于标识模型生成的回复",
+      "probability": 13
     },
     {
       "id": "Q179",
@@ -2878,7 +3053,8 @@ const QUESTION_BANK = {
         "D": "对向量数据库的检索结果进行重新排序"
       },
       "answer": "D",
-      "explanation": "通过LlamaIndex创建RAG应用时，rerank的作用是对向量数据库的检索结果进行重 新排序"
+      "explanation": "通过LlamaIndex创建RAG应用时，rerank的作用是对向量数据库的检索结果进行重 新排序",
+      "probability": 19
     },
     {
       "id": "Q180",
@@ -2892,7 +3068,8 @@ const QUESTION_BANK = {
         "D": "正向传播"
       },
       "answer": "D",
-      "explanation": "模型输出与标签的差异（损失值）在正向传播中明确计算，其他步骤仅依赖该结果进行 后续操作"
+      "explanation": "模型输出与标签的差异（损失值）在正向传播中明确计算，其他步骤仅依赖该结果进行 后续操作",
+      "probability": 31
     },
     {
       "id": "Q181",
@@ -2906,7 +3083,8 @@ const QUESTION_BANK = {
         "D": "字典（Dictionary），键为检测项，值为检测结果和描述"
       },
       "answer": "D",
-      "explanation": "字典以键值对形式完美匹配检测项与结果的关联需求"
+      "explanation": "字典以键值对形式完美匹配检测项与结果的关联需求",
+      "probability": 13
     },
     {
       "id": "Q182",
@@ -2920,7 +3098,8 @@ const QUESTION_BANK = {
         "D": "使用专门的语义分割模型将文本分割成语义完整的段落。"
       },
       "answer": "D",
-      "explanation": "D通过算法或模型主动理解语义边界，是唯一能确保分割后文本保持语义完整性的方法"
+      "explanation": "D通过算法或模型主动理解语义边界，是唯一能确保分割后文本保持语义完整性的方法",
+      "probability": 19
     },
     {
       "id": "Q183",
@@ -2934,7 +3113,8 @@ const QUESTION_BANK = {
         "D": "python forid,queryinfeedback_list: ifclassify_intent(query): intent=classify_intent(query) print(f\"ID:{id},Intent:{intent}\") else: print(\"Errorprocessingquery.\")"
       },
       "answer": "C",
-      "explanation": "语法正确且能有效处理异常的选项"
+      "explanation": "语法正确且能有效处理异常的选项",
+      "probability": 6
     },
     {
       "id": "Q184",
@@ -2948,7 +3128,8 @@ const QUESTION_BANK = {
         "D": "Pinecone"
       },
       "answer": "C",
-      "explanation": "MySQL不是为向量操作设计的，因此不适合存储和检索文本向量"
+      "explanation": "MySQL不是为向量操作设计的，因此不适合存储和检索文本向量",
+      "probability": 19
     },
     {
       "id": "Q185",
@@ -2962,7 +3143,8 @@ const QUESTION_BANK = {
         "D": "“帮我转换成PPT”"
       },
       "answer": "C",
-      "explanation": "提示词最清晰、具体，能高效生成可直接用于Marp的Markdown文件"
+      "explanation": "提示词最清晰、具体，能高效生成可直接用于Marp的Markdown文件",
+      "probability": 7
     },
     {
       "id": "Q186",
@@ -2976,7 +3158,8 @@ const QUESTION_BANK = {
         "D": "角色(Role)"
       },
       "answer": "B",
-      "explanation": "样例的作用：直接提供“模板”或“示例”，减少模糊性"
+      "explanation": "样例的作用：直接提供“模板”或“示例”，减少模糊性",
+      "probability": 30
     },
     {
       "id": "Q187",
@@ -2990,7 +3173,8 @@ const QUESTION_BANK = {
         "D": "python intent_counts=[] forqueryinfeedback_list: intent=classify_intent(query[1]) intent_counts.append(intent) print(intent_counts)"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q188",
@@ -3004,7 +3188,8 @@ const QUESTION_BANK = {
         "D": "python foriinrange(len(feedback_list)): intent=classify_intent(feedback_list[i]) print(f\"Intent:{intent}\")"
       },
       "answer": "B",
-      "explanation": "遍历列表并分类每个问题的实现"
+      "explanation": "遍历列表并分类每个问题的实现",
+      "probability": 6
     },
     {
       "id": "Q189",
@@ -3018,7 +3203,8 @@ const QUESTION_BANK = {
         "D": "使用语义空间API的视觉理解模型对图片进行更深层次的分析。"
       },
       "answer": "D",
-      "explanation": "视觉理解模型专门处理图片语义,API方式可无缝增强大模型能力,不丢失图片中的有价 值信息"
+      "explanation": "视觉理解模型专门处理图片语义,API方式可无缝增强大模型能力,不丢失图片中的有价 值信息",
+      "probability": 13
     },
     {
       "id": "Q190",
@@ -3032,7 +3218,8 @@ const QUESTION_BANK = {
         "D": "过拟合特定任务，泛化能力下降"
       },
       "answer": "C",
-      "explanation": "微调不会降低模型大小和复杂度，反而通常保持或增加复杂度"
+      "explanation": "微调不会降低模型大小和复杂度，反而通常保持或增加复杂度",
+      "probability": 31
     },
     {
       "id": "Q191",
@@ -3046,7 +3233,8 @@ const QUESTION_BANK = {
         "D": "对特定任务的表现不如从头训练的模型"
       },
       "answer": "B",
-      "explanation": "微调的核心优势，预训练模型已具备通用语言理解能力"
+      "explanation": "微调的核心优势，预训练模型已具备通用语言理解能力",
+      "probability": 31
     },
     {
       "id": "Q192",
@@ -3060,7 +3248,8 @@ const QUESTION_BANK = {
         "D": "简化文档预处理流程，降低开发成本。"
       },
       "answer": "A",
-      "explanation": "这是分块的两个核心目的：1.适配模型有限的上下文窗口,2.使检索结果更精准（小分块 能更精确匹配查询）"
+      "explanation": "这是分块的两个核心目的：1.适配模型有限的上下文窗口,2.使检索结果更精准（小分块 能更精确匹配查询）",
+      "probability": 19
     },
     {
       "id": "Q193",
@@ -3074,7 +3263,8 @@ const QUESTION_BANK = {
         "D": "标签编码（LabelEncoding）"
       },
       "answer": "D",
-      "explanation": "将类别标签转换为数字，是分类任务的标准预处理步骤"
+      "explanation": "将类别标签转换为数字，是分类任务的标准预处理步骤",
+      "probability": 13
     },
     {
       "id": "Q194",
@@ -3088,7 +3278,8 @@ const QUESTION_BANK = {
         "D": "向用户返回提示信息，告知其输出内容存在风险。"
       },
       "answer": "B",
-      "explanation": "直接返回不安全信息可能造成伦理/法律风险如传播有害内容"
+      "explanation": "直接返回不安全信息可能造成伦理/法律风险如传播有害内容",
+      "probability": 34
     },
     {
       "id": "Q195",
@@ -3102,7 +3293,8 @@ const QUESTION_BANK = {
         "D": "向Qwen-Max发送一条包含“Python”关键词的请求。"
       },
       "answer": "B",
-      "explanation": "完整性+明确性+效率"
+      "explanation": "完整性+明确性+效率",
+      "probability": 6
     },
     {
       "id": "Q196",
@@ -3116,7 +3308,8 @@ const QUESTION_BANK = {
         "D": "表格单元格改写，kv形式补充单元格信息，增强语义信息。"
       },
       "answer": "A",
-      "explanation": "查询→2.知识检索A→3.增强生成"
+      "explanation": "查询→2.知识检索A→3.增强生成",
+      "probability": 17
     },
     {
       "id": "Q197",
@@ -3130,7 +3323,8 @@ const QUESTION_BANK = {
         "D": "控制模型生成文本的长度。"
       },
       "answer": "C",
-      "explanation": "ACP大模型-2.png"
+      "explanation": "ACP大模型-2.png",
+      "probability": 6
     },
     {
       "id": "Q198",
@@ -3144,7 +3338,8 @@ const QUESTION_BANK = {
         "D": "数据增强"
       },
       "answer": "B",
-      "explanation": "微调大语言模型的数据预处理流程中，旨在减少文本中的噪声、提高数据质量的步骤是 文本清洗"
+      "explanation": "微调大语言模型的数据预处理流程中，旨在减少文本中的噪声、提高数据质量的步骤是 文本清洗",
+      "probability": 31
     },
     {
       "id": "Q199",
@@ -3158,7 +3353,8 @@ const QUESTION_BANK = {
         "D": "optimizer.step()"
       },
       "answer": "B",
-      "explanation": "B是前向传播的核心代码，将输入数据inputs传递给模型model，计算并返回预测结 果outputs"
+      "explanation": "B是前向传播的核心代码，将输入数据inputs传递给模型model，计算并返回预测结 果outputs",
+      "probability": 7
     },
     {
       "id": "Q200",
@@ -3172,7 +3368,8 @@ const QUESTION_BANK = {
         "D": "直接使用Qwen-Max进行图像设计"
       },
       "answer": "B",
-      "explanation": "Qwen-Max的核心能力是文本生成，而课程脚本属于其适用场景"
+      "explanation": "Qwen-Max的核心能力是文本生成，而课程脚本属于其适用场景",
+      "probability": 7
     },
     {
       "id": "Q201",
@@ -3186,7 +3383,8 @@ const QUESTION_BANK = {
         "D": "一次性生成所有类型的识别结果"
       },
       "answer": "D",
-      "explanation": "利用大模型（如Qwen-Max）的批量分析能力，可同时检测直接营销词汇、隐含诱导性语 言、夸张表述等，覆盖更全面。"
+      "explanation": "利用大模型（如Qwen-Max）的批量分析能力，可同时检测直接营销词汇、隐含诱导性语 言、夸张表述等，覆盖更全面。",
+      "probability": 13
     },
     {
       "id": "Q202",
@@ -3200,7 +3398,8 @@ const QUESTION_BANK = {
         "D": "learning_rate=0.001"
       },
       "answer": "A",
-      "explanation": "在优化器（如Adam）中，lr=learning_rate直接设置了初始学习率，是训练过程中学 习率的基准值。"
+      "explanation": "在优化器（如Adam）中，lr=learning_rate直接设置了初始学习率，是训练过程中学 习率的基准值。",
+      "probability": 16
     },
     {
       "id": "Q203",
@@ -3214,7 +3413,8 @@ const QUESTION_BANK = {
         "D": "使用语义千问API润色目录层级，补全缺失信息。"
       },
       "answer": "C",
-      "explanation": "RAG的核心是高质量检索，未经处理的原始文档会引入噪声，严重降低效果。其他选项 均针对不同环节的优化，属于最佳实践。"
+      "explanation": "RAG的核心是高质量检索，未经处理的原始文档会引入噪声，严重降低效果。其他选项 均针对不同环节的优化，属于最佳实践。",
+      "probability": 9
     },
     {
       "id": "Q204",
@@ -3228,7 +3428,8 @@ const QUESTION_BANK = {
         "D": "训练集准确率连续n轮上升"
       },
       "answer": "A",
-      "explanation": "早停法的核心思想是防止模型过拟合，当验证集损失在连续多轮训练中不再下降时，说 明模型性能不再提升，此时应停止训练。"
+      "explanation": "早停法的核心思想是防止模型过拟合，当验证集损失在连续多轮训练中不再下降时，说 明模型性能不再提升，此时应停止训练。",
+      "probability": 31
     },
     {
       "id": "Q205",
@@ -3242,7 +3443,8 @@ const QUESTION_BANK = {
         "D": "python messages=[ {\"role\":\"system\",\"content\":\"你是一个诗歌生成器。\"}, {\"role\":\"system\",\"content\":\"我想写一首关于秋天的诗。\"} ]"
       },
       "answer": "C",
-      "explanation": "system（可选）→设定AI身份，user→用户真实提问，assistant→AI回复"
+      "explanation": "system（可选）→设定AI身份，user→用户真实提问，assistant→AI回复",
+      "probability": 7
     },
     {
       "id": "Q206",
@@ -3256,7 +3458,8 @@ const QUESTION_BANK = {
         "D": "检测用户上传的文本是否包含明确的违禁词汇"
       },
       "answer": "D",
-      "explanation": "规则匹配的优势场景是明确模式、固定表达的检测如违禁词、格式校验，需要语义理解 的场景。"
+      "explanation": "规则匹配的优势场景是明确模式、固定表达的检测如违禁词、格式校验，需要语义理解 的场景。",
+      "probability": 34
     },
     {
       "id": "Q207",
@@ -3270,7 +3473,8 @@ const QUESTION_BANK = {
         "D": "in_progress"
       },
       "answer": "D",
-      "explanation": "终止状态指任务不可再变更的最终状态（如完成/失败/取消），而in_progress是进行 状态，不属于终止状态。"
+      "explanation": "终止状态指任务不可再变更的最终状态（如完成/失败/取消），而in_progress是进行 状态，不属于终止状态。",
+      "probability": 7
     },
     {
       "id": "Q208",
@@ -3284,7 +3488,8 @@ const QUESTION_BANK = {
         "D": "将文本片段转换为向量表示"
       },
       "answer": "A",
-      "explanation": "建立索引\"是离线预处理文档，而选项A是在线处理用户请求，属于后续流程"
+      "explanation": "建立索引\"是离线预处理文档，而选项A是在线处理用户请求，属于后续流程",
+      "probability": 19
     },
     {
       "id": "Q209",
@@ -3298,7 +3503,8 @@ const QUESTION_BANK = {
         "D": "填充序列到固定长度（Padding）"
       },
       "answer": "D",
-      "explanation": "通过添加特定符号如[PAD]将短序列补长，或截断长序列后填充，确保所有输入长度一致"
+      "explanation": "通过添加特定符号如[PAD]将短序列补长，或截断长序列后填充，确保所有输入长度一致",
+      "probability": 13
     },
     {
       "id": "Q210",
@@ -3312,7 +3518,8 @@ const QUESTION_BANK = {
         "D": "plaintext <用户>> 你好 <机器人>> 你好，有什么可以帮你？"
       },
       "answer": "B",
-      "explanation": "机器友好--结构化解析无歧义，人工可读--清晰区分对话角色和内容，标准化符合 XML/HTML等通用数据格式规范。"
+      "explanation": "机器友好--结构化解析无歧义，人工可读--清晰区分对话角色和内容，标准化符合 XML/HTML等通用数据格式规范。",
+      "probability": 13
     },
     {
       "id": "Q211",
@@ -3326,7 +3533,8 @@ const QUESTION_BANK = {
         "D": "python importnumpyasnp data=[1,2,3,4,5,100] std_dev=np.std(data) print(std_dev)"
       },
       "answer": "B",
-      "explanation": "大模型的优势在于理解自然语言和处理复杂语义，情感分析需要理解文本的隐含情绪， 这正是大模型的强项。"
+      "explanation": "大模型的优势在于理解自然语言和处理复杂语义，情感分析需要理解文本的隐含情绪， 这正是大模型的强项。",
+      "probability": 7
     },
     {
       "id": "Q212",
@@ -3340,7 +3548,8 @@ const QUESTION_BANK = {
         "D": "文档内容高度相关，主题单一。"
       },
       "answer": "B",
-      "explanation": "分块的核心目的是提高信息检索的精准度。多主题文档拆分后，可确保每块聚焦单一主 题，避免检索时返回无关内容"
+      "explanation": "分块的核心目的是提高信息检索的精准度。多主题文档拆分后，可确保每块聚焦单一主 题，避免检索时返回无关内容",
+      "probability": 13
     },
     {
       "id": "Q213",
@@ -3354,7 +3563,8 @@ const QUESTION_BANK = {
         "D": "训练初期的模型"
       },
       "answer": "A",
-      "explanation": "模型检查点的标准做法是保存验证集上表现最优的模型，可确保最终选择的是泛化能力 最强的版本，而非过拟合的模型。"
+      "explanation": "模型检查点的标准做法是保存验证集上表现最优的模型，可确保最终选择的是泛化能力 最强的版本，而非过拟合的模型。",
+      "probability": 16
     },
     {
       "id": "Q214",
@@ -3368,7 +3578,8 @@ const QUESTION_BANK = {
         "D": "python data_samples=DataFrame( question=\"sample_question\", answer=\"sample_answer\", contexts=\"sample_contexts\")"
       },
       "answer": "C",
-      "explanation": "在RAGAS（检索增强生成评估框架）中，data_samples通常需要包含以下核心字段： question:用户提问（字符串）answer:模型生成的答案（字符串）contexts:检索到的参考 上下文（列表形式，因RAG可能返回多个相关文档片段）"
+      "explanation": "在RAGAS（检索增强生成评估框架）中，data_samples通常需要包含以下核心字段： question:用户提问（字符串）answer:模型生成的答案（字符串）contexts:检索到的参考 上下文（列表形式，因RAG可能返回多个相关文档片段）",
+      "probability": 9
     },
     {
       "id": "Q215",
@@ -3382,7 +3593,8 @@ const QUESTION_BANK = {
         "D": "一个输入为字符串，输出为字符串的函数"
       },
       "answer": "D",
-      "explanation": "在LangChain中自定义LLM（大语言模型）对象时，最基础的要求是提供一个能完成文 本输入→输出的核心函数"
+      "explanation": "在LangChain中自定义LLM（大语言模型）对象时，最基础的要求是提供一个能完成文 本输入→输出的核心函数",
+      "probability": 13
     },
     {
       "id": "Q216",
@@ -3396,7 +3608,8 @@ const QUESTION_BANK = {
         "D": "model=\"qwen-max\""
       },
       "answer": "A",
-      "explanation": "修改用户提问只需变更messages列表中user角色的content字段，其他配置无需改 动"
+      "explanation": "修改用户提问只需变更messages列表中user角色的content字段，其他配置无需改 动",
+      "probability": 7
     },
     {
       "id": "Q217",
@@ -3410,7 +3623,8 @@ const QUESTION_BANK = {
         "D": "包含所有文字信息的字符串"
       },
       "answer": "B",
-      "explanation": "在LlamaIndex中，SimpleDirectoryReader的作用是将知识文件（如PDF、TXT等）批 量解析为多个Document对象组成的列表"
+      "explanation": "在LlamaIndex中，SimpleDirectoryReader的作用是将知识文件（如PDF、TXT等）批 量解析为多个Document对象组成的列表",
+      "probability": 19
     },
     {
       "id": "Q218",
@@ -3424,7 +3638,8 @@ const QUESTION_BANK = {
         "D": "python messages=[ {\"role\":\"system\",\"content\":\"用户想咨询退货流程。\"} ]"
       },
       "answer": "A",
-      "explanation": "system角色用于设定模型的行为和身份"
+      "explanation": "system角色用于设定模型的行为和身份",
+      "probability": 14
     },
     {
       "id": "Q219",
@@ -3438,7 +3653,8 @@ const QUESTION_BANK = {
         "D": "提供加载持久化索引所需的上下文信息。"
       },
       "answer": "D",
-      "explanation": "StorageContext的作用是提供加载持久化索引所需的上下文信息"
+      "explanation": "StorageContext的作用是提供加载持久化索引所需的上下文信息",
+      "probability": 9
     },
     {
       "id": "Q220",
@@ -3452,7 +3668,8 @@ const QUESTION_BANK = {
         "D": "python importnumpyasnp defembed_text(text): returnnp.random.rand(100)#随机生成一个100维向量"
       },
       "answer": "A",
-      "explanation": "sentence-transformers库专为文本嵌入设计，预训练模型（如all-mpnet-base-v2） 生成的向量能捕捉语义信息，适合检索、聚类等任务"
+      "explanation": "sentence-transformers库专为文本嵌入设计，预训练模型（如all-mpnet-base-v2） 生成的向量能捕捉语义信息，适合检索、聚类等任务",
+      "probability": 9
     },
     {
       "id": "Q221",
@@ -3466,7 +3683,8 @@ const QUESTION_BANK = {
         "D": "plaintext ... 任务目标写一首关于春天的诗受众儿童输出格式四行诗"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q222",
@@ -3480,7 +3698,8 @@ const QUESTION_BANK = {
         "D": "faithfulness"
       },
       "answer": "C",
-      "explanation": "A/B/D仅评估局部环节，而C（answer_correctness）是唯一端到端衡量RAG最终输出 质量的指标。"
+      "explanation": "A/B/D仅评估局部环节，而C（answer_correctness）是唯一端到端衡量RAG最终输出 质量的指标。",
+      "probability": 19
     },
     {
       "id": "Q223",
@@ -3494,7 +3713,8 @@ const QUESTION_BANK = {
         "D": "词性匹配"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 17
     },
     {
       "id": "Q224",
@@ -3508,7 +3728,8 @@ const QUESTION_BANK = {
         "D": "定义了EMBED_MODEL与LLM_MODEL"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q225",
@@ -3522,7 +3743,8 @@ const QUESTION_BANK = {
         "D": "temperature=0.9,top_p=0.9"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q226",
@@ -3536,7 +3758,8 @@ const QUESTION_BANK = {
         "D": "信息量过大，难以理解"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q227",
@@ -3550,7 +3773,8 @@ const QUESTION_BANK = {
         "D": "python messages=[ {\"role\":\"user\",\"content\":\"我想订一张机票\"}, {\"role\":\"system\",\"content\":\"你是一个订票助手\"}, {\"role\":\"assistant\",\"content\":\"你好，请问你想去哪里？\"}"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 15
     },
     {
       "id": "Q228",
@@ -3564,7 +3788,8 @@ const QUESTION_BANK = {
         "D": "这篇文章写了什么？"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q229",
@@ -3578,7 +3803,8 @@ const QUESTION_BANK = {
         "D": "running_loss+=loss.item()*inputs.size(0)"
       },
       "answer": "C",
-      "explanation": "直接计算并打印准确率的代码片段"
+      "explanation": "直接计算并打印准确率的代码片段",
+      "probability": 14
     },
     {
       "id": "Q230",
@@ -3592,7 +3818,8 @@ const QUESTION_BANK = {
         "D": "source_node"
       },
       "answer": "B",
-      "explanation": "直接通过reason字段查看评分依据，其他字段主要用于数据溯源或结构存储"
+      "explanation": "直接通过reason字段查看评分依据，其他字段主要用于数据溯源或结构存储",
+      "probability": 19
     },
     {
       "id": "Q231",
@@ -3606,7 +3833,8 @@ const QUESTION_BANK = {
         "D": "降低召回文本段的中文含量"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q232",
@@ -3622,7 +3850,8 @@ const QUESTION_BANK = {
         "F": "创建新的Thread"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q233",
@@ -3636,7 +3865,8 @@ const QUESTION_BANK = {
         "D": "对于简单的文本替换操作，使用正则表达式而不是调用大模型API。"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q234",
@@ -3650,7 +3880,8 @@ const QUESTION_BANK = {
         "D": "index.storage_context.persist()"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q235",
@@ -3670,7 +3901,8 @@ const QUESTION_BANK = {
         "D",
         "E"
       ],
-      "explanation": "C无提示模板会导致输出不可控，质量波动大，完全依赖模型的默认行为，难以满足特 定需求。"
+      "explanation": "C无提示模板会导致输出不可控，质量波动大，完全依赖模型的默认行为，难以满足特 定需求。",
+      "probability": 30
     },
     {
       "id": "Q236",
@@ -3687,7 +3919,8 @@ const QUESTION_BANK = {
         "A",
         "B"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q237",
@@ -3705,7 +3938,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 53
     },
     {
       "id": "Q238",
@@ -3723,7 +3957,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q239",
@@ -3741,7 +3976,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q240",
@@ -3759,7 +3995,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q241",
@@ -3776,7 +4013,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "覆盖变体和语义理解结合能显著提升多语言合规检查效果"
+      "explanation": "覆盖变体和语义理解结合能显著提升多语言合规检查效果",
+      "probability": 34
     },
     {
       "id": "Q242",
@@ -3793,7 +4031,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "B提供结构化多样性引导，D增加适当随机性，两者结合可优化生成效果"
+      "explanation": "B提供结构化多样性引导，D增加适当随机性，两者结合可优化生成效果",
+      "probability": 13
     },
     {
       "id": "Q243",
@@ -3810,7 +4049,8 @@ const QUESTION_BANK = {
         "A",
         "D"
       ],
-      "explanation": "A适用于严格依赖知识库的场景，D作为兜底策略，两者均可减少幻觉。C可辅助提升 检索质量，但非必需；B完全错误"
+      "explanation": "A适用于严格依赖知识库的场景，D作为兜底策略，两者均可减少幻觉。C可辅助提升 检索质量，但非必需；B完全错误",
+      "probability": 19
     },
     {
       "id": "Q244",
@@ -3827,7 +4067,8 @@ const QUESTION_BANK = {
         "A",
         "D"
       ],
-      "explanation": "产品经理和客服主管是提示词设计的核心角色，分别从流程和内容层面保证机器人符合 业务需求。 其他角色（BC）更多是执行或技术支持，无需深度参与设计。"
+      "explanation": "产品经理和客服主管是提示词设计的核心角色，分别从流程和内容层面保证机器人符合 业务需求。 其他角色（BC）更多是执行或技术支持，无需深度参与设计。",
+      "probability": 30
     },
     {
       "id": "Q245",
@@ -3845,7 +4086,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "C是常见误区，但“数据质量>数据量"
+      "explanation": "C是常见误区，但“数据质量>数据量",
+      "probability": 29
     },
     {
       "id": "Q246",
@@ -3862,7 +4104,8 @@ const QUESTION_BANK = {
         "A",
         "C"
       ],
-      "explanation": "字段复杂，可追加示例邮件+对应JSON，增强模型理解。使用函数调用直接绑定JSON Schema，进一步标准化输出"
+      "explanation": "字段复杂，可追加示例邮件+对应JSON，增强模型理解。使用函数调用直接绑定JSON Schema，进一步标准化输出",
+      "probability": 13
     },
     {
       "id": "Q247",
@@ -3880,7 +4123,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "B错低temperature→稳定性↑，多样性↓高temperature→稳定性↓，多样性↑"
+      "explanation": "B错低temperature→稳定性↑，多样性↓高temperature→稳定性↓，多样性↑",
+      "probability": 13
     },
     {
       "id": "Q248",
@@ -3898,7 +4142,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "提升用户体验的核心是减少等待焦虑和增强交互透明性"
+      "explanation": "提升用户体验的核心是减少等待焦虑和增强交互透明性",
+      "probability": 13
     },
     {
       "id": "Q249",
@@ -3915,7 +4160,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "B和D准确描述了Loss/Costfunction的核心作用（误差度量与参数优化）"
+      "explanation": "B和D准确描述了Loss/Costfunction的核心作用（误差度量与参数优化）",
+      "probability": 13
     },
     {
       "id": "Q250",
@@ -3933,7 +4179,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "无需备案：仅限企业内部使用，不向公众开放，不符合“向境内公众提供”的备案条件"
+      "explanation": "无需备案：仅限企业内部使用，不向公众开放，不符合“向境内公众提供”的备案条件",
+      "probability": 34
     },
     {
       "id": "Q251",
@@ -3951,7 +4198,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q252",
@@ -3970,7 +4218,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q253",
@@ -3987,7 +4236,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 9
     },
     {
       "id": "Q254",
@@ -4005,7 +4255,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q255",
@@ -4022,7 +4273,8 @@ const QUESTION_BANK = {
         "A",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q256",
@@ -4039,7 +4291,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "A选项：通过文档名称建立标签，检索时结合标签（岗位名称）和向量混合检索，能精 准限定检索内容，避免其他岗位内容混入，有效。Btemperature参数控制生成的随机性，调 高它无法解决检索时内容混淆的根本问题，无效。C给二级标题拼接文档名称（岗位名称），使 段落带上明确岗位标识，检索时能准确区分，避免混淆，有效。DReRank仅对检索结果重新排 序，不解决内容混淆的根源，仍会包含其他岗位段落，无效。"
+      "explanation": "A选项：通过文档名称建立标签，检索时结合标签（岗位名称）和向量混合检索，能精 准限定检索内容，避免其他岗位内容混入，有效。Btemperature参数控制生成的随机性，调 高它无法解决检索时内容混淆的根本问题，无效。C给二级标题拼接文档名称（岗位名称），使 段落带上明确岗位标识，检索时能准确区分，避免混淆，有效。DReRank仅对检索结果重新排 序，不解决内容混淆的根源，仍会包含其他岗位段落，无效。",
+      "probability": 30
     },
     {
       "id": "Q257",
@@ -4057,7 +4310,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q258",
@@ -4074,7 +4328,8 @@ const QUESTION_BANK = {
         "A",
         "C"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 16
     },
     {
       "id": "Q259",
@@ -4091,7 +4346,8 @@ const QUESTION_BANK = {
         "A",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q260",
@@ -4108,7 +4364,8 @@ const QUESTION_BANK = {
         "A",
         "C"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q261",
@@ -4125,7 +4382,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q262",
@@ -4142,7 +4400,8 @@ const QUESTION_BANK = {
         "A",
         "C"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q263",
@@ -4160,7 +4419,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 53
     },
     {
       "id": "Q264",
@@ -4179,7 +4439,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q265",
@@ -4197,7 +4458,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 34
     },
     {
       "id": "Q266",
@@ -4211,7 +4473,8 @@ const QUESTION_BANK = {
         "D": "当模型检测到生成内容与输入主题无关时自动停止"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q267",
@@ -4225,7 +4488,8 @@ const QUESTION_BANK = {
         "D": "用物体分割小模型圈出识别区域，然后抠图输入给大模型检测状态"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 34
     },
     {
       "id": "Q268",
@@ -4239,7 +4503,8 @@ const QUESTION_BANK = {
         "D": "通过预付费（包年包月）方式创建GPU资源"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 34
     },
     {
       "id": "Q269",
@@ -4253,7 +4518,8 @@ const QUESTION_BANK = {
         "D": "提高模型批量任务的数量"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 34
     },
     {
       "id": "Q270",
@@ -4267,7 +4533,8 @@ const QUESTION_BANK = {
         "D": "将学习率降低至原来的10分之一"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 16
     },
     {
       "id": "Q271",
@@ -4281,7 +4548,8 @@ const QUESTION_BANK = {
         "D": "结合对话历史改写query，再进行检索"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q272",
@@ -4295,7 +4563,8 @@ const QUESTION_BANK = {
         "D": "欠拟合"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q273",
@@ -4309,7 +4578,8 @@ const QUESTION_BANK = {
         "D": "前端上传PDF至OSS，触发FC解析文本，FC调用百炼模型生成摘要，结果存入OSS并前 端下载"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q274",
@@ -4323,7 +4593,8 @@ const QUESTION_BANK = {
         "D": "使用多模态模型拦截图文混合违规内容，如qwen-v172b"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q275",
@@ -4337,7 +4608,8 @@ const QUESTION_BANK = {
         "D": "评测时只需关注最终回答的准确性，因为用户的满意度主要取决于答案是否正确。"
       },
       "answer": "C",
-      "explanation": "RAG是检索+生成的配合，评测必须同时关注两步，才能真正优化系统就像考试既要练 知识点，也要练答题技巧"
+      "explanation": "RAG是检索+生成的配合，评测必须同时关注两步，才能真正优化系统就像考试既要练 知识点，也要练答题技巧",
+      "probability": 19
     },
     {
       "id": "Q276",
@@ -4351,7 +4623,8 @@ const QUESTION_BANK = {
         "D": "为SummaryAgent提供更多训练数据，确保最终回答更加全面"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 53
     },
     {
       "id": "Q277",
@@ -4365,7 +4638,8 @@ const QUESTION_BANK = {
         "D": "要确保数据集准确、内容相关"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q278",
@@ -4379,7 +4653,8 @@ const QUESTION_BANK = {
         "D": "检索结果包含大量无关商品信息，影响用户体验。"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q279",
@@ -4393,7 +4668,8 @@ const QUESTION_BANK = {
         "D": "强制用户只提简单问题"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q280",
@@ -4407,7 +4683,8 @@ const QUESTION_BANK = {
         "D": "Markdown结构化切片"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q281",
@@ -4421,7 +4698,8 @@ const QUESTION_BANK = {
         "D": "使用完全相同的提示词"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q282",
@@ -4435,7 +4713,8 @@ const QUESTION_BANK = {
         "D": "在知识库检索前严格限制应用的数据访问权限，避免泄露公开信息"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q283",
@@ -4449,7 +4728,8 @@ const QUESTION_BANK = {
         "D": "默认检索100条切片，手动让用户筛选"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q284",
@@ -4463,7 +4743,8 @@ const QUESTION_BANK = {
         "D": "要求大模型面临陷阱时进行解答"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q285",
@@ -4477,7 +4758,8 @@ const QUESTION_BANK = {
         "D": "你是一个医疗客服。如果用户的请求不足以完成预约，请主动追问。"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q286",
@@ -4491,7 +4773,8 @@ const QUESTION_BANK = {
         "D": "可以采取流式输出，但是我要修改一下返回层面的代码，比如适配流式输出的数据格式，并 且将return改为yield"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q287",
@@ -4505,7 +4788,8 @@ const QUESTION_BANK = {
         "D": "HyDE（假想文档生成）"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q288",
@@ -4519,7 +4803,8 @@ const QUESTION_BANK = {
         "D": "由算法工程师进行编写"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q289",
@@ -4533,7 +4818,8 @@ const QUESTION_BANK = {
         "D": "问题改写（QuestionRewriting）"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q290",
@@ -4547,7 +4833,8 @@ const QUESTION_BANK = {
         "D": "调整模型的温度参数（Temperature）"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q291",
@@ -4561,7 +4848,8 @@ const QUESTION_BANK = {
         "D": "在检索时把txt文件原样拼给大模型"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q292",
@@ -4575,7 +4863,8 @@ const QUESTION_BANK = {
         "D": "工具函数的参数描述信息不足，未明确规定输入参数的具体格式，导致大模型生成调用参数 时出现偏差。"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q293",
@@ -4589,7 +4878,8 @@ const QUESTION_BANK = {
         "D": "请参考开源社区流行的编码风格，生成一份java代码"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 15
     },
     {
       "id": "Q294",
@@ -4603,7 +4893,8 @@ const QUESTION_BANK = {
         "D": "使用微调提高模型的逻辑推理能力"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q295",
@@ -4617,7 +4908,8 @@ const QUESTION_BANK = {
         "D": "增大模型温度让其自由生成"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q296",
@@ -4631,7 +4923,8 @@ const QUESTION_BANK = {
         "D": "调用支持上下文缓存（ContextCache）的模型减少重复请求的计算开销"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 34
     },
     {
       "id": "Q297",
@@ -4645,7 +4938,8 @@ const QUESTION_BANK = {
         "D": "提高API调用的速度"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q298",
@@ -4659,7 +4953,8 @@ const QUESTION_BANK = {
         "D": "参数更新幅度不足"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q299",
@@ -4673,7 +4968,8 @@ const QUESTION_BANK = {
         "D": "扩展上下文：添加背景“当前城市垃圾填埋占比超过60%”"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q300",
@@ -4687,7 +4983,8 @@ const QUESTION_BANK = {
         "D": "使用经过量化的模型"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q301",
@@ -4701,7 +4998,8 @@ const QUESTION_BANK = {
         "D": "在聊天界面显眼位置标注限制，不建议用户输入类似问题"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q302",
@@ -4715,7 +5013,8 @@ const QUESTION_BANK = {
         "D": "减少索引构建时间"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q303",
@@ -4729,7 +5028,8 @@ const QUESTION_BANK = {
         "D": "部署混合模型架构：大模型生成回答后，立即调用专用小模型进行合规性重写"
       },
       "answer": "B",
-      "explanation": "更可靠：结合内容安全服务（如专业的内容审核API），利用AI进行实时语义分析，而 非简单关键词匹配，能更准确检测和替换违规片段，保障合规性。不明显影响体验：流式输出 与实时扫描结合，响应几乎无延迟，用户看到的是即时处理后的内容，替换仅针对违规片段， 整体对话流畅自然。综合优势：相比其他选项，B在技术成熟度、效率和用户体验上更平衡， 适合大模型客服的高并发、实时交互场景。"
+      "explanation": "更可靠：结合内容安全服务（如专业的内容审核API），利用AI进行实时语义分析，而 非简单关键词匹配，能更准确检测和替换违规片段，保障合规性。不明显影响体验：流式输出 与实时扫描结合，响应几乎无延迟，用户看到的是即时处理后的内容，替换仅针对违规片段， 整体对话流畅自然。综合优势：相比其他选项，B在技术成熟度、效率和用户体验上更平衡， 适合大模型客服的高并发、实时交互场景。",
+      "probability": 34
     },
     {
       "id": "Q304",
@@ -4743,7 +5043,8 @@ const QUESTION_BANK = {
         "D": "使用支持联网搜索的大模型API完成此任务"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q305",
@@ -4757,7 +5058,8 @@ const QUESTION_BANK = {
         "D": "能够修改一些大模型API不直接提供的参数，使得开发Agent的过程更灵活"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q306",
@@ -4771,7 +5073,8 @@ const QUESTION_BANK = {
         "D": "基于工作流，按照常用顺序（交通->景点->住宿），依次调用对应服务API->基于模板 汇总子Agent执行结果"
       },
       "answer": "C",
-      "explanation": "旅途规划要同时处理交通、景点、住宿，多Agent系统能拆分任务并行执行提高效率， 而C里汇总Agent还能校验冲突（像酒店和交通时间冲突这类实际问题），单Agent或没冲 突校验的多Agent（A等）搞不定复杂约束。"
+      "explanation": "旅途规划要同时处理交通、景点、住宿，多Agent系统能拆分任务并行执行提高效率， 而C里汇总Agent还能校验冲突（像酒店和交通时间冲突这类实际问题），单Agent或没冲 突校验的多Agent（A等）搞不定复杂约束。",
+      "probability": 7
     },
     {
       "id": "Q307",
@@ -4785,7 +5088,8 @@ const QUESTION_BANK = {
         "D": "在Prompt中写死可预约教室列表"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q308",
@@ -4799,7 +5103,8 @@ const QUESTION_BANK = {
         "D": "检查大模型是否能根据知识内容对问题进行正确解答"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q309",
@@ -4813,7 +5118,8 @@ const QUESTION_BANK = {
         "D": "将APIKey保存在公开的配置文件中"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q310",
@@ -4827,7 +5133,8 @@ const QUESTION_BANK = {
         "D": "请法律专家参与构建评测集"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q311",
@@ -4841,7 +5148,8 @@ const QUESTION_BANK = {
         "D": "便于计算语义相似度"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q312",
@@ -4855,7 +5163,8 @@ const QUESTION_BANK = {
         "D": "使用长期记忆功能，让智能体不断积累用户偏好信息"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 34
     },
     {
       "id": "Q313",
@@ -4869,7 +5178,8 @@ const QUESTION_BANK = {
         "D": "采用提示词工程技术，通过优化语言描述指导模型从文本中推断出应操作的UI元素。"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 53
     },
     {
       "id": "Q314",
@@ -4883,7 +5193,8 @@ const QUESTION_BANK = {
         "D": "微调轮次过少可能导致模型欠拟合"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q315",
@@ -4897,7 +5208,8 @@ const QUESTION_BANK = {
         "D": "尝试使用LlamaIndex外的其它RAG开发框架"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q316",
@@ -4911,7 +5223,8 @@ const QUESTION_BANK = {
         "D": "为文学和技术翻译分别设计专用提示词模板"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q317",
@@ -4925,7 +5238,8 @@ const QUESTION_BANK = {
         "D": "大模型出现故障"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q318",
@@ -4939,7 +5253,8 @@ const QUESTION_BANK = {
         "D": "更换主参微调+减少batch_size"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q319",
@@ -4953,7 +5268,8 @@ const QUESTION_BANK = {
         "D": "检索时，将用户的问题输入向量数据库进行检索；"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q320",
@@ -4967,7 +5283,8 @@ const QUESTION_BANK = {
         "D": "训练成功，停止训练并进一步评估其效果"
       },
       "answer": "D",
-      "explanation": "训练损失和验证损失均收敛到较低水平是模型训练成功的标志"
+      "explanation": "训练损失和验证损失均收敛到较低水平是模型训练成功的标志",
+      "probability": 31
     },
     {
       "id": "Q321",
@@ -4981,7 +5298,8 @@ const QUESTION_BANK = {
         "D": "大模型对中文支持度不足"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q322",
@@ -4995,7 +5313,8 @@ const QUESTION_BANK = {
         "D": "训练成功"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q323",
@@ -5009,7 +5328,8 @@ const QUESTION_BANK = {
         "D": "同等数据量下（1000条），LoRA微调效果接近全参微调"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q324",
@@ -5023,7 +5343,8 @@ const QUESTION_BANK = {
         "D": "用户输入错误导致大模型误调用该工具"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q325",
@@ -5037,7 +5358,8 @@ const QUESTION_BANK = {
         "D": "减少服务器计算资源消耗"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q326",
@@ -5051,7 +5373,8 @@ const QUESTION_BANK = {
         "D": "为知识库文档添加数字签名"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q327",
@@ -5065,7 +5388,8 @@ const QUESTION_BANK = {
         "D": "温度参数越高，越适合撰写技术报告、代码等有较高确定性需求的场景"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q328",
@@ -5079,7 +5403,8 @@ const QUESTION_BANK = {
         "D": "数据分布剧烈漂移的任务"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q329",
@@ -5093,7 +5418,8 @@ const QUESTION_BANK = {
         "D": "你是一个订票客服人员。对于订票问题，如果信息不完整，请向用户主动询问订票相关信息。 如果是其他票务问题，则正常回答。"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q330",
@@ -5107,7 +5433,8 @@ const QUESTION_BANK = {
         "D": "通过动作捕捉复现预设舞蹈动作"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q331",
@@ -5121,7 +5448,8 @@ const QUESTION_BANK = {
         "D": "说明训练策略有效，应继续训练"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q332",
@@ -5135,7 +5463,8 @@ const QUESTION_BANK = {
         "D": "优化文档切分策略"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q333",
@@ -5154,7 +5483,8 @@ const QUESTION_BANK = {
         "B",
         "E"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q334",
@@ -5171,7 +5501,8 @@ const QUESTION_BANK = {
         "A",
         "C"
       ],
-      "explanation": "检索阶段的核心是召回率（recall）和精准率（precision），因此选A和C。其他指标 涉及生成答案的质量，属于后续阶段。"
+      "explanation": "检索阶段的核心是召回率（recall）和精准率（precision），因此选A和C。其他指标 涉及生成答案的质量，属于后续阶段。",
+      "probability": 19
     },
     {
       "id": "Q335",
@@ -5193,7 +5524,8 @@ const QUESTION_BANK = {
         "E",
         "F"
       ],
-      "explanation": "FFmpeg仅用于音视频处理，不能训练AI模型（需使用PyTorch、TensorFlow等框架）"
+      "explanation": "FFmpeg仅用于音视频处理，不能训练AI模型（需使用PyTorch、TensorFlow等框架）",
+      "probability": 13
     },
     {
       "id": "Q336",
@@ -5210,7 +5542,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "A和C属于其他RAGAS指标（如faithfulness和answer_relevancy）"
+      "explanation": "A和C属于其他RAGAS指标（如faithfulness和answer_relevancy）",
+      "probability": 19
     },
     {
       "id": "Q337",
@@ -5229,7 +5562,8 @@ const QUESTION_BANK = {
         "C",
         "E"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q338",
@@ -5250,7 +5584,8 @@ const QUESTION_BANK = {
         "E",
         "F"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 34
     },
     {
       "id": "Q339",
@@ -5269,7 +5604,8 @@ const QUESTION_BANK = {
         "A",
         "E"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q340",
@@ -5289,7 +5625,8 @@ const QUESTION_BANK = {
         "D",
         "E"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 17
     },
     {
       "id": "Q341",
@@ -5310,7 +5647,8 @@ const QUESTION_BANK = {
         "E",
         "F"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q342",
@@ -5329,7 +5667,8 @@ const QUESTION_BANK = {
         "B",
         "E"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q343",
@@ -5346,7 +5685,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "流式输出的核心优势是优化用户体验和提升网络稳定性，而非直接影响模型性能。适 用于实时交互场景如聊天机器人、长文本生成，但需结合前端优化以最大化用户体验提升。"
+      "explanation": "流式输出的核心优势是优化用户体验和提升网络稳定性，而非直接影响模型性能。适 用于实时交互场景如聊天机器人、长文本生成，但需结合前端优化以最大化用户体验提升。",
+      "probability": 13
     },
     {
       "id": "Q344",
@@ -5365,7 +5705,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q345",
@@ -5384,7 +5725,8 @@ const QUESTION_BANK = {
         "A",
         "B"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q346",
@@ -5405,7 +5747,8 @@ const QUESTION_BANK = {
         "E",
         "F"
       ],
-      "explanation": "直接控制训练过程（如学习率、批次大小），可通过调整影响模型性能（如epoch数）"
+      "explanation": "直接控制训练过程（如学习率、批次大小），可通过调整影响模型性能（如epoch数）",
+      "probability": 16
     },
     {
       "id": "Q347",
@@ -5425,7 +5768,8 @@ const QUESTION_BANK = {
         "C",
         "E"
       ],
-      "explanation": "D简单任务无实时交互需求，流式反而增加复杂度"
+      "explanation": "D简单任务无实时交互需求，流式反而增加复杂度",
+      "probability": 13
     },
     {
       "id": "Q348",
@@ -5446,7 +5790,8 @@ const QUESTION_BANK = {
         "E",
         "F"
       ],
-      "explanation": "核心措施：人员培训（A）+应急机制（B）+持续更新（E）+安全测试（F） 需避免：盲目依赖开源（C）或云端（D），需结合业务需求定制方案"
+      "explanation": "核心措施：人员培训（A）+应急机制（B）+持续更新（E）+安全测试（F） 需避免：盲目依赖开源（C）或云端（D），需结合业务需求定制方案",
+      "probability": 34
     },
     {
       "id": "Q349",
@@ -5466,7 +5811,8 @@ const QUESTION_BANK = {
         "B",
         "E"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q350",
@@ -5480,7 +5826,8 @@ const QUESTION_BANK = {
         "D": "把这段文字变成PPT"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q351",
@@ -5494,7 +5841,8 @@ const QUESTION_BANK = {
         "D": "动态学习率策略"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q352",
@@ -5508,7 +5856,8 @@ const QUESTION_BANK = {
         "D": "创建一个默认的StorageContext对象，并忽略PERSIST_DIR。"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q353",
@@ -5522,7 +5871,8 @@ const QUESTION_BANK = {
         "D": "按字符分割"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q354",
@@ -5536,7 +5886,8 @@ const QUESTION_BANK = {
         "D": "根据不同的子任务需求，选择不同的模型类型和参数。"
       },
       "answer": "A",
-      "explanation": "Multi-Agent的核心原则,任务分解将复杂问题拆解为子任务。专业化分配为每个子任务 选择最优工具（规则引擎、小模型、大模型等）,协同流程：通过管道（Pipeline）或消息传递 整合结果。"
+      "explanation": "Multi-Agent的核心原则,任务分解将复杂问题拆解为子任务。专业化分配为每个子任务 选择最优工具（规则引擎、小模型、大模型等）,协同流程：通过管道（Pipeline）或消息传递 整合结果。",
+      "probability": 27
     },
     {
       "id": "Q355",
@@ -5552,7 +5903,8 @@ const QUESTION_BANK = {
         "F": "基于固定token长度切片"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q356",
@@ -5566,7 +5918,8 @@ const QUESTION_BANK = {
         "D": "loss=F.nll_loss(output,target,reduction='sum')"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 16
     },
     {
       "id": "Q357",
@@ -5580,7 +5933,8 @@ const QUESTION_BANK = {
         "D": "sklearn.metrics.precision_score"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q358",
@@ -5594,7 +5948,8 @@ const QUESTION_BANK = {
         "D": "受众（Audience）"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q359",
@@ -5608,7 +5963,8 @@ const QUESTION_BANK = {
         "D": "损失函数"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q360",
@@ -5622,7 +5978,8 @@ const QUESTION_BANK = {
         "D": "计算两组数据之间的皮尔逊相关系数"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q361",
@@ -5636,7 +5993,8 @@ const QUESTION_BANK = {
         "D": "存储和管理大量的文本数据，并提供全文检索功能。"
       },
       "answer": "C",
-      "explanation": "向量数据库的核心价值在于高效处理向量相似性搜索，而非结构化数据或传统检索"
+      "explanation": "向量数据库的核心价值在于高效处理向量相似性搜索，而非结构化数据或传统检索",
+      "probability": 19
     },
     {
       "id": "Q362",
@@ -5650,7 +6008,8 @@ const QUESTION_BANK = {
         "D": "字典树"
       },
       "answer": "D",
-      "explanation": "字典树：匹配关键词“cat”只需依次比较c→a→t，路径唯一，数组/链表：需遍历所 有关键词逐个比较"
+      "explanation": "字典树：匹配关键词“cat”只需依次比较c→a→t，路径唯一，数组/链表：需遍历所 有关键词逐个比较",
+      "probability": 13
     },
     {
       "id": "Q363",
@@ -5664,7 +6023,8 @@ const QUESTION_BANK = {
         "D": "结合输出格式（OutputFormat）和样例（Sample）"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q364",
@@ -5678,7 +6038,8 @@ const QUESTION_BANK = {
         "D": "可以分步优化，提高整体处理效率和成本。"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q365",
@@ -5692,7 +6053,8 @@ const QUESTION_BANK = {
         "D": "Document对象-index-Node对象-query_engine"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 9
     },
     {
       "id": "Q366",
@@ -5706,7 +6068,8 @@ const QUESTION_BANK = {
         "D": "假设输入的文档为document，在函数开头添加"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q367",
@@ -5720,7 +6083,8 @@ const QUESTION_BANK = {
         "D": "使用专门的库，例如Python的PyPDF2和python-docx。"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 9
     },
     {
       "id": "Q368",
@@ -5736,7 +6100,8 @@ const QUESTION_BANK = {
         "F": "输入数据可以通过模糊的引导词来定义其作用"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q369",
@@ -5750,7 +6115,8 @@ const QUESTION_BANK = {
         "D": "具有很强的数据泛化能力，可以有效识别新的变种。"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 34
     },
     {
       "id": "Q370",
@@ -5764,7 +6130,8 @@ const QUESTION_BANK = {
         "D": "将答案返回给用户之前检查"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 34
     },
     {
       "id": "Q371",
@@ -5780,7 +6147,8 @@ const QUESTION_BANK = {
         "F": "角色"
       },
       "answer": "F",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q372",
@@ -5794,7 +6162,8 @@ const QUESTION_BANK = {
         "D": "RAG是一种将大语言模型与外部知识库结合，提升模型问答能力的技术"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q373",
@@ -5808,7 +6177,8 @@ const QUESTION_BANK = {
         "D": "completion.choices.content"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q374",
@@ -5823,7 +6193,8 @@ const QUESTION_BANK = {
         "E": "用一句话概括以下文字："
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q375",
@@ -5837,7 +6208,8 @@ const QUESTION_BANK = {
         "D": "将用户输入内容作为base_url参数的值传入"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 17
     },
     {
       "id": "Q376",
@@ -5851,7 +6223,8 @@ const QUESTION_BANK = {
         "D": "进行后处理，如相似度阈值、rerank等"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q377",
@@ -5865,7 +6238,8 @@ const QUESTION_BANK = {
         "D": "让大模型自动修改内容"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q378",
@@ -5879,7 +6253,8 @@ const QUESTION_BANK = {
         "D": "ifresponse.status_code==HTTPStatus.NOT_FOUND:"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q379",
@@ -5893,7 +6268,8 @@ const QUESTION_BANK = {
         "D": "反向传播"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q380",
@@ -5909,7 +6285,8 @@ const QUESTION_BANK = {
         "F": "验证API调用的返回状态码是否为200"
       },
       "answer": "F",
-      "explanation": "示例代码中的verify_status_code函数通过检查响应对象的status_code属性，判断 API调用是否成功（HTTP状态码200表示成功）。若状态码不为200，则打印错误信息并终止 程序"
+      "explanation": "示例代码中的verify_status_code函数通过检查响应对象的status_code属性，判断 API调用是否成功（HTTP状态码200表示成功）。若状态码不为200，则打印错误信息并终止 程序",
+      "probability": 7
     },
     {
       "id": "Q381",
@@ -5923,7 +6300,8 @@ const QUESTION_BANK = {
         "D": "正则化系数"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q382",
@@ -5937,7 +6315,8 @@ const QUESTION_BANK = {
         "D": "存储在内存中作为一系列向量嵌入"
       },
       "answer": "D",
-      "explanation": "LlamaIndex默认使用内存存储向量嵌入，其他存储方式需主动配置"
+      "explanation": "LlamaIndex默认使用内存存储向量嵌入，其他存储方式需主动配置",
+      "probability": 19
     },
     {
       "id": "Q383",
@@ -5951,7 +6330,8 @@ const QUESTION_BANK = {
         "D": "python pythonprint(completion.choices[0].message.content)"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 17
     },
     {
       "id": "Q384",
@@ -5965,7 +6345,8 @@ const QUESTION_BANK = {
         "D": "微调是在预训练模型基础上进行的调整优化"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q385",
@@ -5979,7 +6360,8 @@ const QUESTION_BANK = {
         "D": "plaintext -- ##Title Content"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q386",
@@ -5993,7 +6375,8 @@ const QUESTION_BANK = {
         "D": "检测一组销售数据中的异常值"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q387",
@@ -6007,7 +6390,8 @@ const QUESTION_BANK = {
         "D": "文本向量化"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q388",
@@ -6021,7 +6405,8 @@ const QUESTION_BANK = {
         "D": "system"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q389",
@@ -6035,7 +6420,8 @@ const QUESTION_BANK = {
         "D": "对预训练模型的所有参数进行随机初始化"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q390",
@@ -6049,7 +6435,8 @@ const QUESTION_BANK = {
         "D": "{\"role\":\"system\",\"content\":\"你是一个初级程序员，正在学习代码审查。\"}"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 15
     },
     {
       "id": "Q391",
@@ -6063,7 +6450,8 @@ const QUESTION_BANK = {
         "D": "seed"
       },
       "answer": "D",
-      "explanation": "A（stream）主要用于控制大模型是否以流式传输的方式返回结果，也就是能否边生 成内容边返回给用户，和让模型对于同一提示返回相同结果并无关联。B（max_token）是用 来限定模型生成文本时的最大token数量，主要影响生成文本的长度，而非生成结果的一致 性。C（api_key）是应用程序访问大模型API的密钥，起到身份验证和授权访问的作用， 和生成结果是否相同没有直接联系。D（seed）在大模型相关操作中，seed（种子）参数就像 一个随机数生成器的起始值。当设置固定的seed值时，模型的随机生成过程就被固定下来， 对于相同的提示词，能够最大程度保证每次生成结果的一致性"
+      "explanation": "A（stream）主要用于控制大模型是否以流式传输的方式返回结果，也就是能否边生 成内容边返回给用户，和让模型对于同一提示返回相同结果并无关联。B（max_token）是用 来限定模型生成文本时的最大token数量，主要影响生成文本的长度，而非生成结果的一致 性。C（api_key）是应用程序访问大模型API的密钥，起到身份验证和授权访问的作用， 和生成结果是否相同没有直接联系。D（seed）在大模型相关操作中，seed（种子）参数就像 一个随机数生成器的起始值。当设置固定的seed值时，模型的随机生成过程就被固定下来， 对于相同的提示词，能够最大程度保证每次生成结果的一致性",
+      "probability": 15
     },
     {
       "id": "Q392",
@@ -6077,7 +6465,8 @@ const QUESTION_BANK = {
         "D": "对用户query重复检索3次后返回结果"
       },
       "answer": "C",
-      "explanation": "A：增加召回片段数量，就像找东西时扩大寻找范围，但没考虑员工所在部门，还是会 混进其他部门的信息，解决不了问题。B：减少召回片段数量，只是找得少了，但没针对部门 调整，仍可能找错部门，没用。C：结合员工部门信息改写查询内容。比如员工A在销售部， 就把查询变成“销售部法务接口人”，这样就能精准找到自己部门的接口人，直接解决总返回 其他部门信息的问题。D：对用户查询重复检索3次。每次查的内容都一样，不调整部门信息， 还是会返回其他部门的结果。"
+      "explanation": "A：增加召回片段数量，就像找东西时扩大寻找范围，但没考虑员工所在部门，还是会 混进其他部门的信息，解决不了问题。B：减少召回片段数量，只是找得少了，但没针对部门 调整，仍可能找错部门，没用。C：结合员工部门信息改写查询内容。比如员工A在销售部， 就把查询变成“销售部法务接口人”，这样就能精准找到自己部门的接口人，直接解决总返回 其他部门信息的问题。D：对用户查询重复检索3次。每次查的内容都一样，不调整部门信息， 还是会返回其他部门的结果。",
+      "probability": 13
     },
     {
       "id": "Q393",
@@ -6091,7 +6480,8 @@ const QUESTION_BANK = {
         "D": "更换embedding模型"
       },
       "answer": "D",
-      "explanation": "A并发量影响响应速度（处理请求的快慢），与能否召回更多内容无关，不能解决召回率 低的问题。B提高相似度阈值，意味着匹配要求更严格（需更高相似度才召回），会让召回的内 容更少，原本召回率就低，这样做会更差。C题目明确知识库内容已充足，增加文档无法解决“检 索不到”的问题。Dembedding模型负责将文本转为向量，不同模型生成的向量质量不同。若 原模型生成的向量不利于检索，更换模型可能提升匹配效果，从而提高召回率。"
+      "explanation": "A并发量影响响应速度（处理请求的快慢），与能否召回更多内容无关，不能解决召回率 低的问题。B提高相似度阈值，意味着匹配要求更严格（需更高相似度才召回），会让召回的内 容更少，原本召回率就低，这样做会更差。C题目明确知识库内容已充足，增加文档无法解决“检 索不到”的问题。Dembedding模型负责将文本转为向量，不同模型生成的向量质量不同。若 原模型生成的向量不利于检索，更换模型可能提升匹配效果，从而提高召回率。",
+      "probability": 19
     },
     {
       "id": "Q394",
@@ -6105,7 +6495,8 @@ const QUESTION_BANK = {
         "D": "api_key 此参数用于限制生成内容的最大token数量，决定了生成内容的长度，不影响多样性。D.这 是应用程序访问模型接口的密钥，用于身份验证和授权，与生成内容的特性毫无关联。"
       },
       "answer": "A",
-      "explanation": "A.在大模型中它是控制生成随机性的参数，温度值越高，生成内容的随机性越大，多样 性就越强；温度值越低，生成内容越保守，重复度可能越高。所以它能控制生成内容的多样性。"
+      "explanation": "A.在大模型中它是控制生成随机性的参数，温度值越高，生成内容的随机性越大，多样 性就越强；温度值越低，生成内容越保守，重复度可能越高。所以它能控制生成内容的多样性。",
+      "probability": 7
     },
     {
       "id": "Q395",
@@ -6123,7 +6514,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "A按语义切片，能确保相邻且语义相关的内容不被拆分，保持上下文完整。B调大切片 覆盖范围，可将相邻段落纳入同一切片，避免拆分导致的上下文缺失。C滑动窗口生成重叠切 片，使相邻段落内容在重叠区域保留，减少拆分影响。Dtemperature控制生成随机性，与切 片连贯性无关，无法解决上下文问题。"
+      "explanation": "A按语义切片，能确保相邻且语义相关的内容不被拆分，保持上下文完整。B调大切片 覆盖范围，可将相邻段落纳入同一切片，避免拆分导致的上下文缺失。C滑动窗口生成重叠切 片，使相邻段落内容在重叠区域保留，减少拆分影响。Dtemperature控制生成随机性，与切 片连贯性无关，无法解决上下文问题。",
+      "probability": 19
     },
     {
       "id": "Q396",
@@ -6141,7 +6533,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "A增加训练数据量，能让模型学习更多特征，改善欠拟合。B增加迭代次数（epoch）， 使模型对训练数据学习更充分，有助于解决欠拟合。C增加lora_rank值，提升LORA微调的 复杂度，让模型能学习更复杂模式，改善欠拟合。D学习率过大可能导致跳过最优解，欠拟合 时提高学习率无法解决模型“没学好”的问题。"
+      "explanation": "A增加训练数据量，能让模型学习更多特征，改善欠拟合。B增加迭代次数（epoch）， 使模型对训练数据学习更充分，有助于解决欠拟合。C增加lora_rank值，提升LORA微调的 复杂度，让模型能学习更复杂模式，改善欠拟合。D学习率过大可能导致跳过最优解，欠拟合 时提高学习率无法解决模型“没学好”的问题。",
+      "probability": 7
     },
     {
       "id": "Q397",
@@ -6155,7 +6548,8 @@ const QUESTION_BANK = {
         "D": "检索结果不准确，丢失“百炼X1手机”这一历史对话信息"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q398",
@@ -6169,7 +6563,8 @@ const QUESTION_BANK = {
         "D": "在大模型回答后再次让用户手动删除"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q399",
@@ -6183,7 +6578,8 @@ const QUESTION_BANK = {
         "D": "大模型计算资源不足"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q400",
@@ -6197,7 +6593,8 @@ const QUESTION_BANK = {
         "D": "为AI生成内容申请知识产权保护"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 34
     },
     {
       "id": "Q401",
@@ -6211,7 +6608,8 @@ const QUESTION_BANK = {
         "D": "只有生成步骤"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q402",
@@ -6225,7 +6623,8 @@ const QUESTION_BANK = {
         "D": "直接提问：“请优先将NSC翻译为神经干细胞”"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q403",
@@ -6239,7 +6638,8 @@ const QUESTION_BANK = {
         "D": "前端工程师。只有前端工程师更理解用户的交互逻辑，是最懂用户需要的群体。"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q404",
@@ -6253,7 +6653,8 @@ const QUESTION_BANK = {
         "D": "由大模型来判断哪个文本段最相关"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q405",
@@ -6267,7 +6668,8 @@ const QUESTION_BANK = {
         "D": "根据问题类型（人事类/技术类）自动选择对应模板"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q406",
@@ -6281,7 +6683,8 @@ const QUESTION_BANK = {
         "D": "补充新闻稿中的发布会日期、会场地址和与会者人数"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q407",
@@ -6295,7 +6698,8 @@ const QUESTION_BANK = {
         "D": "使用单一的问题模板"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q408",
@@ -6312,7 +6716,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q409",
@@ -6329,7 +6734,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q410",
@@ -6346,7 +6752,8 @@ const QUESTION_BANK = {
         "A",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q411",
@@ -6363,7 +6770,8 @@ const QUESTION_BANK = {
         "A",
         "C"
       ],
-      "explanation": "B.题干问题在于相关信息未被召回，而非生成阶段回答内容不好。优化生成阶段提示词 模板主要影响的是生成答案的内容和格式，对解决信息召回排名问题帮助不大，所以该措施不 合适。"
+      "explanation": "B.题干问题在于相关信息未被召回，而非生成阶段回答内容不好。优化生成阶段提示词 模板主要影响的是生成答案的内容和格式，对解决信息召回排名问题帮助不大，所以该措施不 合适。",
+      "probability": 19
     },
     {
       "id": "Q412",
@@ -6377,7 +6785,8 @@ const QUESTION_BANK = {
         "D": "不处理，直接使用返回结果。"
       },
       "answer": "B",
-      "explanation": "直接应对了模型输出不可控所带来的运行时错误，是最贴近问题处理的机制"
+      "explanation": "直接应对了模型输出不可控所带来的运行时错误，是最贴近问题处理的机制",
+      "probability": 13
     },
     {
       "id": "Q413",
@@ -6391,7 +6800,8 @@ const QUESTION_BANK = {
         "D": "python completion=client.chat.Completions.create( model=\"qwen-max\", messages=[{\"role\":\"user\",\"content\":\"你好\"}])"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q414",
@@ -6405,7 +6815,8 @@ const QUESTION_BANK = {
         "D": "生成结果更加多样化。"
       },
       "answer": "B",
-      "explanation": "top_p是一种文本生成中的采样策略。它通过限制模型只从累计概率达到p的最小词集 合中进行采样，从而控制生成结果的多样性和质量。当top_p较小时（例如0.1），表示模型 只会从极少数高概率的词中选择下一个词。当top_p较大时，模型可以考虑更多的候选词，包 括低概率但可能更有创意或多样性的词。"
+      "explanation": "top_p是一种文本生成中的采样策略。它通过限制模型只从累计概率达到p的最小词集 合中进行采样，从而控制生成结果的多样性和质量。当top_p较小时（例如0.1），表示模型 只会从极少数高概率的词中选择下一个词。当top_p较大时，模型可以考虑更多的候选词，包 括低概率但可能更有创意或多样性的词。",
+      "probability": 13
     },
     {
       "id": "Q415",
@@ -6419,7 +6830,8 @@ const QUESTION_BANK = {
         "D": "使得有关Llamalndex的后续步骤中无需再次指定LLM与embed_model"
       },
       "answer": "D",
-      "explanation": "A-虽然确实定义了这两个模型，但不是主要目的 B-嵌入模型不会直接参与LLM生成过程 C-代码中没有涉及流式输出的设置"
+      "explanation": "A-虽然确实定义了这两个模型，但不是主要目的 B-嵌入模型不会直接参与LLM生成过程 C-代码中没有涉及流式输出的设置",
+      "probability": 7
     },
     {
       "id": "Q416",
@@ -6433,7 +6845,8 @@ const QUESTION_BANK = {
         "D": "更新智能体"
       },
       "answer": "A",
-      "explanation": "此代码用于根据ID检索已有的智能体，而非创建、删除或更新"
+      "explanation": "此代码用于根据ID检索已有的智能体，而非创建、删除或更新",
+      "probability": 7
     },
     {
       "id": "Q417",
@@ -6447,7 +6860,8 @@ const QUESTION_BANK = {
         "D": "增加文档切片的粒度(例如将段落切成更小的片段）"
       },
       "answer": "C",
-      "explanation": "构建索引是直接优化检索效率的核心技术，其他选项或无关（B）、或可能降低效率（A）， 而D的效果更依赖于具体场景。"
+      "explanation": "构建索引是直接优化检索效率的核心技术，其他选项或无关（B）、或可能降低效率（A）， 而D的效果更依赖于具体场景。",
+      "probability": 19
     },
     {
       "id": "Q418",
@@ -6461,7 +6875,8 @@ const QUESTION_BANK = {
         "D": "文本翻译"
       },
       "answer": "B",
-      "explanation": "若代码为re.sub(r'\\W+','',text)，则会直接删除非单词字符（不留空格），但题目 中替换为空格，仍属于去噪范畴。"
+      "explanation": "若代码为re.sub(r'\\W+','',text)，则会直接删除非单词字符（不留空格），但题目 中替换为空格，仍属于去噪范畴。",
+      "probability": 7
     },
     {
       "id": "Q419",
@@ -6475,7 +6890,8 @@ const QUESTION_BANK = {
         "D": "文本摘要"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 31
     },
     {
       "id": "Q420",
@@ -6495,7 +6911,8 @@ const QUESTION_BANK = {
         "D",
         "F"
       ],
-      "explanation": "微调的三大核心优势数据效率：少量标注数据即可适配任务（C）；领域精准性：提升专 业领域表现（D）；训练速度：复用预训练知识，加速收敛（F）。"
+      "explanation": "微调的三大核心优势数据效率：少量标注数据即可适配任务（C）；领域精准性：提升专 业领域表现（D）；训练速度：复用预训练知识，加速收敛（F）。",
+      "probability": 31
     },
     {
       "id": "Q421",
@@ -6515,7 +6932,8 @@ const QUESTION_BANK = {
         "B",
         "F"
       ],
-      "explanation": "不依赖训练集指标（如C、E），因其无法反映泛化能力。 验证准确率提高（D）是积极信号，不应触发早停。"
+      "explanation": "不依赖训练集指标（如C、E），因其无法反映泛化能力。 验证准确率提高（D）是积极信号，不应触发早停。",
+      "probability": 13
     },
     {
       "id": "Q422",
@@ -6535,7 +6953,8 @@ const QUESTION_BANK = {
         "E",
         "F"
       ],
-      "explanation": "A（难以实现）：实际上，基于字符的切片相对简单直接，并不特别难以实现。C（需要 大量的存储空间）：基于字符的切片本身不会直接导致存储需求增加；存储需求更多取决于原始 数据量和编码方式。D（计算复杂度高）：基于字符的切片计算上并不复杂，其算法通常比基于 语法或语义的分割要简单得多"
+      "explanation": "A（难以实现）：实际上，基于字符的切片相对简单直接，并不特别难以实现。C（需要 大量的存储空间）：基于字符的切片本身不会直接导致存储需求增加；存储需求更多取决于原始 数据量和编码方式。D（计算复杂度高）：基于字符的切片计算上并不复杂，其算法通常比基于 语法或语义的分割要简单得多",
+      "probability": 19
     },
     {
       "id": "Q423",
@@ -6554,7 +6973,8 @@ const QUESTION_BANK = {
         "A",
         "F"
       ],
-      "explanation": "上下文(Context)指的是提供背景信息或情境，以帮助模型更好地理解用户的需求或意 思"
+      "explanation": "上下文(Context)指的是提供背景信息或情境，以帮助模型更好地理解用户的需求或意 思",
+      "probability": 30
     },
     {
       "id": "Q424",
@@ -6572,7 +6992,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "ABD这些步骤涵盖了从定义新prompt到将其应用于系统中的全过程,而选项C涉及到了 直接修改框架源码的做法，这不是推荐。"
+      "explanation": "ABD这些步骤涵盖了从定义新prompt到将其应用于系统中的全过程,而选项C涉及到了 直接修改框架源码的做法，这不是推荐。",
+      "probability": 30
     },
     {
       "id": "Q425",
@@ -6591,7 +7012,8 @@ const QUESTION_BANK = {
         "D",
         "E"
       ],
-      "explanation": "create（D）、retrieve（C，获取单个消息）、list（F）覆盖了消息的增、查（单条/列 表）操作，是Message类的核心方法。update（A）和modify（E）因功能重叠，通常选其一， 但若题目设计允许两者并存，则需更多上下文。"
+      "explanation": "create（D）、retrieve（C，获取单个消息）、list（F）覆盖了消息的增、查（单条/列 表）操作，是Message类的核心方法。update（A）和modify（E）因功能重叠，通常选其一， 但若题目设计允许两者并存，则需更多上下文。",
+      "probability": 13
     },
     {
       "id": "Q426",
@@ -6608,7 +7030,8 @@ const QUESTION_BANK = {
         "A",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q427",
@@ -6630,7 +7053,8 @@ const QUESTION_BANK = {
         "E",
         "F"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q428",
@@ -6644,7 +7068,8 @@ const QUESTION_BANK = {
         "D": "对输入文本进行分词（Tokenize）"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q429",
@@ -6658,7 +7083,8 @@ const QUESTION_BANK = {
         "D": "请根据下面提供的内容判断其类别（体育/经济/娱乐），用符号分隔.思考过程|类别结 果。内容是..."
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q430",
@@ -6672,7 +7098,8 @@ const QUESTION_BANK = {
         "D": "要求用户在输入问题之外，还需要输入相关的文本段"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 7
     },
     {
       "id": "Q431",
@@ -6686,7 +7113,8 @@ const QUESTION_BANK = {
         "D": "大模型无法准确还原论文的原本内容"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q432",
@@ -6700,7 +7128,8 @@ const QUESTION_BANK = {
         "D": "将temperature、top_p调高"
       },
       "answer": "B",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q433",
@@ -6714,7 +7143,8 @@ const QUESTION_BANK = {
         "D": "通过参数调大模型的最大输入长度"
       },
       "answer": "A",
-      "explanation": "考查在大模型输入超长报错场景下，对解决该问题有效方案的掌握，涉及大模型应用中 处理输入长度超限问题的相关知识，重点是对RAG（检索增强生成）等技术及模型参数调整作 用的理解。答案为A，RAG可通过检索相关文本段，筛选关键内容输入，避免超长问题；B增 加Token数量不解决输入超长；C降低temperature影响输出随机性，与输入超长无关；D调 整最大输入长度非优先且可能受模型限制。"
+      "explanation": "考查在大模型输入超长报错场景下，对解决该问题有效方案的掌握，涉及大模型应用中 处理输入长度超限问题的相关知识，重点是对RAG（检索增强生成）等技术及模型参数调整作 用的理解。答案为A，RAG可通过检索相关文本段，筛选关键内容输入，避免超长问题；B增 加Token数量不解决输入超长；C降低temperature影响输出随机性，与输入超长无关；D调 整最大输入长度非优先且可能受模型限制。",
+      "probability": 13
     },
     {
       "id": "Q434",
@@ -6728,7 +7158,8 @@ const QUESTION_BANK = {
         "D": "工具函数描述信息不够明确，未能准确说明调用时机和用途"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q435",
@@ -6742,7 +7173,8 @@ const QUESTION_BANK = {
         "D": "为每一条切片附详细的前置叙述，希望大模型自动补齐缺失内容"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q436",
@@ -6756,7 +7188,8 @@ const QUESTION_BANK = {
         "D": "仅列出ECI命令和参数列表。"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q437",
@@ -6770,7 +7203,8 @@ const QUESTION_BANK = {
         "D": "以上所有"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q438",
@@ -6784,7 +7218,8 @@ const QUESTION_BANK = {
         "D": "让用户输入更多关键词"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q439",
@@ -6798,7 +7233,8 @@ const QUESTION_BANK = {
         "D": "返回所有岗位的职责"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q440",
@@ -6812,7 +7248,8 @@ const QUESTION_BANK = {
         "D": "改进提示词，并且在输入阶段过滤掉敏感关键词"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 30
     },
     {
       "id": "Q441",
@@ -6826,7 +7263,8 @@ const QUESTION_BANK = {
         "D": "文档加载-内容分割-文本向量化-索引存储"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q442",
@@ -6840,7 +7278,8 @@ const QUESTION_BANK = {
         "D": "结合历史常见问题，使用大模型对query进行改写"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q443",
@@ -6854,7 +7293,8 @@ const QUESTION_BANK = {
         "D": "在后端逻辑中使用正则表达式方法对生成结果进行后处理。"
       },
       "answer": "C",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q444",
@@ -6868,7 +7308,8 @@ const QUESTION_BANK = {
         "D": "改进提示词（明确产品信息、文档主题和结构）"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q445",
@@ -6882,7 +7323,8 @@ const QUESTION_BANK = {
         "D": "总结用户反馈中的常见问题，通过多维度评测指标（如准确性、相关性）找到回复质量较低 的原因并进行针对性优化。"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q446",
@@ -6896,7 +7338,8 @@ const QUESTION_BANK = {
         "D": "加入rerank的步骤"
       },
       "answer": "D",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q447",
@@ -6910,7 +7353,8 @@ const QUESTION_BANK = {
         "D": "识别请求中的关键字（如“投影仪故障”“会议改线上”），匹配规则系统后调用API完成任 务。"
       },
       "answer": "A",
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q448",
@@ -6928,7 +7372,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q449",
@@ -6945,7 +7390,8 @@ const QUESTION_BANK = {
         "B",
         "C"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 27
     },
     {
       "id": "Q450",
@@ -6962,7 +7408,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q451",
@@ -6980,7 +7427,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 13
     },
     {
       "id": "Q452",
@@ -6998,7 +7446,8 @@ const QUESTION_BANK = {
         "B",
         "D"
       ],
-      "explanation": "此题来自ACP考试326题库，无原始解析。"
+      "explanation": "此题来自ACP考试326题库，无原始解析。",
+      "probability": 19
     },
     {
       "id": "Q453",
@@ -7015,7 +7464,8 @@ const QUESTION_BANK = {
         "A",
         "C"
       ],
-      "explanation": "A外部知识增强输出（RAG检索知识，开卷考试查资料）；C知识提前标记辅助检索；BRAG 不改变模型权重，开卷不涉及权重类比；D错误（均需理解问题）"
+      "explanation": "A外部知识增强输出（RAG检索知识，开卷考试查资料）；C知识提前标记辅助检索；BRAG 不改变模型权重，开卷不涉及权重类比；D错误（均需理解问题）",
+      "probability": 19
     },
     {
       "id": "Q454",
@@ -7032,7 +7482,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "选项通过提示词优化和流程设计，低成本解决模型遗漏关键内容的问题，而A、B分别 因成本高或无关性被排除。"
+      "explanation": "选项通过提示词优化和流程设计，低成本解决模型遗漏关键内容的问题，而A、B分别 因成本高或无关性被排除。",
+      "probability": 34
     },
     {
       "id": "Q455",
@@ -7049,7 +7500,8 @@ const QUESTION_BANK = {
         "C",
         "D"
       ],
-      "explanation": "A、B错误指标和评测集需人工主导，而非模型完全生成"
+      "explanation": "A、B错误指标和评测集需人工主导，而非模型完全生成",
+      "probability": 13
     },
     {
       "id": "Q456",
@@ -7063,7 +7515,8 @@ const QUESTION_BANK = {
         "D": "使用纯规则引擎匹配"
       },
       "answer": "B",
-      "explanation": "基于RAG架构，更新外部知识的正确方式是更新向量数据库（B选项），这是RAG动态 扩展知识的标准操作，低成本且高效"
+      "explanation": "基于RAG架构，更新外部知识的正确方式是更新向量数据库（B选项），这是RAG动态 扩展知识的标准操作，低成本且高效",
+      "probability": 19
     }
   ]
 };
